@@ -219,10 +219,10 @@ window.addEventListener("template-loaded", () => {
             const isDark = localStorage.dark === "true";
             document.querySelector("html").classList.toggle("dark", !isDark);
             localStorage.setItem("dark", !isDark);
-            switchBtn.querySelector("span").textContent = isDark ? "Dark mode" : "Light mode";
+            switchBtn.querySelector("span").textContent = isDark ? "Dao diện tối" : "Dao diện sáng";
         };
         const isDark = localStorage.dark === "true";
-        switchBtn.querySelector("span").textContent = isDark ? "Light mode" : "Dark mode";
+        switchBtn.querySelector("span").textContent = isDark ? "Dao diện tối" : "Dao diện sáng";
     }
 });
 
