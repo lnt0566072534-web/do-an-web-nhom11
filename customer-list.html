@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Danh sách quản lý khách hàng | Cửa hàng cà phê</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", Arial, sans-serif;
+    }
+    body {
+      background: #f9f9f9;
+      color: #333;
+      padding: 30px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      position: relative;
+    }
+    .breadcrumb {
+      font-size: 16px;
+      margin-bottom: 24px;
+    }
+    .breadcrumb a {
+      color: #777;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .breadcrumb span {
+      margin: 0 6px;
+      color: #aaa;
+    }
+    .breadcrumb .active {
+      color: #111;
+      font-weight: 600;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    thead {
+      background: #f3f4f6;
+    }
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 15px;
+    }
+    th {
+      font-weight: 600;
+      color: #444;
+    }
+    tbody tr {
+      border-bottom: 1px solid #eee;
+      transition: background 0.2s;
+    }
+    tbody tr:hover {
+      background: #fafafa;
+    }
+    .note {
+      font-style: italic;
+      color: #777;
+    }
+    .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #f5f5f5;
+      color: #222;
+      font-size: 13px;
+      margin: 2px;
+    }
+    .price {
+      font-weight: 600;
+      color: #16a34a;
+      margin-left: 4px;
+    }
+    .cart {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-size: 22px;
+      cursor: pointer;
+      color: #444;
+    }
+    .cart .tooltip {
+      visibility: hidden;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 6px 10px;
+      border-radius: 6px;
+      position: absolute;
+      top: -38px;
+      right: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+      white-space: nowrap;
+      font-size: 13px;
+    }
+    .cart:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+    .cart:hover {
+      color: #16a34a;
+    }
+    /* --- DARK MODE --- */
+html.dark body {
+  background: #1e1e1e;
+  color: #f5f5f5;
+}
+
+html.dark .container {
+  background: #2c2c2c;
+  color: #f5f5f5;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+html.dark table thead {
+  background: #3a3a3a;
+}
+
+html.dark th,
+html.dark td {
+  border-color: #555;
+  color: #f0f0f0;
+}
+
+html.dark .tag {
+  background: #444;
+  color: #fff;
+}
+
+html.dark .note {
+  color: #ccc;
+}
+
+html.dark .breadcrumb a {
+  color: #bbb;
+}
+
+html.dark .breadcrumb .active {
+  color: #fff;
+}
+  </style>
+</head>
+<body>
+    <!-- Header -->
+  <header id="header" class="header"></header>
+  <div class="container">
+    <!-- Icon giỏ hàng -->
+    <div class="cart">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="tooltip">Đi đến giỏ hàng</span>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+  <a href="./index.html">Trang chủ</a> <span>›</span> <span class="active">Quản lý khách hàng</span>
+</div>
+    <h1>Danh sách khách hàng</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Tên khách hàng</th>
+          <th>Số điện thoại</th>
+          <th>Sản phẩm đã mua</th>
+          <th>Ghi chú</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Nguyễn Văn Meo</td>
+          <td>+1 123 456 789 321</td>
+          <td>
+            <span class="tag">Hạt cà phê Lavazza <span class="price">47.000đ</span></span>
+            <span class="tag">Espresso Qualità Oro <span class="price">38.650đ</span></span>
+          </td>
+          <td class="note">Khách hàng VIP</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Thị Bò</td>
+          <td>+44 325 657 345 676</td>
+          <td>
+            <span class="tag">Espresso Arabica & Robusta <span class="price">37.000đ</span></span>
+          </td>
+          <td class="note">Mua hàng mỗi tháng</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Chó</td>
+          <td>+49 128 657 657 886</td>
+          <td>
+            <span class="tag">Cà phê Sumatra Mandheling <span class="price">24.000đ</span></span>
+            <span class="tag">Lavazza Hộp Đen <span class="price">99.990đ</span></span>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Cáo</td>
+          <td>+33 634 943 374 348</td>
+          <td>
+            <span class="tag">Cà phê Espresso Ý <span class="price">45.000đ</span></span>
+            <span class="tag">Qualità Rossa <span class="price">28.500đ</span></span>
+          </td>
+          <td class="note">Thích cà phê vị mạnh</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Mèo</td>
+          <td>+49 234 654 563 432</td>
+          <td>
+            <span class="tag">Lavazza Crema e Gusto <span class="price">32.000đ</span></span>
+          </td>
+          <td class="note">Khách hàng mới</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Gà</td>
+          <td>+39 343 346 765 345</td>
+          <td>
+            <span class="tag">Espresso Qualità Oro <span class="price">38.650đ</span></span>
+            <span class="tag">Espresso Italiano <span class="price">45.000đ</span></span>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Heo</td>
+          <td>+1 423 323 445 545</td>
+          <td>
+            <span class="tag">Hạt cà phê Arabica <span class="price">47.000đ</span></span>
+          </td>
+          <td class="note">Thỉnh thoảng mới mua</td>
+        </tr>
+      </tbody>
+    </table>
+      <!-- Footer -->
+  <footer id="footer" class="footer"></footer>
+
+  <!-- Nạp file scripts.js trước -->
+  <script src="./assets/js/scripts.js"></script>
+
+  <script>
+    // Nạp header và footer
+    load("#header", "./templates/header.html");
+    load("#footer", "./templates/footer.html");
+
+    // Giữ chế độ tối khi chuyển trang
+    const isDark = localStorage.dark === "true";
+    document.querySelector("html").classList.toggle("dark", isDark);
+  </script>
+</body>
+</html>
+
