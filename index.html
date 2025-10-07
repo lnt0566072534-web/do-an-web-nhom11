@@ -24,47 +24,9 @@
     </head>
     <body>
         <!-- Header -->
-        <header id="header" class="header"></header>
-        <script>
-    load("#header", "./templates/header.html", function() {
-        // Sau khi load header xong, kiểm tra đăng nhập
-        const isLoggedIn = localStorage.getItem("isLoggedIn");
-        const username = localStorage.getItem("username");
-
-        if(isLoggedIn === "true" && username) {
-            const topActUser = document.querySelector(".top-act__user");
-            if(topActUser) {
-                topActUser.innerHTML = `
-                    <img src="assets/img/avatar/IMG_2422.PNG" alt="" class="top-act__avatar" />
-                    <div class="act-dropdown top-act__dropdown">
-                        <div class="act-dropdown__inner user-menu">
-                            <img src="./assets/icons/arrow-up.png" alt="" class="act-dropdown__arrow top-act__dropdown-arrow" />
-                            <div class="user-menu__top">
-                                <img src="assets/img/avatar/IMG_2422.PNG" alt="" class="user-menu__avatar" />
-                                <div>
-                                    <p class="user-menu__name">${username}</p>
-                                    <p>@${username}</p>
-                                </div>
-                            </div>
-                            <ul class="user-menu__list">
-                                <li><a href="./index.html" class="user-menu__link">Trang chủ</a></li>
-                                <li><a href="./profile.html" class="user-menu__link">Thông tin cá nhân</a></li>
-                                <li><a href="./sign-in.html" id="logout-btn" class="user-menu__link">Đăng xuất</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                `;
-
-                document.getElementById("logout-btn").addEventListener("click", function(e){
-                    e.preventDefault();
-                    localStorage.removeItem("isLoggedIn");
-                    localStorage.removeItem("username");
-                    localStorage.removeItem("role");
-                    window.location.href = "./sign-in.html";
-                });
-            }
-        }
-    });
+<header id="header" class="header"></header>
+<script>
+    load("#header", "./templates/header.html");
         </script>
         <!-- MAIN -->
         <main class="container home">

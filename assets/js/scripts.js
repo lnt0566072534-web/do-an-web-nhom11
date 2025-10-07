@@ -228,3 +228,44 @@ window.addEventListener("template-loaded", () => {
 
 const isDark = localStorage.dark === "true";
 document.querySelector("html").classList.toggle("dark", isDark);
+// =============================
+// XỬ LÝ ĐĂNG NHẬP, LƯU TRẠNG THÁI
+// =============================
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("form");
+
+    // Nếu đang ở trang đăng nhập
+    if (form && window.location.pathname.includes("sign-in.html")) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const email = document.querySelector('input[type="email"]').value;
+            const password = document.querySelector('input[type="password"]').value;
+
+            // Chỉ cần nhập không trống là cho đăng nhập
+            if (email.trim() !== "" && password.trim() !== "") {
+                localStorage.setItem("isLoggedIn", "true");
+                window.location.href = "index-logined.html"; // chuyển đến trang chủ sau đăng nhập
+            } else {
+                alert("Vui lòng nhập email và mật khẩu!");
+            }
+        });
+    }
+
+    // Nếu chưa đăng nhập mà truy cập các trang khác -> chuyển về trang đăng nhập
+    const publicPages = ["sign-in.html", "sign-up.html", "index.html"];
+    const currentPage = window.location.pathname.split("/").pop();
+
+    if (!localStorage.getItem("isLoggedIn") && !publicPages.includes(currentPage)) {
+        window.location.href = "sign-in.html";
+    }
+
+    // Nút đăng xuất
+    const logoutBtn = document.querySelector(".logout-btn");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+            localStorage.removeItem("isLoggedIn");
+            window.location.href = "sign-in.html";
+        });
+    }
+});

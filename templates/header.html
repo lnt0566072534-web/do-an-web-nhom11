@@ -6,7 +6,7 @@
         </button>
 
         <!-- Logo -->
-        <a href="./" class="logo top-bar__logo">
+        <a href="./index.html" class="logo top-bar__logo">
             <img src="./assets/icons/logo.svg" alt="grocerymart" class="logo__img top-bar__logo-img" />
             <h1 class="logo__title top-bar__logo-title">Cửa hàng cà phê</h1>
         </a>
@@ -23,20 +23,53 @@
                 <span class="nav-btn__qnt">3</span>
             </a>
 
-            <a href="#!" class="nav-btn d-none d-md-flex">
+            <a href="./favourite.html" class="nav-btn d-none d-md-flex">
                 <img src="./assets/icons/heart.svg" alt="" class="nav-btn__icon icon" />
-                <span class="nav-btn__title">Favorite</span>
+                <span class="nav-btn__title">Yêu thích</span>
                 <span class="nav-btn__qnt">3</span>
             </a>
-            <ul class="navbar__list js-dropdown-list">
-            </ul>
+
+            <ul class="navbar__list js-dropdown-list"></ul>
         </nav>
         <div class="navbar__overlay js-toggle" toggle-target="#navbar"></div>
 
         <!-- Actions -->
-        <div class="top-act">
+        <div class="top-act" id="userActions">
+            <!-- Mặc định (chưa đăng nhập) -->
             <a href="./sign-in.html" class="btn btn--text d-md-none">Đăng nhập</a>
-            <a href="./sign-up.html" class="top-act__sign-up btn btn--primary">Đăng kí</a>
+            <a href="./sign-up.html" class="top-act__sign-up btn btn--primary">Đăng ký</a>
         </div>
     </div>
 </div>
+
+<!-- Script xử lý trạng thái đăng nhập -->
+<script>
+    // Khi trang tải xong
+    document.addEventListener("DOMContentLoaded", function () {
+        const userActions = document.getElementById("userActions");
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        const username = localStorage.getItem("userEmail") || "Người dùng";
+
+        if (isLoggedIn === "true") {
+            // Nếu đã đăng nhập → hiển thị tên và nút đăng xuất
+            userActions.innerHTML = `
+                <div class="top-act__user">
+                    <span class="user-name">${username}</span>
+                    <button id="logoutBtn" class="btn btn--text">Đăng xuất</button>
+                </div>
+            `;
+        }
+
+        // Xử lý đăng xuất
+        const logoutBtn = document.getElementById("logoutBtn");
+        if (logoutBtn) {
+            logoutBtn.addEventListener("click", function () {
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("userEmail");
+                alert("Bạn đã đăng xuất!");
+                window.location.href = "./sign-in.html";
+            });
+        }
+    });
+</script>
+

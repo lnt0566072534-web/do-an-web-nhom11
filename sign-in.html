@@ -43,56 +43,54 @@
                     <p class="auth__desc">
                         Chào mừng bạn quay lại đăng nhập. Khách hàng quay lại có thể truy cập toàn bộ thông tin đã lưu trước đó.
                     </p>
-                    <form action="./index-logined.html" class="form auth__form">
-                        <div class="form__group">
-                            <div class="form__text-input">
-                                <input
-                                    type="email"
-                                    name=""
-                                    id=""
-                                    placeholder="Email"
-                                    class="form__input"
-                                    autofocus
-                                    required
-                                />
-                                <img src="./assets/icons/message.svg" alt="" class="form__input-icon" />
-                                <img src="./assets/icons/form-error.svg" alt="" class="form__input-icon-error" />
-                            </div>
-                            <p class="form__error">Email không đúng định dạng</p>
-                        </div>
-                        <div class="form__group">
-                            <div class="form__text-input">
-                                <input
-                                    type="password"
-                                    name=""
-                                    id=""
-                                    placeholder="Password"
-                                    class="form__input"
-                                    required
-                                    minlength="6"
-                                />
-                                <img src="./assets/icons/lock.svg" alt="" class="form__input-icon" />
-                                <img src="./assets/icons/form-error.svg" alt="" class="form__input-icon-error" />
-                            </div>
-                            <p class="form__error">Mật khẩu phải có ít nhất 6 ký tự</p>
-                        </div>
-                        <div class="form__group form__group--inline">
-                            <label class="form__checkbox">
-                                <input type="checkbox" name="" id="" class="form__checkbox-input d-none" />
-                                <span class="form__checkbox-label">Ghi nhớ tài khoản</span>
-                            </label>
-                            <a href="./reset-password.html" class="auth__link form__pull-right">Quên mật khẩu?</a>
-                        </div>
-                        <div class="form__group auth__btn-group">
-                            <button class="btn btn--primary auth__btn form__submit-btn">Đăng nhập</button>
-                            <button class="btn btn--outline auth__btn btn--no-margin">
-                                <img src="./assets/icons/google.svg" alt="" class="btn__icon icon" />
-                                Đăng nhập bằng Google
-                            </button>
-                            </button>
-                        </div>
-                    </form>
+                    <form id="loginForm" class="form auth__form">
+                         <div class="form__group">
+                        <div class="form__text-input">
+                             <input
+                               type="email"
+                               id="email"
+                               placeholder="Email"
+                               class="form__input"
+                                required
+            />
+            <img src="./assets/icons/message.svg" alt="" class="form__input-icon" />
+            <img src="./assets/icons/form-error.svg" alt="" class="form__input-icon-error" />
+        </div>
+        <p class="form__error">Email không đúng định dạng</p>
+    </div>
 
+    <div class="form__group">
+        <div class="form__text-input">
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                class="form__input"
+                required
+                minlength="6"
+            />
+            <img src="./assets/icons/lock.svg" alt="" class="form__input-icon" />
+            <img src="./assets/icons/form-error.svg" alt="" class="form__input-icon-error" />
+                        </div>
+                      <p class="form__error">Mật khẩu phải có ít nhất 6 ký tự</p>
+                 </div>
+
+                       <div class="form__group form__group--inline">
+                       <label class="form__checkbox">
+                             <input type="checkbox" id="remember" class="form__checkbox-input d-none" />
+                             <span class="form__checkbox-label">Ghi nhớ tài khoản</span>
+                         </label>
+                       <a href="./reset-password.html" class="auth__link form__pull-right">Quên mật khẩu?</a>
+                        </div>
+
+                 <div class="form__group auth__btn-group">
+                    <button type="submit" class="btn btn--primary auth__btn form__submit-btn">Đăng nhập</button>
+                    <button type="button" class="btn btn--outline auth__btn btn--no-margin">
+                       <img src="./assets/icons/google.svg" alt="" class="btn__icon icon" />
+                        Đăng nhập bằng Google
+                  </button>
+               </div>
+               </form>
                     <p class="auth__text">
                        Chưa có tài khoản?
                         <a href="./sign-up.html" class="auth__link auth__text-link">Đăng ký</a>
@@ -100,8 +98,6 @@
                 </div>
             </div>
         </main>
-        <script>
-            window.dispatchEvent(new Event("template-loaded"));
-        </script>
+        <script> window.dispatchEvent(new Event("template-loaded")); </script>
     </body>
 </html>
