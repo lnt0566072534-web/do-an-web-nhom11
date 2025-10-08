@@ -108,13 +108,13 @@
                     <h2 class="home__heading">Tổng số sản phẩm LavAzza 1320</h2>
                     <div class="filter-wrap">
                         <button class="filter-btn js-toggle" toggle-target="#home-filter">
-                            Bộ lọc
+                            Phân loại
                             <img src="./assets/icons/filter.svg" alt="" class="filter-btn__icon icon" />
                         </button>
 
                         <div id="home-filter" class="filter hide">
                             <img src="./assets/icons/arrow-up.png" alt="" class="filter__arrow" />
-                            <h3 class="filter__heading">Bộ lọc</h3>
+                            <h3 class="filter__heading">Phân loại</h3>
                             <form action="" class="filter__form form">
                                 <div class="filter__row filter__content">
                                     <!-- Filter column 1 -->
@@ -475,13 +475,32 @@
                         </article>
                     </div>
                 </div>
+                <!-- Pagination -->
+              <!-- Pagination -->
+<div class="pagination">
+  <a href="./index.html" class="page-btn active">1</a>
+  <a href="./index.html" class="page-btn">2</a>
+  <a href="./index.html" class="page-btn">3</a>
+  <a href="./index.html" class="page-btn next">&raquo;</a>
+</div>
+
+
             </section>
         </main>
-
         <!-- Footer -->
         <footer id="footer" class="footer"></footer>
         <script>
             load("#footer", "./templates/footer.html");
         </script>
-    </body>
+        <script>
+  const buttons = document.querySelectorAll(".page-btn");
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+  });
+    </script>
+</body>
 </html>
+

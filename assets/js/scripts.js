@@ -269,3 +269,63 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+// =============================
+// XỬ LÝ TÌM KIẾM SẢN PHẨM
+// =============================
+
+// Khi template (header) load xong thì gắn sự kiện tìm kiếm
+window.addEventListener("template-loaded", () => {
+    const searchInput = document.querySelector("#searchInput");
+    const searchBtn = document.querySelector("#searchBtn");
+
+    if (searchInput && searchBtn) {
+        // Khi click nút tìm kiếm
+        searchBtn.addEventListener("click", () => {
+            const keyword = searchInput.value.trim().toLowerCase();
+            if (!keyword) {
+                alert("Vui lòng nhập tên sản phẩm cần tìm!");
+                return;
+            }
+            // Chuyển hướng đến trang index với tham số tìm kiếm
+            window.location.href = `./index.html?search=${encodeURIComponent(keyword)}`;
+        });
+
+        // Khi nhấn Enter
+        searchInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                searchBtn.click();
+            }
+        });
+    }
+});
+
+// Khi trang index load thì lọc kết quả tìm kiếm
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const keyword = params.get("search");
+    if (!keyword) return;
+
+    const searchTerm = keyword.toLowerCase();
+    const products = document.querySelectorAll(".product-card");
+    let found = 0;
+
+    products.forEach((product) => {
+        const title = product.querySelector(".product-card__title").textContent.toLowerCase();
+        const brand = product.querySelector(".product-card__brand").textContent.toLowerCase();
+        if (title.includes(searchTerm) || brand.includes(searchTerm)) {
+            product.style.display = "";
+            found++;
+        } else {
+            product.style.display = "none";
+        }
+    });
+
+    if (found === 0) {
+        const container = document.querySelector(".row.row-cols-5");
+        if (container) {
+            container.innerHTML = `<p style="font-size:18px; color:#888; text-align:center; width:100%; margin-top:40px;">Không tìm thấy sản phẩm nào phù hợp với từ khóa "<b>${keyword}</b>"</p>`;
+        }
+    }
+});
+

@@ -29,13 +29,18 @@
                 <span class="nav-btn__qnt">3</span>
             </a>
 
-            <ul class="navbar__list js-dropdown-list"></ul>
+            <ul class="navbar__list js-dropdown-list">
+                <li><a href="./index.html">Trang chủ</a></li>
+                <li><a href="./index.html">Sản phẩm</a></li>
+                <li><a href="./checkout.html">Giỏ hàng</a></li>
+                <li><a href="./customer-list.html">Quản lý khách hàng</a></li>
+                <li><a href="./purchase-history.html">Lịch sử mua hàng</a></li>
+            </ul>
         </nav>
         <div class="navbar__overlay js-toggle" toggle-target="#navbar"></div>
 
         <!-- Actions -->
         <div class="top-act" id="userActions">
-            <!-- Mặc định (chưa đăng nhập) -->
             <a href="./sign-in.html" class="btn btn--text d-md-none">Đăng nhập</a>
             <a href="./sign-up.html" class="top-act__sign-up btn btn--primary">Đăng ký</a>
         </div>
@@ -44,32 +49,84 @@
 
 <!-- Script xử lý trạng thái đăng nhập -->
 <script>
-    // Khi trang tải xong
-    document.addEventListener("DOMContentLoaded", function () {
-        const userActions = document.getElementById("userActions");
-        const isLoggedIn = localStorage.getItem("isLoggedIn");
-        const username = localStorage.getItem("userEmail") || "Người dùng";
+document.addEventListener("DOMContentLoaded", function () {
+    const userActions = document.getElementById("userActions");
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const username = localStorage.getItem("userEmail") || "Người dùng";
 
-        if (isLoggedIn === "true") {
-            // Nếu đã đăng nhập → hiển thị tên và nút đăng xuất
-            userActions.innerHTML = `
-                <div class="top-act__user">
-                    <span class="user-name">${username}</span>
-                    <button id="logoutBtn" class="btn btn--text">Đăng xuất</button>
-                </div>
-            `;
-        }
+    if (isLoggedIn === "true") {
+        userActions.innerHTML = `
+            <div class="top-act__user">
+                <span class="user-name">${username}</span>
+                <button id="logoutBtn" class="btn btn--text">Đăng xuất</button>
+            </div>
+        `;
+    }
 
-        // Xử lý đăng xuất
-        const logoutBtn = document.getElementById("logoutBtn");
-        if (logoutBtn) {
-            logoutBtn.addEventListener("click", function () {
-                localStorage.removeItem("isLoggedIn");
-                localStorage.removeItem("userEmail");
-                alert("Bạn đã đăng xuất!");
-                window.location.href = "./sign-in.html";
-            });
-        }
-    });
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", function () {
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("userEmail");
+            alert("Bạn đã đăng xuất!");
+            window.location.href = "./sign-in.html";
+        });
+    }
+
+    // ✅ Xử lý tìm kiếm sản phẩm
+    const searchInput = document.querySelector("#searchInput");
+    const searchBtn = document.querySelector("#searchBtn");
+
+    if (searchInput && searchBtn) {
+        searchBtn.addEventListener("click", () => {
+            const keyword = searchInput.value.trim().toLowerCase();
+            if (!keyword) {
+                alert("Vui lòng nhập tên sản phẩm cần tìm!");
+                return;
+            }
+            window.location.href = `./index.html?search=${encodeURIComponent(keyword)}`;
+        });
+
+        searchInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                searchBtn.click();
+            }
+        });
+    }
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Lấy từ khóa tìm kiếm từ URL (nếu có)
+  const params = new URLSearchParams(window.location.search);
+  const keyword = params.get("search");
+  if (!keyword) return;
+
+  const searchTerm = keyword.toLowerCase();
+
+  // Lấy tất cả sản phẩm
+  const products = document.querySelectorAll(".product-card");
+
+  let found = 0;
+  products.forEach((product) => {
+    const title = product.querySelector(".product-card__title").textContent.toLowerCase();
+    const brand = product.querySelector(".product-card__brand").textContent.toLowerCase();
+
+    if (title.includes(searchTerm) || brand.includes(searchTerm)) {
+      product.style.display = "";
+      found++;
+    } else {
+      product.style.display = "none";
+    }
+  });
+
+  // Nếu không có sản phẩm nào khớp
+  if (found === 0) {
+    const container = document.querySelector(".row.row-cols-5");
+    if (container) {
+      container.innerHTML = `<p style="font-size:18px; color:#888; text-align:center; width:100%; margin-top:40px;">Không tìm thấy sản phẩm nào phù hợp với từ khóa "<b>${keyword}</b>"</p>`;
+    }
+  }
+});
 </script>
 

@@ -4605,5 +4605,172 @@ html {
   justify-content: flex-end;
   margin-top: 30px;
 }
+/* PAGINATION */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 40px 0;
+}
+
+.page-btn {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.page-btn:hover {
+  background: #16a34a;
+  color: #fff;
+  border-color: #16a34a;
+}
+
+.page-btn.active {
+  background: #16a34a;
+  color: #fff;
+  border-color: #16a34a;
+}
+
+.page-btn.next {
+  font-size: 18px;
+  padding: 6px 12px;
+}
+
+/* Dark mode support */
+html.dark .page-btn {
+  background: #2c2c2c;
+  color: #ddd;
+  border-color: #555;
+}
+
+html.dark .page-btn:hover,
+html.dark .page-btn.active {
+  background: #16a34a;
+  color: #fff;
+  border-color: #16a34a;
+}
+.navbar__list {
+  display: flex;
+  gap: 20px; /* tạo khoảng cách giữa các mục */
+  list-style: none; /* bỏ dấu chấm đầu dòng */
+}
+
+.navbar__list li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navbar__list li a:hover {
+  color: #16a34a; /* đổi màu khi rê chuột */
+}
+/* ===============================
+   NAVBAR TEXT COLOR BY THEME
+   =============================== */
+
+/* Màu chữ mặc định (Light mode) */
+.navbar__list a {
+  color: #222;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+/* Hiệu ứng khi hover */
+.navbar__list a:hover {
+  color: #16a34a; /* xanh lá nhẹ */
+}
+
+/* Khi bật Dark mode */
+html.dark .navbar__list a {
+  color: #fff;
+}
+
+html.dark .navbar__list a:hover {
+  color: #4ade80; /* xanh sáng khi hover trong dark mode */
+}
+/* ==========================
+   ĐỔI MÀU MENU THEO DARK/LIGHT MODE
+   ========================== */
+
+/* Mặc định (Light mode) */
+.header .navbar__list a,
+.header .top-bar__logo-title,
+.header .nav-btn__title {
+  color: #222;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+/* Hover (Light mode) */
+.header .navbar__list a:hover,
+.header .nav-btn__title:hover {
+  color: #16a34a;
+}
+
+/* Khi bật Dark mode */
+html.dark .header .navbar__list a,
+html.dark .header .top-bar__logo-title,
+html.dark .header .nav-btn__title {
+  color: #fff;
+}
+
+/* Hover (Dark mode) */
+html.dark .header .navbar__list a:hover,
+html.dark .header .nav-btn__title:hover {
+  color: #4ade80; /* xanh sáng hơn trong dark mode */
+}
+/* Ô tìm kiếm trong header */
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #2c2c2c;
+  border-radius: 20px;
+  padding: 4px 10px;
+  margin-left: 20px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+  padding: 6px 8px;
+  width: 160px;
+}
+
+.search-box button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+html.dark .search-box {
+  background: #444;
+}
+
+html.dark .search-box input {
+  color: #fff;
+}
+
+html.light .search-box {
+  background: #eee;
+}
+
+html.light .search-box input {
+  color: #000;
+}
+
 
 /*# sourceMappingURL=main.css.map */
