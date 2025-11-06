@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Đơn Hàng Hiện Đại</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ====================================================================
+           I. THIẾT KẾ CHUNG VÀ CƠ SỞ (BASE STYLES)
+           ==================================================================== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 30px;
+            background-color: #f8f9fa; 
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .header {
+            margin-bottom: 30px;
+            color: #212529;
+            border-bottom: 3px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+        
+        /* Màu chủ đạo mới: Xanh lá cây */
+        :root {
+            --primary-color: #198754; /* Xanh lá đậm */
+            --secondary-bg: #e9ecef; /* Xám nhạt */
+        }
+        
+        /* ====================================================================
+           II. THANH LỌC (FILTER CARD)
+           ==================================================================== */
+        .filter-card {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+            margin-bottom: 30px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .filter-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.25em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .filter-form {
+            display: flex;
+            gap: 20px;
+            align-items: flex-end;
+        }
+
+        .form-group {
+            flex-grow: 1;
+            flex-basis: 25%;
+        }
+
+        .form-group label {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .filter-form select,
+        .filter-form input[type="date"] {
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #f8f9fa;
+        }
+
+        .filter-form button {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .filter-form button:hover {
+            background-color: #157347;
+        }
+
+        /* ====================================================================
+           III. BẢNG DỮ LIỆU (TABLE STYLES)
+           ==================================================================== */
+        .data-table {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            overflow-x: auto;
+        }
+        
+        .data-table h2 {
+            padding: 15px 25px 0;
+            font-size: 1.5em;
+            color: #495057;
+        }
+
+        table {
+            width: 100%;
+            min-width: 1100px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px 25px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef; 
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: var(--secondary-bg); 
+            color: #495057;
+            font-weight: 600;
+            white-space: nowrap;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+        
+        /* Cột Địa Chỉ */
+        td.address-col {
+            max-width: 180px; 
+            white-space: normal; 
+            word-wrap: break-word;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+        
+        /* Cột Tổng Tiền */
+        td.amount-col {
+            font-weight: 700;
+            color: #dc3545; 
+        }
+        
+        /* Căn Giữa Cột Thao Tác */
+        th.action-col, 
+        td.actions {
+            text-align: center; 
+        }
+
+        /* ====================================================================
+           IV. TRẠNG THÁI (STATUS BADGES)
+           ==================================================================== */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 10px;
+            border-radius: 50px; 
+            font-size: 0.85em;
+            font-weight: 600;
+            white-space: nowrap;
+            gap: 5px;
+        }
+        
+        .status-success {
+            background-color: #d1e7dd; 
+            color: #0f5132; 
+        }
+
+        .status-pending {
+            background-color: #fff3cd; 
+            color: #664d03; 
+        }
+        
+        .status-shipping {
+            background-color: #cfe2ff; 
+            color: #084298; 
+        }
+        
+        .status-cancelled {
+            background-color: #f8d7da; 
+            color: #842029; 
+        }
+
+        /* ====================================================================
+           V. NÚT THAO TÁC (ICONS & TEXT)
+           ==================================================================== */
+        .actions {
+             /* Sử dụng flexbox để căn nút dễ dàng */
+             display: flex;
+             justify-content: center;
+             align-items: center;
+        }
+        
+        .actions a {
+            display: inline-flex; /* Quan trọng: để icon và chữ nằm cạnh nhau */
+            align-items: center;
+            gap: 5px; /* Khoảng cách giữa icon và chữ */
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 8px 10px; /* Thêm padding nhẹ để làm nổi bật */
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .actions a:hover {
+            background-color: #e6f1ec; /* Nền nhẹ khi hover */
+            color: #157347;
+        }
+        
+        .actions a i {
+            font-size: 1.1em; /* Kích thước icon */
+        }
+
+
+        /* ====================================================================
+           VI. PHÂN TRANG (PAGINATION)
+           ==================================================================== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+            padding: 10px 0;
+        }
+
+        .pagination a {
+            color: #495057;
+            padding: 8px 14px;
+            text-decoration: none;
+            border: 1px solid #ced4da;
+            margin: 0 4px;
+            border-radius: 6px;
+            transition: background-color .3s, color 0.3s;
+            font-weight: 500;
+        }
+
+        .pagination a.active {
+            background-color: var(--primary-color);
+            color: white;
+            border: 1px solid var(--primary-color);
+        }
+        
+        .pagination a:not(.active):hover {
+            background-color: var(--secondary-bg);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Quản Lí Đơn Hàng</h1>
+            <p>Quản lý và lọc các giao dịch gần đây một cách hiệu quả.</p>
+        </div>
+
+        <div class="filter-card">
+            <h3><i class="fas fa-filter"></i> Bộ Lọc & Tìm Kiếm</h3>
+            <form class="filter-form">
+                
+                <div class="form-group">
+                    <label for="status-select">Trạng Thái</label>
+                    <select id="status-select">
+                        <option value="all">Tất Cả</option>
+                        <option value="pending">Chờ xác nhận</option>
+                        <option value="shipping">Đang giao</option>
+                        <option value="success">Hoàn thành</option>
+                        <option value="cancelled">Đã hủy</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="date-from"><i class="fas fa-calendar-alt"></i> Ngày Bắt Đầu</label>
+                    <input type="date" id="date-from">
+                </div>
+
+                <div class="form-group">
+                    <label for="date-to"><i class="fas fa-calendar-alt"></i> Ngày Kết Thúc</label>
+                    <input type="date" id="date-to">
+                </div>
+
+                <button type="submit">
+                    <i class="fas fa-search"></i> Tìm kiếm
+                </button>
+            </form>
+        </div>
+
+        <div class="data-table">
+            <h2> Danh Sách Đơn Hàng</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã Đơn</th>
+                        <th>Khách Hàng</th>
+                        <th>Địa Chỉ</th> 
+                        <th>Ngày Đặt</th>
+                        <th>Tổng Tiền</th>
+                        <th>Trạng Thái</th>
+                        <th class="action-col">Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#ORD001</td>
+                        <td>Nguyễn Văn A</td>
+                        <td class="address-col">123 Đường Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP.HCM</td> 
+                        <td>20/10/2025</td>
+                        <td class="amount-col">4.500.000₫</td>
+                        <td>
+                            <div class="status-badge status-shipping">
+                                 <i class="fas fa-truck"></i> Đang giao
+                            </div>
+                        </td>
+                        <td class="actions">
+                            <a href="xemchitiet.html" title="Xem Chi Tiết"><i class="fas fa-eye"></i> Xem</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#ORD002</td>
+                        <td>Trần Thị B</td>
+                        <td class="address-col">456 Lê Lợi, Phường 4, Gò Vấp, TP.HCM</td> 
+                        <td>01/11/2025</td>
+                        <td class="amount-col">350.000₫</td>
+                        <td>
+                            <div class="status-badge status-pending">
+                                 <i class="fas fa-hourglass-half"></i> Chờ xác nhận
+                            </div>
+                        </td>
+                        <td class="actions">
+                            <a href="xemchitiet.html" title="Xem Chi Tiết"><i class="fas fa-eye"></i> Xem</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#ORD003</td>
+                        <td>Lê Văn C</td>
+                        <td class="address-col">789 Trần Hưng Đạo, Quận Ninh Kiều, Cần Thơ</td> 
+                        <td>15/09/2025</td>
+                        <td class="amount-col">80.000₫</td>
+                        <td>
+                            <div class="status-badge status-cancelled">
+                                 <i class="fas fa-ban"></i> Đã hủy
+                            </div>
+                        </td>
+                        <td class="actions">
+                            <a href="xemchitiet.html" title="Xem Chi Tiết"><i class="fas fa-eye"></i> Xem</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#ORD004</td>
+                        <td>Phạm Thị D</td>
+                        <td class="address-col">101 Lý Thường Kiệt, Ba Đình, Hà Nội</td> 
+                        <td>05/08/2025</td>
+                        <td class="amount-col">5.000.000₫</td>
+                        <td>
+                            <div class="status-badge status-success">
+                                 <i class="fas fa-check-circle"></i> Hoàn thành
+                            </div>
+                        </td>
+                        <td class="actions">
+                            <a href="xemchitiet.html" title="Xem Chi Tiết"><i class="fas fa-eye"></i> Xem</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#ORD005</td>
+                        <td>Hoàng Văn E</td>
+                        <td class="address-col">202 Nguyễn Tri Phương, Quận 10, TP.HCM</td> 
+                        <td class="amount-col">28/11/2025</td>
+                        <td>750.000</td>
+                        <td>
+                            <div class="status-badge status-shipping">
+                                 <i class="fas fa-truck"></i> Đang giao
+                            </div>
+                        </td>
+                        <td class="actions">
+                            <a href="xemchitiet.html" title="Xem Chi Tiết"><i class="fas fa-eye"></i> Xem</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="pagination">
+                <a href="#">&laquo;</a>
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">&raquo;</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function handleFilter(event) {
+            event.preventDefault(); 
+            const status = document.getElementById('status-select').value;
+            const dateFrom = document.getElementById('date-from').value;
+            const dateTo = document.getElementById('date-to').value;
+            
+            alert(`Lọc dữ liệu theo:\n- Trạng Thái: ${status}\n- Từ Ngày: ${dateFrom}\n- Đến Ngày: ${dateTo}`);
+        }
+
+        document.querySelector('.filter-form').addEventListener('submit', handleFilter);
+    </script>
+</body>
+</html>
