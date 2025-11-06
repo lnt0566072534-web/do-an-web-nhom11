@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Đơn Hàng #ORD001</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ====================================================================
+           I. CĂN CHỈNH CHUNG VÀ CƠ SỞ
+           ==================================================================== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px; 
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        :root {
+            --primary-color: #198754; 
+            --light-bg: #e6f1ec; 
+            --border-color: #dee2e6;
+            --save-color: #007bff; 
+        }
+
+        /* ====================================================================
+           II. TIÊU ĐỀ & HÀNH ĐỘNG
+           ==================================================================== */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px; 
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .action-buttons button {
+            padding: 10px 20px;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-left: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .action-buttons .back-btn { background-color: #6c757d; color: white; }
+        .action-buttons .back-btn:hover { background-color: #5a6268; }
+        .action-buttons .save-btn { background-color: var(--save-color); color: white; }
+        .action-buttons .save-btn:hover { background-color: #0056b3; }
+
+
+        /* ====================================================================
+           III. BỐ CỤC CHÍNH & CARD
+           ==================================================================== */
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 2.5fr 1fr; 
+            gap: 35px; 
+            margin-bottom: 35px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            padding: 30px; 
+        }
+
+        .card h2 {
+            font-size: 1.4em;
+            color: var(--primary-color);
+            margin-top: 0;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--light-bg);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .edit-icon {
+            color: #6c757d;
+            cursor: pointer;
+            padding: 5px;
+            font-size: 0.9em;
+            transition: color 0.2s;
+        }
+
+        /* ====================================================================
+           IV. THÔNG TIN CHUNG (ORDER INFO)
+           ==================================================================== */
+        .order-info-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px 50px; 
+        }
+
+        .info-item {
+            flex-basis: calc(33.333% - 50px);
+            min-width: 220px;
+        }
+
+        .info-item label {
+            display: block;
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        
+        .editable-field {
+            padding: 10px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        
+        .total-amount {
+            font-size: 1.4em !important;
+            color: #dc3545;
+            font-weight: 700 !important;
+        }
+
+        /* ====================================================================
+           V. THÔNG TIN KHÁCH HÀNG & GIAO HÀNG
+           ==================================================================== */
+        .customer-info p {
+            margin: 12px 0; 
+            line-height: 1.6;
+        }
+        
+        .customer-info label {
+            display: inline-block;
+            width: 110px; 
+            color: #495057;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        /* ====================================================================
+           VI. BẢNG SẢN PHẨM CHI TIẾT 
+           ==================================================================== */
+        .product-table-card {
+            padding: 0;
+        }
+        
+        .product-table th, .product-table td {
+            padding: 18px 30px; 
+        }
+
+        .product-table th {
+            background-color: var(--light-bg); 
+        }
+
+        /* Hình ảnh sản phẩm */
+        .product-image {
+            width: 80px; 
+            text-align: center;
+        }
+
+        .product-image img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        /* CĂN CHỈNH CÁC CỘT SỐ LIỆU */
+        /* STT */
+        .product-table th:nth-child(1), .product-table td:nth-child(1) { width: 50px; text-align: center; } 
+        /* Tên Sản Phẩm */
+        .product-table th:nth-child(3) { width: auto; }
+        /* Đơn Giá */
+        .product-table th:nth-child(4), .product-table td:nth-child(4) { text-align: right; width: 120px; } 
+        /* Số Lượng (Cột này chứa dữ liệu tĩnh) */
+        .product-table th:nth-child(5), .product-table td:nth-child(5) { 
+            text-align: center; 
+            width: 100px; 
+            font-weight: 600; /* Nhấn mạnh số lượng */
+        } 
+        /* Thành Tiền */
+        .product-table th:nth-child(6), .product-table td:nth-child(6) { 
+            text-align: right; 
+            font-weight: 700; 
+            color: #dc3545; 
+            width: 150px;
+        } 
+
+        /* Hàng tổng cộng cuối bảng */
+        .summary-row td {
+            border-top: 2px solid var(--border-color);
+            padding: 15px 30px;
+        }
+        
+        .summary-row .total-label { 
+            text-align: right; 
+            font-size: 1.1em;
+        }
+        .summary-row .total-value { 
+            font-weight: 700; 
+            color: #dc3545; 
+            font-size: 1.3em !important; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Chỉnh Sửa Đơn Hàng <span style="color: var(--save-color);">#ORD001</span></h1>
+            <div class="action-buttons">
+                <button type="button" class="back-btn" onclick="window.location.href='quanlidonhang.html'">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </button>
+                <button type="button" class="save-btn" onclick="saveOrderDetails()">
+                    <i class="fas fa-save"></i> Lưu Thay Đổi
+                </button>
+            </div>
+        </div>
+        
+        <form id="orderForm">
+            <div class="detail-grid">
+                
+                <div class="card order-details">
+                    <h2><i class="fas fa-info-circle"></i> Tóm Tắt Đơn Hàng</h2>
+                    <div class="order-info-group">
+                        
+                        <div class="info-item">
+                            <label>Mã Đơn Hàng</label>
+                            <strong>#ORD001</strong>
+                        </div>
+
+                        <div class="info-item">
+                            <label>Ngày Đặt Hàng</label>
+                            <strong>20/10/2025</strong>
+                        </div>
+
+                        <div class="info-item">
+                            <label for="status-select">Trạng Thái Hiện Tại</label>
+                            <select id="status-select" name="status" class="editable-field">
+                                <option value="shipping" selected>Đang giao</option>
+                                <option value="pending">Chờ xác nhận</option>
+                                <option value="success">Hoàn thành</option>
+                                <option value="cancelled">Đã hủy</option>
+                            </select>
+                        </div>
+                        
+                        <div class="info-item">
+                            <label>Phương Thức Thanh Toán</label>
+                            <strong>Thanh toán khi nhận hàng (COD)</strong>
+                        </div>
+                        
+                        <div class="info-item">
+                            <label for="shipping-fee-input">Phí Vận Chuyển (VNĐ)</label>
+                            <input type="number" id="shipping-fee-input" name="shipping_fee" value="30000" class="editable-field" min="0">
+                        </div>
+
+                        <div class="info-item">
+                            <label>Tổng Tiền Thanh Toán</label>
+                            <strong class="total-amount" id="grand-total">4.530.000₫</strong>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="card customer-info">
+                    <h2>
+                        <i class="fas fa-user-circle"></i> Khách Hàng & Giao Hàng
+                        <i class="fas fa-pen edit-icon" id="editCustomerInfoBtn" onclick="toggleEditCustomerInfo()"></i>
+                    </h2>
+                    
+                    <div id="customer-display-fields">
+                        <p><label>Khách Hàng:</label><span id="customer-name-display">Nguyễn Văn A</span></p>
+                        <p><label>Điện Thoại:</label><span id="customer-phone-display">0901 234 567</span></p>
+                        <p><label>Email:</label><span id="customer-email-display">nguyen.va@email.com</span></p>
+                        <p><label>Địa Chỉ:</label><span id="customer-address-display">123 Đường Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP.HCM</span></p>
+                    </div>
+
+                    <div id="customer-edit-fields" style="display: none;">
+                        <p><label for="customer-name-input">Khách Hàng:</label><input type="text" id="customer-name-input" name="customer_name" value="Nguyễn Văn A" class="editable-field"></p>
+                        <p><label for="customer-phone-input">Điện Thoại:</label><input type="text" id="customer-phone-input" name="customer_phone" value="0901 234 567" class="editable-field"></p>
+                        <p><label for="customer-email-input">Email:</label><input type="email" id="customer-email-input" name="customer_email" value="nguyen.va@email.com" class="editable-field"></p>
+                        <p><label for="customer-address-input" style="vertical-align: top;">Địa Chỉ:</label><textarea id="customer-address-input" name="customer_address" class="editable-field" rows="3">123 Đường Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP.HCM</textarea></p>
+                    </div>
+
+                </div>
+                
+            </div>
+            
+            <div class="card product-table-card">
+                <h2><i class="fas fa-shopping-basket"></i> Sản Phẩm Đã Đặt</h2>
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Hình Ảnh</th>
+                            <th>Tên Sản Phẩm</th>
+                            <th>Đơn Giá</th>
+                            <th>Số Lượng</th>
+                            <th>Thành Tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-list-body">
+                        <tr data-price="4000000" data-quantity="1" data-id="1">
+                            <td>1</td>
+                            <td class="product-image">
+                                <img src="https://via.placeholder.com/60x60/87CEFA/FFFFFF?text=Áo" alt="Áo Sơ Mi">
+                            </td>
+                            <td class="product-name">Hạt cà phê  (Size L, Trắng)</td>
+                            <td class="unit-price-display">4.000.000₫</td>
+                            <td>
+                                <span class="quantity-display">1</span>
+                            </td>
+                            <td class="row-total-display">4.000.000₫</td>
+                        </tr>
+                        <tr data-price="500000" data-quantity="1" data-id="2">
+                            <td>2</td>
+                            <td class="product-image">
+                                <img src="https://via.placeholder.com/60x60/9370DB/FFFFFF?text=Vòng" alt="Vòng Tay">
+                            </td>
+                            <td class="product-name">Vòng Tay Thạch Anh Tím</td>
+                            <td class="unit-price-display">500.000₫</td>
+                            <td>
+                                <span class="quantity-display">1</span>
+                            </td>
+                            <td class="row-total-display">500.000₫</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="summary-row">
+                            <td colspan="5" class="total-label">Tổng tiền hàng:</td>
+                            <td class="total-value" id="sub-total-value">4.500.000₫</td>
+                        </tr>
+                        <tr class="summary-row">
+                            <td colspan="5" class="total-label">Phí vận chuyển:</td>
+                            <td class="total-value" id="shipping-fee-value">30.000₫</td>
+                        </tr>
+                        <tr class="summary-row" style="background-color: var(--light-bg);">
+                            <td colspan="5" class="total-label">TỔNG THANH TOÁN:</td>
+                            <td class="total-value" id="final-total-value">4.530.000₫</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // Hàm định dạng số tiền (giữ nguyên)
+        const formatCurrency = (number) => {
+            return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+        };
+
+        // Hàm chuyển đổi chế độ chỉnh sửa thông tin khách hàng (giữ nguyên)
+        function toggleEditCustomerInfo() {
+            const displayDiv = document.getElementById('customer-display-fields');
+            const editFieldsDiv = document.getElementById('customer-edit-fields');
+            const editIcon = document.getElementById('editCustomerInfoBtn');
+            const isEditing = editFieldsDiv.style.display !== 'none';
+
+            if (isEditing) {
+                // Thoát chế độ chỉnh sửa, cập nhật lại dữ liệu hiển thị
+                document.getElementById('customer-name-display').textContent = document.getElementById('customer-name-input').value;
+                document.getElementById('customer-phone-display').textContent = document.getElementById('customer-phone-input').value;
+                document.getElementById('customer-email-display').textContent = document.getElementById('customer-email-input').value;
+                document.getElementById('customer-address-display').textContent = document.getElementById('customer-address-input').value;
+                
+                editFieldsDiv.style.display = 'none';
+                displayDiv.style.display = 'block';
+                editIcon.classList.remove('fa-save');
+                editIcon.classList.add('fa-pen');
+            } else {
+                // Bật chế độ chỉnh sửa
+                displayDiv.style.display = 'none';
+                editFieldsDiv.style.display = 'block';
+                editIcon.classList.remove('fa-pen');
+                editIcon.classList.add('fa-save');
+            }
+        }
+
+        // Hàm tính toán và cập nhật tổng tiền hàng (Sub Total) (giữ nguyên)
+        function calculateSubTotal() {
+            let subTotal = 0;
+            const rows = document.querySelectorAll('#product-list-body tr');
+            
+            rows.forEach(row => {
+                const quantity = parseInt(row.dataset.quantity) || 0; 
+                const price = parseInt(row.dataset.price) || 0; 
+                const rowTotal = quantity * price;
+
+                row.querySelector('.row-total-display').textContent = formatCurrency(rowTotal);
+                subTotal += rowTotal;
+            });
+            
+            document.getElementById('sub-total-value').textContent = formatCurrency(subTotal);
+            return subTotal;
+        }
+
+        // Hàm cập nhật tổng tiền cuối cùng (Grand Total) (giữ nguyên)
+        function updateGrandTotal() {
+            const subTotal = calculateSubTotal();
+            const shippingFee = parseInt(document.getElementById('shipping-fee-input').value) || 0; 
+            const finalTotal = subTotal + shippingFee;
+
+            document.getElementById('shipping-fee-value').textContent = formatCurrency(shippingFee);
+            document.getElementById('final-total-value').textContent = formatCurrency(finalTotal);
+            document.getElementById('grand-total').textContent = formatCurrency(finalTotal);
+        }
+        
+        // =========================================================
+        // PHẦN ĐÃ ĐƯỢC CHỈNH SỬA
+        // =========================================================
+        function saveOrderDetails() {
+            // Bước 1: Thoát khỏi chế độ chỉnh sửa khách hàng nếu đang bật
+            const editFieldsDiv = document.getElementById('customer-edit-fields');
+            if (editFieldsDiv.style.display !== 'none') {
+                toggleEditCustomerInfo(); 
+            }
+            
+            // Bước 2: Hiển thị thông báo đơn giản
+            alert(`✅ Đã lưu thông tin thành công!`);
+            
+            // Bước 3: Chuyển hướng sang trang quản lý đơn hàng
+            window.location.href = 'quanlidonhang.html'; 
+        }
+        // =========================================================
+
+        // Lắng nghe sự kiện khi DOM được tải (giữ nguyên)
+        document.addEventListener('DOMContentLoaded', () => {
+            updateGrandTotal();
+
+            // Chỉ cần lắng nghe sự kiện thay đổi của Phí Vận Chuyển
+            const shippingFeeInput = document.getElementById('shipping-fee-input');
+            shippingFeeInput.addEventListener('change', updateGrandTotal);
+            shippingFeeInput.addEventListener('keyup', updateGrandTotal);
+        });
+    </script>
+</body>
+</html>
