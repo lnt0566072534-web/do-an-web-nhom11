@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Lịch sử mua hàng | Cửa hàng cà phê</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <style>
+    body {
+      background: #f9f9f9;
+      color: #333;
+      padding: 30px;
+      font-family: "Inter", Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    /* Giữ lại style table phòng khi dùng lại, nhưng không bắt buộc */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background: #f3f4f6;
+      color: #444;
+    }
+
+    tr:hover {
+      background: #fafafa;
+    }
+    
+    /* Style cho thông báo mới */
+    .login-prompt {
+        text-align: center;
+        padding: 40px 20px;
+        font-size: 18px;
+        color: #555;
+    }
+
+    /* Dark mode hỗ trợ */
+    html.dark body {
+      background: #1e1e1e;
+      color: #f5f5f5;
+    }
+
+    html.dark .container {
+      background: #2c2c2c;
+      color: #f5f5f5;
+      box-shadow: 0 4px 12px rgba(255,255,255,0.1);
+    }
+
+    html.dark th {
+      background: #3a3a3a;
+      color: #eee;
+    }
+
+    html.dark .login-prompt {
+        color: #bbb;
+    }
+  </style>
+</head>
+<body>
+  <header id="header"></header>
+      <div class="top-bar">
+    <a href="./index.html" class="logo top-bar__logo" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
+      <img src="./assets/icons/logo.svg" alt="Logo" style="width:32px;height:32px;" />
+      <h1 style="font-size:20px;font-weight:600;color:inherit;">Cửa hàng cà phê</h1>
+    </a>
+  </div>
+
+
+  <div class="container">
+    <h1>Lịch sử mua hàng</h1>
+
+    <div class="login-prompt">
+        <p>Vui lòng đăng nhập và thử lại!</p>
+    </div>
+    
+  </div>
+
+  <footer id="footer"></footer>
+
+  <script src="./assets/js/scripts.js"></script>
+  <script>
+    load("#header", "./templates/header.html");
+    load("#footer", "./templates/footer.html");
+
+    // Giữ chế độ tối khi đổi trang
+    const isDark = localStorage.dark === "true";
+    document.querySelector("html").classList.toggle("dark", isDark);
+ // Không cần xử lý popup nữa vì không có nút "Chi tiết"
+  </script>
+</body>
+</html>
