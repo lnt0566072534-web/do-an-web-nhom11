@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Khách Hàng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS Cơ Bản (Giữ nguyên) */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 8px;
+        }
+
+        /* Thanh tìm kiếm */
+        .search-bar {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .search-bar form {
+            display: flex;
+            gap: 15px;
+            align-items: flex-end; 
+        }
+        
+        .form-group {
+            flex-grow: 1;
+            flex-basis: 25%;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .search-bar input[type="text"], 
+        .search-bar select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .search-bar button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            height: 40px; 
+            flex-basis: auto;
+            display: flex;
+            align-items: center;
+            gap: 5px; 
+            font-weight: bold;
+        }
+
+        /* Icon tìm kiếm màu trắng */
+        .search-bar button .fas.fa-search {
+            color: white; /* Đảm bảo icon màu trắng */
+        }
+
+        /* Bảng danh sách */
+        .customer-list {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 900px;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .status-active {
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-locked {
+            color: red;
+            font-weight: bold;
+        }
+
+        /* Nút Thao Tác */
+        .actions {
+            display: flex; 
+            gap: 5px; 
+        }
+        
+        .actions a, 
+        .actions button { 
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            text-decoration: none; 
+            text-align: center;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+        }
+
+        .actions .edit-btn {
+            background-color: #ffc107; 
+            color: #333;
+        }
+
+        .actions .lock-btn {
+            background-color: #dc3545; 
+            color: white;
+        }
+        
+        .actions .unlock-btn {
+            background-color: #17a2b8; 
+            color: white;
+        }
+        
+        /* Đảm bảo icon Khóa/Mở khóa cũng màu trắng */
+        .actions button .fas.fa-lock,
+        .actions button .fas.fa-unlock {
+            color: white;
+        }
+
+        /* PHÂN TRANG */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            padding-bottom: 10px;
+        }
+
+        .pagination a {
+            color: #007bff;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+            border-radius: 4px;
+            transition: background-color .3s, transform 0.1s ease; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagination a.active {
+            background-color: #007bff;
+            color: white;
+            border: 1px solid #007bff;
+        }
+        
+        .pagination a:not(.active):active {
+            background-color: #ccc; 
+            transform: scale(0.95); 
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) inset; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Quản Lý Khách Hàng </h1>
+    </div>
+
+    <div class="search-bar">
+        <h2> Tìm Kiếm & Lọc Khách Hàng</h2>
+        <form>
+            <div class="form-group">
+                <label for="search-name">Tìm Kiếm theo Tên</label>
+                <input type="text" id="search-name" placeholder="Nhập tên khách hàng...">
+            </div>
+            
+            <div class="form-group">
+                <label for="search-account">Tìm Kiếm theo Tài Khoản</label>
+                <input type="text" id="search-account" placeholder="Nhập tên tài khoản...">
+            </div>
+            
+            <div class="form-group">
+                <label for="status-select">Trạng Thái</label>
+                <select id="status-select">
+                    <option value="all">Tất Cả Trạng Thái</option>
+                    <option value="active">Hoạt Động</option>
+                    <option value="locked">Đã Khóa</option>
+                </select>
+            </div>
+
+            <button type="submit">
+                <i class="fas fa-search"></i> Tìm Kiếm
+            </button>
+        </form>
+    </div>
+
+    <div class="customer-list">
+        <h2> Danh Sách Khách Hàng</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên Khách Hàng</th>
+                    <th>Tài Khoản</th>
+                    <th>Địa Chỉ</th>
+                    <th>Tổng Đơn (Số Lượng)</th>
+                    <th>Ngày Đăng Ký</th>
+                    <th>Trạng Thái</th>
+                    <th>Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Nguyễn Văn A</td><td>vana</td><td>123 Nguyễn Văn Cừ, HN</td><td>15</td><td>20/10/2023</td><td class="status-active">Hoạt Động</td><td class="actions"><a href="suathongtin.html" class="edit-btn">Sửa</a><button class="lock-btn" onclick="lockCustomer('lock')"><i class="fas fa-lock"></i> Khóa</button></td></tr>
+                <tr><td>2</td><td>Trần Thị B</td><td>thibtran</td><td>456 Lê Lợi, HCM</td><td>3</td><td>01/11/2023</td><td class="status-active">Hoạt Động</td><td class="actions"><a href="suathongtin.html" class="edit-btn">Sửa</a><button class="lock-btn" onclick="lockCustomer('lock')"><i class="fas fa-lock"></i> Khóa</button></td></tr>
+                
+                <tr><td>3</td><td>Lê Văn C</td><td>levanc</td><td>789 Hai Bà Trưng, ĐN</td><td>1</td><td>15/09/2023</td><td class="status-locked">Đã Khóa</td><td class="actions"><a href="suathongtin.html" class="edit-btn">Sửa</a><button class="unlock-btn" onclick="lockCustomer('unlock')"><i class="fas fa-unlock"></i> Mở Khóa</button></td></tr>
+                
+                <tr><td>4</td><td>Phạm Thị D</td><td>dpham</td><td>101 Lý Thường Kiệt, HN</td><td>18</td><td>05/08/2023</td><td class="status-active">Hoạt Động</td><td class="actions"><a href="suathongtin.html" class="edit-btn">Sửa</a><button class="lock-btn" onclick="lockCustomer('lock')"><i class="fas fa-lock"></i> Khóa</button></td></tr>
+                <tr><td>5</td><td>Hoàng Văn E</td><td>hoange</td><td>202 Trần Hưng Đạo, HCM</td><td>8</td><td>28/11/2023</td><td class="status-active">Hoạt Động</td><td class="actions"><a href="suathongtin.html" class="edit-btn">Sửa</a><button class="lock-btn" onclick="lockCustomer('lock')"><i class="fas fa-lock"></i> Khóa</button></td></tr>
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#" class="prev-next">Sau &raquo;</a>
+        </div>
+    </div>
+    
+    <script>
+        function lockCustomer(action) {
+            let confirmText = "";
+            let successText = "";
+
+            if (action === 'lock') {
+                confirmText = "Bạn có chắc chắn muốn khóa khách hàng này không?";
+                successText = "Đã khóa khách hàng thành công!"; 
+            } else if (action === 'unlock') {
+                confirmText = "Bạn có chắc chắn muốn mở khóa khách hàng này không?";
+                successText = "Đã mở khóa khách hàng thành công!"; 
+            } else {
+                return;
+            }
+
+            const confirmation = confirm(confirmText);
+
+            if (confirmation) {
+                alert(successText);
+            }
+        }
+    </script>
+</body>
+</html>
