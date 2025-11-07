@@ -1,131 +1,166 @@
 <div class="container">
-    <div class="top-bar">
-        <!-- More -->
-        <button class="top-bar__more d-none d-lg-block js-toggle" toggle-target="#navbar">
-            <img src="./assets/icons/more.svg" alt="" class="icon top-bar__more-icon" />
-        </button>
+  <div class="top-bar" style="justify-content: space-between; align-items: center;">
+    <!-- Logo -->
+    <a href="./index.html" class="logo top-bar__logo">
+      <img src="./assets/icons/logo.svg" alt="grocerymart" class="logo__img top-bar__logo-img" />
+      <h1 class="logo__title top-bar__logo-title">Cửa hàng cà phê</h1>
+    </a>
 
-        <!-- Logo -->
-        <a href="./index.html" class="logo top-bar__logo">
-            <img src="./assets/icons/logo.svg" alt="grocerymart" class="logo__img top-bar__logo-img" />
-            <h1 class="logo__title top-bar__logo-title">Cửa hàng cà phê</h1>
-        </a>
-
-        <!-- Navbar -->
-        <nav id="navbar" class="navbar hide">
-            <button class="navbar__close-btn js-toggle" toggle-target="#navbar">
-                <img class="icon" src="./assets/icons/arrow-left.svg" alt="" />
-            </button>
-
-            <a href="./checkout.html" class="nav-btn d-none d-md-flex">
-                <img src="./assets/icons/buy.svg" alt="" class="nav-btn__icon icon" />
-                <span class="nav-btn__title">Cart</span>
-                <span class="nav-btn__qnt">3</span>
-            </a>
-
-            <a href="./favourite.html" class="nav-btn d-none d-md-flex">
-                <img src="./assets/icons/heart.svg" alt="" class="nav-btn__icon icon" />
-                <span class="nav-btn__title">Yêu thích</span>
-                <span class="nav-btn__qnt">3</span>
-            </a>
-
-            <ul class="navbar__list js-dropdown-list">
-                <li><a href="./index.html">Trang chủ</a></li>
-                <li><a href="./index.html">Sản phẩm</a></li>
-                <li><a href="./checkout.html">Giỏ hàng</a></li>
-                <li><a href="./purchase-history-guest.html">Lịch sử mua hàng</a></li>
-            </ul>
-        </nav>
-        <div class="navbar__overlay js-toggle" toggle-target="#navbar"></div>
-
-        <!-- Actions -->
-        <div class="top-act" id="userActions">
-            <a href="./sign-in.html" class="btn btn--text d-md-none">Đăng nhập</a>
-            <a href="./sign-up.html" class="top-act__sign-up btn btn--primary">Đăng ký</a>
-        </div>
+    <!-- 🔍 Thanh tìm kiếm giữa header -->
+    <div class="header-search">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Tìm kiếm sản phẩm..."
+        class="search-box"
+      />
+      <button id="searchBtn" class="search-btn">Tìm kiếm</button>
     </div>
+
+    <!-- Actions -->
+    <div class="top-act" id="userActions">
+      <a href="./sign-in.html" class="btn btn--text d-md-none">Đăng nhập</a>
+      <a href="./sign-up.html" class="top-act__sign-up btn btn--primary">Đăng ký</a>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="navbar hide">
+    <button class="navbar__close-btn js-toggle" toggle-target="#navbar">
+      <img class="icon" src="./assets/icons/arrow-left.svg" alt="" />
+    </button>
+
+    <a href="./checkout.html" class="nav-btn d-none d-md-flex">
+      <img src="./assets/icons/buy.svg" alt="" class="nav-btn__icon icon" />
+      <span class="nav-btn__title">Cart</span>
+      <span class="nav-btn__qnt">3</span>
+    </a>
+
+    <a href="./favourite.html" class="nav-btn d-none d-md-flex">
+      <img src="./assets/icons/heart.svg" alt="" class="nav-btn__icon icon" />
+      <span class="nav-btn__title">Yêu thích</span>
+      <span class="nav-btn__qnt">3</span>
+    </a>
+
+    <ul class="navbar__list js-dropdown-list">
+      <li><a href="./index.html">Trang chủ</a></li>
+      <li><a href="./index.html">Sản phẩm</a></li>
+      <li><a href="./empty-cart.html">Giỏ hàng</a></li>
+      <li><a href="./purchase-history-guest.html">Lịch sử mua hàng</a></li>
+    </ul>
+  </nav>
+  <div class="navbar__overlay js-toggle" toggle-target="#navbar"></div>
 </div>
 
-<!-- Script xử lý trạng thái đăng nhập -->
+<!-- 🎨 CSS cho thanh tìm kiếm -->
+<style>
+  .header-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 999px;
+    padding: 8px 16px;
+    border: 2px solid #ccc;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .search-box {
+    border: none;
+    outline: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 999px;
+    flex: 1;
+    font-size: 1.1rem;
+    color: #000;
+    background: transparent;
+  }
+
+  .search-btn {
+    background: #ffb703;
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 0.7rem 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.25s;
+  }
+
+  .search-btn:hover {
+    background: #ffa500;
+  }
+
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .logo__title {
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  @media (max-width: 768px) {
+    .header-search {
+      max-width: 100%;
+      padding: 6px 12px;
+    }
+  }
+</style>
+
+<!-- ⚙️ Script xử lý đăng nhập & tìm kiếm -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
     const userActions = document.getElementById("userActions");
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     const username = localStorage.getItem("userEmail") || "Người dùng";
 
     if (isLoggedIn === "true") {
-        userActions.innerHTML = `
-            <div class="top-act__user">
-                <span class="user-name">${username}</span>
-                <button id="logoutBtn" class="btn btn--text">Đăng xuất</button>
-            </div>
-        `;
+      userActions.innerHTML = `
+        <div class="top-act__user">
+          <span class="user-name">${username}</span>
+          <button id="logoutBtn" class="btn btn--text">Đăng xuất</button>
+        </div>
+      `;
     }
 
     const logoutBtn = document.getElementById("logoutBtn");
     if (logoutBtn) {
-        logoutBtn.addEventListener("click", function () {
-            localStorage.removeItem("isLoggedIn");
-            localStorage.removeItem("userEmail");
-            alert("Bạn đã đăng xuất!");
-            window.location.href = "./sign-in.html";
-        });
+      logoutBtn.addEventListener("click", function () {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userEmail");
+        alert("Bạn đã đăng xuất!");
+        window.location.href = "./sign-in.html";
+      });
     }
 
-    // ✅ Xử lý tìm kiếm sản phẩm
+    // ✅ Xử lý tìm kiếm
     const searchInput = document.querySelector("#searchInput");
     const searchBtn = document.querySelector("#searchBtn");
 
     if (searchInput && searchBtn) {
-        searchBtn.addEventListener("click", () => {
-            const keyword = searchInput.value.trim().toLowerCase();
-            if (!keyword) {
-                alert("Vui lòng nhập tên sản phẩm cần tìm!");
-                return;
-            }
-            window.location.href = `./index.html?search=${encodeURIComponent(keyword)}`;
-        });
+      const goToSearch = () => {
+        const keyword = searchInput.value.trim();
+        if (!keyword) {
+          alert("Vui lòng nhập tên sản phẩm cần tìm!");
+          return;
+        }
+        // Chuyển qua trang search-result.html và gửi từ khóa
+       window.location.href = `./search-result.html?search=${encodeURIComponent(keyword)}`;
 
-        searchInput.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") {
-                searchBtn.click();
-            }
-        });
-    }
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Lấy từ khóa tìm kiếm từ URL (nếu có)
-  const params = new URLSearchParams(window.location.search);
-  const keyword = params.get("search");
-  if (!keyword) return;
+      };
 
-  const searchTerm = keyword.toLowerCase();
-
-  // Lấy tất cả sản phẩm
-  const products = document.querySelectorAll(".product-card");
-
-  let found = 0;
-  products.forEach((product) => {
-    const title = product.querySelector(".product-card__title").textContent.toLowerCase();
-    const brand = product.querySelector(".product-card__brand").textContent.toLowerCase();
-
-    if (title.includes(searchTerm) || brand.includes(searchTerm)) {
-      product.style.display = "";
-      found++;
-    } else {
-      product.style.display = "none";
+      searchBtn.addEventListener("click", goToSearch);
+      searchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") goToSearch();
+      });
     }
   });
-
-  // Nếu không có sản phẩm nào khớp
-  if (found === 0) {
-    const container = document.querySelector(".row.row-cols-5");
-    if (container) {
-      container.innerHTML = `<p style="font-size:18px; color:#888; text-align:center; width:100%; margin-top:40px;">Không tìm thấy sản phẩm nào phù hợp với từ khóa "<b>${keyword}</b>"</p>`;
-    }
-  }
-});
 </script>
-

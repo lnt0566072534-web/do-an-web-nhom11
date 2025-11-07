@@ -4771,6 +4771,12 @@ html.light .search-box {
 html.light .search-box input {
   color: #000;
 }
+.cart-info--summary {
+    margin-top: 20px;
+}
+.hide {
+    display: none !important;
+}
 
 
 /*# sourceMappingURL=main.css.map */

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kết quả tìm kiếm | Cửa hàng Cà phê</title>
+
+  <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <script src="./assets/js/scripts.js"></script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+    }
+
+    .search-header {
+      text-align: center;
+      margin: 2rem auto 1.5rem auto;
+    }
+
+    .search-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 1.2rem;
+    }
+
+    .advanced-btn {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      padding: 0.8rem 1.8rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.25s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+    .advanced-btn:hover { background: #f0f0f0; }
+
+    .advanced-search {
+      width: 80%;
+      max-width: 650px;
+      margin: 1rem auto;
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: none;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .advanced-search label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .advanced-search input[type="text"],
+    .advanced-search select {
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 100%;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      width: 90%;
+      max-width: 1400px;
+      margin: 2rem auto 4rem;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: 0.25s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .product-card img {
+      width: 100%;
+      max-width: 200px;
+      height: 200px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+    }
+
+    .product-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #333;
+      margin: 0.4rem 0;
+    }
+
+    .stars {
+      color: #ffb703;
+      margin-top: 0.2rem;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 1024px) {
+      .product-grid { gap: 1.5rem; }
+      .product-card img { max-width: 180px; height: 180px; }
+    }
+
+    @media (max-width: 768px) {
+      .product-card img { max-width: 150px; height: 150px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header id="header" class="header"></header>
+  <script>load("#header", "./templates/header.html");</script>
+
+  <main class="container">
+    <section class="search-header">
+      <h2>Kết quả tìm kiếm cho "Lavazza"</h2>
+      <button id="toggleAdvanced" class="advanced-btn">Tìm kiếm nâng cao</button>
+
+      <!-- Tìm kiếm nâng cao -->
+      <div class="advanced-search" id="advancedBox" aria-hidden="true">
+        <h3 style="margin-bottom:1rem;">Tùy chọn lọc</h3>
+
+        <!-- Tên sản phẩm -->
+        <div style="margin-bottom:1rem;">
+          <label for="productName">Tên sản phẩm</label>
+          <input type="text" id="productName" placeholder="Nhập tên sản phẩm...">
+        </div>
+
+        <!-- Thương hiệu -->
+        <div style="margin-bottom:1rem;">
+          <label for="brandInput">Thương hiệu</label>
+          <input type="text" id="brandInput" placeholder="Nhập tên thương hiệu...">
+        </div>
+
+        <!-- Trọng lượng -->
+        <div style="margin-bottom:1rem;">
+          <label for="weightSelect">Trọng lượng</label>
+          <div style="display:flex;gap:10px;">
+            <select id="weightSelect">
+              <option value="">Tất cả</option>
+              <option value="300">300g</option>
+              <option value="500" selected>500g</option>
+              <option value="700">700g</option>
+            </select>
+            <select id="unitSelect">
+              <option>Gram</option>
+              <option>Kg</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Số sao đánh giá -->
+        <div style="margin-bottom:1.2rem;">
+          <label for="ratingSelect">Số sao đánh giá</label>
+          <select id="ratingSelect">
+            <option value="">Tất cả</option>
+            <option value="1">1 ⭐</option>
+            <option value="2">2 ⭐⭐</option>
+            <option value="3">3 ⭐⭐⭐</option>
+            <option value="4">4 ⭐⭐⭐⭐</option>
+            <option value="5">5 ⭐⭐⭐⭐⭐</option>
+          </select>
+        </div>
+
+        <!-- Khoảng giá (đưa xuống dưới cùng trước nút) -->
+        <div style="margin-bottom:1.2rem;">
+          <label style="display:block;font-weight:600;margin-bottom:0.5rem;">Khoảng giá</label>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="white-space:nowrap">Thấp nhất</span>
+            <input type="range" id="minPrice" min="30000" max="300000" value="30000" step="1000" style="flex:1;">
+            <input type="range" id="maxPrice" min="30000" max="300000" value="300000" step="1000" style="flex:1;">
+            <span style="white-space:nowrap">Cao nhất</span>
+          </div>
+          <div style="margin-top:8px;font-size:0.95rem;color:#555;">
+            <span id="priceDisplay">30.000đ – 300.000đ</span>
+          </div>
+        </div>
+
+        <!-- Nút hành động -->
+        <div style="display:flex;justify-content:flex-end;gap:10px;">
+          <button type="button" onclick="closeAdvanced()" 
+                  style="padding:0.6rem 1.2rem;border:none;border-radius:8px;background:#eee;cursor:pointer;">
+            Hủy
+          </button>
+          <button id="applyBtn" type="button"
+                  style="padding:0.6rem 1.2rem;border:none;border-radius:8px;background:#ffb703;color:white;cursor:pointer;">
+            Xem kết quả
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="product-grid" id="productGrid">
+      <div class="product-card">
+        <img src="./assets/img/product/item-3.png" alt="Lavazza Espresso">
+        <h3>Lavazza Espresso</h3>
+        <p>250g</p>
+        <p><strong>129.000đ</strong></p>
+        <div class="stars">⭐⭐⭐⭐</div>
+      </div>
+
+      <div class="product-card">
+        <img src="./assets/img/product/item-4.png" alt="Lavazza Crema e Gusto">
+        <h3>Lavazza Crema e Gusto</h3>
+        <p>500g</p>
+        <p><strong>215.000đ</strong></p>
+        <div class="stars">⭐⭐⭐</div>
+      </div>
+
+      <div class="product-card">
+        <img src="./assets/img/product/item-1.png" alt="Lavazza Qualità Oro">
+        <h3>Lavazza Qualità Oro</h3>
+        <p>1kg</p>
+        <p><strong>375.000đ</strong></p>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+      </div>
+
+      <div class="product-card">
+        <img src="./assets/img/product/item-2.png" alt="Lavazza Rossa">
+        <h3>Lavazza Rossa</h3>
+        <p>250g</p>
+        <p><strong>119.000đ</strong></p>
+        <div class="stars">⭐⭐</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Toggle advanced box
+    const btn = document.getElementById('toggleAdvanced');
+    const box = document.getElementById('advancedBox');
+    function closeAdvanced(){ box.style.display = 'none'; box.setAttribute('aria-hidden','true'); }
+    btn.addEventListener('click', () => {
+      const isShown = box.style.display === 'block';
+      box.style.display = isShown ? 'none' : 'block';
+      box.setAttribute('aria-hidden', String(isShown));
+    });
+
+    // Price range display & sync
+    const minPrice = document.getElementById('minPrice');
+    const maxPrice = document.getElementById('maxPrice');
+    const priceDisplay = document.getElementById('priceDisplay');
+
+    function formatVND(value) {
+      return Number(value).toLocaleString('vi-VN') + 'đ';
+    }
+    function updatePriceDisplay() {
+      let minVal = parseInt(minPrice.value);
+      let maxVal = parseInt(maxPrice.value);
+      if (minVal > maxVal) [minPrice.value, maxPrice.value] = [maxVal, minVal];
+      priceDisplay.textContent = `${formatVND(minPrice.value)} – ${formatVND(maxPrice.value)}`;
+    }
+    minPrice.addEventListener('input', updatePriceDisplay);
+    maxPrice.addEventListener('input', updatePriceDisplay);
+
+    // Xử lý nút "Xem kết quả" -> chuyển trang search-result.html
+    document.getElementById('applyBtn').addEventListener('click', () => {
+      // Nếu bạn muốn truyền thông tin lọc qua URL, có thể thêm query string ở đây.
+      // Ví dụ (đã mã hóa minimal): ?q=lavazza&min=30000&max=300000
+      const productName = encodeURIComponent(document.getElementById('productName').value || '');
+      const brand = encodeURIComponent(document.getElementById('brandInput').value || '');
+      const weight = encodeURIComponent(document.getElementById('weightSelect').value || '');
+      const unit = encodeURIComponent(document.getElementById('unitSelect').value || '');
+      const rating = encodeURIComponent(document.getElementById('ratingSelect').value || '');
+      const min = encodeURIComponent(document.getElementById('minPrice').value || '');
+      const max = encodeURIComponent(document.getElementById('maxPrice').value || '');
+
+      const qs = `?product=${productName}&brand=${brand}&weight=${weight}&unit=${unit}&rating=${rating}&min=${min}&max=${max}`;
+      window.location.href = 'search-result.html' + qs;
+    });
+  </script>
+
+  <!-- Footer -->
+  <footer id="footer" class="footer"></footer>
+  <script>load("#footer", "./templates/footer.html");</script>
+</body>
+</html>

@@ -1,185 +1,197 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chi Tiết Đơn Hàng</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background-color: #f0f2f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-      margin: 0;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi Tiết Đơn Hàng | Grocery Mart</title>
 
-    .container {
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 24px 32px;
-      max-width: 800px;
-      width: 100%;
-      margin: auto;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
+  <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <script src="./assets/js/scripts.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    h1 {
-      text-align: center;
-      /* Màu xanh lá cây giống trong ảnh */
-      color: #16a34a; 
-      font-size: 24px;
-      margin-bottom: 24px;
-      text-transform: uppercase;
-    }
+  <style>
 
-    .order-info {
-      margin-bottom: 24px;
-    }
+    body {
+      font-family: "Inter", Arial, sans-serif; 
+      background-color: #f0f2f5;
+      margin: 0;
+    }
 
-    .order-info p {
-      margin-bottom: 12px;
-      font-size: 16px;
-      color: #333;
-    }
+    /* Container chứa toàn bộ nội dung đơn hàng */
+    .order-container {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px 32px;
+      max-width: 800px;
+      width: 90%;
+      margin: 30px auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid #ccc; /* ✅ viền bao ngoài */
+    }
 
-    /* Căn chỉnh cho đẹp hơn */
-    .order-info p strong {
-      font-weight: 600;
-      min-width: 180px;
-      display: inline-block;
+    .order-container h1 {
+      text-align: center;
+      color: #16a34a;
+      font-size: 24px;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+
+    .order-info {
+      margin-bottom: 24px;
+    }
+
+    .order-info p {
+      margin-bottom: 12px;
+      font-size: 16px;
+      color: #333;
+      word-break: break-word;
+    }
+
+    .order-info p strong {
+      font-weight: 600;
+      min-width: 180px;
+      display: inline-block;
       color: #111;
-    }
+    }
 
-    .order-details table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
+    /* Bảng sản phẩm */
+    .order-details table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      border: 1px solid #ccc; /* ✅ Viền ngoài bảng */
+    }
 
-    .order-details th,
-    .order-details td {
-      padding: 12px 0;
-      text-align: left;
-      border-bottom: 1px solid #eee;
-    }
+    .order-details th,
+    .order-details td {
+      padding: 12px 10px;
+      text-align: left;
+      border: 1px solid #ccc; /* ✅ Viền từng ô kiểu Excel */
+      font-size: 16px;
+    }
 
-    .order-details th {
-      font-size: 14px;
-      color: #555;
-      text-transform: uppercase;
-    }
+    .order-details th {
+      font-size: 14px;
+      text-transform: uppercase;
+      background: #fafafa;
+      font-weight: 600;
+    }
 
-    .order-details td {
-      font-size: 16px;
-    }
-
-    /* Căn lề cho cột số lượng và giá tiền */
     .order-details th:nth-child(2),
     .order-details td:nth-child(2) {
         text-align: center;
     }
+
     .order-details th:nth-child(3),
     .order-details td:nth-child(3) {
         text-align: right;
     }
 
-    /* Hàng tổng cộng */
-    .order-details tfoot .total td {
-      font-size: 20px;
-      font-weight: bold;
-      padding-top: 16px;
-      border-bottom: none;
-      color: #333;
-    }
-    .order-details tfoot .total td:last-child {
-        /* Màu đỏ cho tổng tiền (tùy chọn) */
-        /* color: #d9534f; */
+    .order-details tfoot .total td {
+      font-size: 18px;
+      font-weight: bold;
+      background: #f7f7f7;
     }
 
-    .thank-you {
-      text-align: center;
-      font-style: italic;
-      margin-top: 24px;
-      font-size: 16px;
-      color: #555;
-    }
+    .thank-you {
+      text-align: center;
+      font-style: italic;
+      margin-top: 24px;
+      font-size: 16px;
+      color: #555;
+    }
 
-    .btn-home {
-      display: block;
-      width: fit-content;
-      margin: 24px auto 0 auto;
-      background: #16a34a;
-      color: #ffffff;
-      padding: 12px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      text-align: center;
-      transition: background-color 0.2s;
-    }
+    .btn-home {
+      display: block;
+      width: fit-content;
+      margin: 24px auto 0 auto;
+      background: #16a34a;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      text-align: center;
+      transition: background-color 0.2s;
+    }
 
-    .btn-home:hover {
-      background: #148a40;
-    }
-  </style>
+    .btn-home:hover {
+      background: #148a40;
+    }
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+  </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>Chi Tiết Đơn Hàng</h1>
+  <header id="header" class="header"></header>
+  <script>
+    load("#header", "./templates/header-logined.html");
+  </script>
 
-    <div class="order-info">
-            <p><strong>Mã đơn hàng:</strong> 0011</p> 
-      <p><strong>Khách hàng:</strong> Nguyễn Văn Meo</p>
-      <p><strong>Email:</strong> Meo@gmail.com</p>
-      <p><strong>Điện thoại:</strong> 0123456789</p>
-      <p><strong>Địa chỉ:</strong> 123 Đường ABC, Phường XYZ, Quận GHI, TP. Hồ Chí Minh</p>
-      <p><strong>Phương thức thanh toán:</strong> Thanh toán khi nhận hàng</p>
-      <p><strong>Trạng thái:</strong> Đặt hàng thành công</p>
-      <p><strong>Ngày đặt hàng:</strong> 01-02-2025</p>
-    </div>
+  <main>
+    <div class="order-container">
+      <h1>Chi Tiết Đơn Hàng</h1>
 
-    <div class="order-details">
-      <table>
-        <thead>
-          <tr>
-            <th>Sản phẩm</th>
-            <th>số lượng</th>
-            <th>Tổng tiền</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Hạt Cà Phê - Espresso Arabica và Robusta</td>
-            <td>1</td>
-            <td>47.000đ</td>
-          </tr>
-          <tr>
-            <td>Cà phê Lavazza - Thường thức Espresso Ý</td>
-            <td>1</td>
-            <td>106.000đ</td>
-          </tr>
-          <tr>
-            <td>Qualità Oro Mountain Grown - Hạt cà phê</td>
-            <td>1</td>
-            <td>38.000đ</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr class="total">
-            <td colspan="2">Tổng cộng</td>
-            <td>đ191.000</td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
+      <div class="order-info">
+        <p><strong>Mã đơn hàng:</strong> 0011</p>
+        <p><strong>Khách hàng:</strong> Nguyễn Văn Meo</p>
+        <p><strong>Email:</strong> Meo@gmail.com</p>
+        <p><strong>Điện thoại:</strong> 0123456789</p>
+        <p><strong>Địa chỉ:</strong> 105 Bà Huyện Thanh Quan, Phường Xuân Hòa, TP. HCM</p>
+        <p><strong>Phương thức thanh toán:</strong> Thanh toán khi nhận hàng</p>
+        <p><strong>Trạng thái:</strong> Đặt hàng thành công</p>
+        <p><strong>Ngày đặt hàng:</strong> 01-02-2025</p>
+      </div>
 
-    <p class="thank-you">Cảm ơn bạn đã mua hàng!</p>
-    <a href="./index.html" class="btn-home">Về trang chủ</a>
-  </div>
+      <div class="order-details">
+        <table>
+          <thead>
+            <tr>
+              <th>Sản phẩm</th>
+              <th>Số lượng</th>
+              <th>Tổng tiền</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hạt Cà Phê - Espresso Arabica và Robusta</td>
+              <td>1</td>
+              <td>47.000đ</td>
+            </tr>
+            <tr>
+              <td>Cà phê Lavazza - Thưởng thức Espresso Ý</td>
+              <td>1</td>
+              <td>106.000đ</td>
+            </tr>
+            <tr>
+              <td>Qualità Oro Mountain Grown - Hạt cà phê</td>
+              <td>1</td>
+              <td>38.000đ</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="total">
+              <td colspan="2">Tổng cộng</td>
+              <td>191.000đ</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <p class="thank-you">Cảm ơn bạn đã mua hàng!</p>
+      <a href="./index-logined.html" class="btn-home">Về trang chủ</a>
+    </div>
+  </main>
+
+  <footer id="footer" class="footer"></footer>
+  <script>
+    load("#footer", "./templates/footer.html");
+  </script>
 
 </body>
 </html>

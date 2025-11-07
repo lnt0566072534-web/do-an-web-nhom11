@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giỏ hàng trống | Grocery Mart</title>
+
+  <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <script src="./assets/js/scripts.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Giúp footer nằm dưới đáy trình duyệt */
+    body {
+      background-color: #f0f2f5;
+      margin: 0;
+      font-family: "Inter", Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1; /* đẩy footer xuống */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 0;
+    }
+
+    /* Khung trắng giữa màn hình */
+    .empty-cart-message {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 60px 40px;
+      max-width: 550px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    }
+
+    .empty-cart-message h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 12px;
+    }
+
+    .empty-cart-message p {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    /* Nút về trang chủ */
+    .return-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background-color: #2db300;
+      color: #fff;
+      font-size: 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .return-btn:hover {
+      opacity: 0.85;
+    }
+    body {
+  font-family: 'Inter', sans-serif;
+}
+
+  </style>
+</head>
+<body>
+
+  <header id="header" class="header"></header>
+  <script>
+    load("#header", "./templates/header.html");
+  </script>
+
+  <main>
+    <div class="empty-cart-message">
+      <h2>Giỏ hàng trống</h2>
+      <p>Vui lòng đăng nhập để tiếp tục!</p>
+      <a href="index.html" class="return-btn">Về trang chủ</a>
+    </div>
+  </main>
+
+  <footer id="footer" class="footer"></footer>
+  <script>
+    load("#footer", "./templates/footer.html");
+  </script>
+
+</body>
+</html>

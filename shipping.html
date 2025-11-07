@@ -401,7 +401,8 @@
                                     Tiếp tục thanh toán
                                 </a>
                             </div>
-                            <div class="cart-info">
+                            <div class="cart-info cart-info--summary">
+
                                 <a href="#!">
                                     <article class="gift-item">
                                         <div class="gift-item__icon-wrap">
@@ -587,5 +588,57 @@
             </div>
             <div class="modal__overlay"></div>
         </div>
+        <script>
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // Tăng số lượng
+    document.querySelectorAll(".cart-item__input-btn:last-child").forEach(btn => {
+        btn.addEventListener("click", () => {
+            let quantityEl = btn.parentElement.querySelector("span");
+            let current = parseInt(quantityEl.innerText);
+            quantityEl.innerText = current + 1;
+        });
+    });
+
+    // Giảm số lượng
+    document.querySelectorAll(".cart-item__input-btn:first-child").forEach(btn => {
+        btn.addEventListener("click", () => {
+            let quantityEl = btn.parentElement.querySelector("span");
+            let current = parseInt(quantityEl.innerText);
+            if (current > 1) quantityEl.innerText = current - 1;
+        });
+    });
+
+    // Xóa sản phẩm
+    document.querySelectorAll(".cart-item__ctrl-btn:last-child").forEach(btn => {
+        btn.addEventListener("click", () => {
+            if (confirm("Bạn có chắc muốn xóa sản phẩm này?")) {
+                let item = btn.closest(".cart-item");
+                item.remove();
+            }
+        });
+    });
+
+});
+// --- Chọn tỉnh/TP trong popup ---
+document.addEventListener("DOMContentLoaded", () => {
+    const cityInput = document.querySelector("#city");
+    const cityDialog = document.querySelector("#city-dialog");
+    const cityOptions = cityDialog.querySelectorAll(".form__option");
+
+    cityOptions.forEach(option => {
+        option.addEventListener("click", () => {
+            // Gán text của option vào input
+            cityInput.value = option.innerText;
+
+            // Đóng popup chọn tỉnh
+            cityDialog.classList.add("hide");
+        });
+    });
+});
+
+</script>
+
+
     </body>
 </html>

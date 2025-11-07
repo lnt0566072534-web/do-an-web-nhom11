@@ -338,5 +338,39 @@
             </div>
             <div class="modal__overlay js-toggle" toggle-target="#delete-confirm"></div>
         </div>
+        <script>
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // Tăng số lượng
+    document.querySelectorAll(".cart-item__input-btn:last-child").forEach(btn => {
+        btn.addEventListener("click", () => {
+            let quantityEl = btn.parentElement.querySelector("span");
+            let current = parseInt(quantityEl.innerText);
+            quantityEl.innerText = current + 1;
+        });
+    });
+
+    // Giảm số lượng
+    document.querySelectorAll(".cart-item__input-btn:first-child").forEach(btn => {
+        btn.addEventListener("click", () => {
+            let quantityEl = btn.parentElement.querySelector("span");
+            let current = parseInt(quantityEl.innerText);
+            if (current > 1) quantityEl.innerText = current - 1;
+        });
+    });
+
+    // Xóa sản phẩm
+    document.querySelectorAll(".cart-item__ctrl-btn:last-child").forEach(btn => {
+        btn.addEventListener("click", () => {
+            if (confirm("Bạn có chắc muốn xóa sản phẩm này?")) {
+                let item = btn.closest(".cart-item");
+                item.remove();
+            }
+        });
+    });
+
+});
+</script>
+
     </body>
 </html>

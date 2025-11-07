@@ -21,6 +21,9 @@
 
         <!-- Scripts -->
         <script src="./assets/js/scripts.js"></script>
+        <head>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
     </head>
     <body>
         <!-- Header -->
@@ -287,7 +290,7 @@
                                     <span>Tổng ước tính</span>
                                     <span>202.000đ</span>
                                 </div>
-                                <a href="./confirm.html" class="cart-info__next-btn btn btn--primary btn--rounded">Thanh toán 202.000đ</a>
+                                <a href="./confirm.html" id="btn-thanh-toan" class="cart-info__next-btn btn btn--primary btn--rounded">Thanh toán 202.000đ</a>
                             </div>
                             <div class="cart-info">
                                 <a href="#!">
@@ -474,5 +477,25 @@
             </div>
             <div class="modal__overlay"></div>
         </div>
+        <script>
+  document.getElementById("btn-thanh-toan").addEventListener("click", function(event) {
+    
+    event.preventDefault();     
+    
+    Swal.fire({
+      title: "Đặt hàng thành công!",
+      text: "Đang chuyển bạn đến trang chi tiết đơn hàng...",
+      icon: "success",
+      timer: 3000, 
+      showConfirmButton: false
+    }).then(() => {
+
+      window.location.href = "./confirm.html"; 
+    });
+
+  });
+</script>
+
+</body> </html>
     </body>
 </html>
