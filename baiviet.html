@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đánh Giá Khách Hàng - Tên Quán Cafe Của Bạn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Cài đặt chung và Biến CSS (Màu Xanh Chủ Đạo) --- */
+        :root {
+            --blue-primary: #1976D2; /* Xanh Nước Biển Đậm */
+            --blue-secondary: #BBDEFB; /* Xanh Nhạt/Pastel */
+            --blue-light: #E3F2FD; /* Xanh Rất Nhạt (Nền nhẹ) */
+            --accent-star: #FFC107; /* Vàng hổ phách (cho sao) */
+            --background-light: #F9F7F5; 
+            --font-dark: #333333;
+            --font-light: #ffffff;
+            --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-light);
+            margin: 0;
+            padding: 0;
+            color: var(--font-dark);
+            line-height: 1.6;
+        }
+
+        /* --- NÚT QUAY LẠI MỚI --- */
+        .back-button-container {
+            max-width: 1200px;
+            margin: 20px auto 0; 
+            padding: 0 20px;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 18px;
+            background-color: var(--font-light); 
+            color: var(--blue-primary);
+            border: 1px solid var(--blue-secondary);
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+
+        .btn-back i {
+            margin-right: 8px;
+        }
+
+        .btn-back:hover {
+            background-color: var(--blue-primary);
+            color: var(--font-light);
+            border-color: var(--blue-primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* --- Header Chính --- */
+        .header {
+            background-color: var(--blue-primary);
+            color: var(--font-light);
+            padding: 50px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+            margin-top: 20px; /* Thêm khoảng cách nếu cần */
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        /* --- Container Chính --- */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* --- Thẻ Tóm tắt Đánh giá --- */
+        .summary-card {
+            background-color: var(--font-light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-light);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 40px;
+            border: 1px solid var(--blue-secondary);
+        }
+
+        .summary-item {
+            text-align: center;
+        }
+
+        .summary-score {
+            font-size: 4.5em;
+            font-weight: 700;
+            color: var(--blue-primary);
+            line-height: 1;
+        }
+
+        .summary-score small {
+            font-size: 0.4em;
+            font-weight: 400;
+            color: var(--font-dark);
+        }
+
+        .summary-stars i {
+            color: var(--accent-star);
+            font-size: 1.5em;
+        }
+        
+        .summary-count {
+            color: var(--blue-primary);
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        /* --- Phần Đánh giá Chi tiết --- */
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .review-card {
+            background-color: var(--font-light);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--blue-primary); /* Điểm nhấn */
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--blue-secondary);
+            padding-bottom: 10px;
+        }
+
+        .reviewer-info strong {
+            display: block;
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+
+        .review-date {
+            font-size: 0.85em;
+            color: var(--secondary-color);
+        }
+
+        .review-rating i {
+            color: var(--accent-star);
+            font-size: 1.1em;
+        }
+
+        .review-title {
+            font-weight: 600;
+            margin-top: 0;
+            color: var(--blue-primary);
+        }
+
+        .review-text {
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            color: var(--font-dark);
+        }
+
+        /* Nút Tải thêm/Gửi đánh giá */
+        .load-more-btn, .write-review-btn {
+            display: block;
+            width: 50%;
+            margin: 30px auto;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .load-more-btn {
+            background-color: var(--blue-secondary);
+            color: var(--font-dark);
+        }
+
+        .load-more-btn:hover {
+            background-color: #90CAF9; /* Xanh sáng hơn khi hover */
+        }
+        
+        .write-review-btn {
+            background-color: var(--blue-primary);
+            color: var(--font-light);
+        }
+
+        .write-review-btn:hover {
+            background-color: #1565C0; /* Xanh đậm hơn khi hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            .summary-card {
+                flex-direction: column;
+            }
+            .summary-item {
+                margin: 10px 0;
+            }
+            .load-more-btn, .write-review-btn {
+                width: 90%;
+            }
+        }
+
+        .product-reviewed {
+            font-size: 0.8em;
+            color: #777;
+            margin-top: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="back-button-container">
+        <a class="btn-back" href="adminnew.html"> 
+            <i class="fas fa-arrow-left"></i> Quay lại
+        </a>
+    </div>
+
+    <div class="header">
+        <h1>Khách Hàng Nói Gì Về Chúng Tôi?</h1>
+        <p>Phản hồi của bạn là động lực để Tên Quán Cafe Của Bạn ngày càng hoàn thiện!</p>
+    </div>
+
+    <div class="container">
+        
+        <div class="summary-card">
+            <div class="summary-item">
+                <div class="summary-score">4.8<small>/5</small></div>
+                <div class="summary-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <div class="summary-count">Từ 2.150 đánh giá</div>
+            </div>
+        </div>
+
+        <button class="write-review-btn" onclick="alert('Chức năng chuyển đến Form Gửi Đánh Giá!')">
+            <i class="fas fa-pen-to-square"></i> Gửi đánh giá của bạn
+        </button>
+
+        <div class="review-grid">
+            
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <strong>Nguyễn Văn A</strong>
+                        <span class="review-date">Đăng ngày 24/10/2025</span>
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <h4 class="review-title">Không gian tuyệt vời, cà phê đậm đà</h4>
+                <p class="review-text">
+                    "Tôi thực sự thích góc ngồi cạnh cửa sổ, rất yên tĩnh để làm việc. Ly Espresso Macchiato hoàn hảo, đúng vị. Nhân viên phục vụ nhanh nhẹn và chu đáo. Chắc chắn sẽ quay lại!"
+                </p>
+                <span class="product-reviewed">Đánh giá cho: **Espresso Macchiato & Không gian**</span>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <strong>Trần Thị B</strong>
+                        <span class="review-date">Đăng ngày 20/10/2025</span>
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </div>
+                <h4 class="review-title">Trà đào thơm, nên thử!</h4>
+                <p class="review-text">
+                    "Trà đào cam sả ở đây rất thơm và thanh mát, không quá ngọt như những chỗ khác. Tôi thấy hơi đông vào buổi tối cuối tuần, nhưng tổng thể vẫn rất hài lòng."
+                </p>
+                <span class="product-reviewed">Đánh giá cho: **Trà Đào Cam Sả**</span>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <strong>Lê Hoàng C</strong>
+                        <span class="review-date">Đăng ngày 15/10/2025</span>
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <h4 class="review-title">Điểm hẹn lý tưởng</h4>
+                <p class="review-text">
+                    "Bánh Tiramisu tuyệt vời! Vị béo nhẹ, không bị ngấy. Tôi thường xuyên gặp gỡ đối tác ở đây vì không gian lịch sự và nhạc nhẹ nhàng. Highly recommend!"
+                </p>
+                <span class="product-reviewed">Đánh giá cho: **Bánh Tiramisu**</span>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <strong>Phạm Thu D</strong>
+                        <span class="review-date">Đăng ngày 12/10/2025</span>
+                    </div>
+                    <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                <h4 class="review-title">Phục vụ thân thiện</h4>
+                <p class="review-text">
+                    "Đồ uống ổn, nhưng điều khiến tôi quay lại là đội ngũ nhân viên. Họ luôn mỉm cười và sẵn lòng giúp đỡ. Cà phê đá xay của tôi hôm đó hơi nhạt một chút, nhưng không sao."
+                </p>
+                <span class="product-reviewed">Đánh giá cho: **Phục vụ & Cà phê đá xay**</span>
+            </div>
+            
+        </div>
+
+        <button class="load-more-btn">
+            <i class="fas fa-redo-alt"></i> Tải thêm đánh giá (1.900+)
+        </button>
+
+    </div>
+
+</body>
+</html>
