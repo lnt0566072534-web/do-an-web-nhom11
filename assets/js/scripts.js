@@ -253,12 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Nếu chưa đăng nhập mà truy cập các trang khác -> chuyển về trang đăng nhập
-    const publicPages = ["sign-in.html", "sign-up.html", "index.html"];
-    const currentPage = window.location.pathname.split("/").pop();
-
-    if (!localStorage.getItem("isLoggedIn") && !publicPages.includes(currentPage)) {
-        window.location.href = "sign-in.html";
-    }
+    
 
     // Nút đăng xuất
     const logoutBtn = document.querySelector(".logout-btn");

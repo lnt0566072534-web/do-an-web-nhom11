@@ -23,11 +23,26 @@
         <script src="./assets/js/scripts.js"></script>
     </head>
     <body>
-        <!-- Header -->
-<header id="header" class="header"></header>
+       <!-- Thay thế toàn bộ header hiện tại bằng 1 chỗ này -->
+<div id="header"></div>
+
 <script>
-    load("#header", "./templates/header.html");
-        </script>
+  // Load header template và sau đó load header-script.js
+  fetch("./templates/header.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("header").innerHTML = html;
+
+      // sau khi chèn HTML xong thì nạp JS
+      const s = document.createElement("script");
+      s.src = "./templates/header-script.js";
+      document.body.appendChild(s);
+    })
+    .catch(err => {
+      console.error("Không thể load header:", err);
+    });
+</script>
+
         <!-- MAIN -->
         <main class="container home">
             <!-- Slideshow -->
@@ -47,11 +62,6 @@
                         </div>
                     </div>
 
-                    <div class="slideshow__page">
-                        <span class="slideshow__num">1</span>
-                        <span class="slideshow__slider"></span>
-                        <span class="slideshow__num">5</span>
-                    </div>
                 </div>
             </div>
 
@@ -108,126 +118,7 @@
                     <h2 class="home__heading">Tổng số sản phẩm LavAzza 1320</h2>
                     <div class="filter-wrap">
                         <button class="filter-btn js-toggle" toggle-target="#home-filter">
-                            Phân loại
-                            <img src="./assets/icons/filter.svg" alt="" class="filter-btn__icon icon" />
-                        </button>
-
-                        <div id="home-filter" class="filter hide">
-                            <img src="./assets/icons/arrow-up.png" alt="" class="filter__arrow" />
-                            <h3 class="filter__heading">Phân loại</h3>
-                            <form action="" class="filter__form form">
-                                <div class="filter__row filter__content">
-                                    <!-- Filter column 1 -->
-                                    <div class="filter__col">
-                                        <label for="" class="form__label">Giá</label>
-                                        <div class="filter__form-group">
-                                            <div
-                                                class="filter__form-slider"
-                                                style="--min-value: 10%; --max-value: 60%"
-                                            ></div>
-                                        </div>
-                                        <div class="filter__form-group filter__form-group--inline">
-                                            <div>
-                                                <label for="" class="form__label form__label--small"> thấp nhất </label>
-                                                <div class="filter__form-text-input filter__form-text-input--small">
-                                                    <input
-                                                        type="text"
-                                                        name=""
-                                                        id=""
-                                                        class="filter__form-input"
-                                                        value="$30.00"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <label for="" class="form__label form__label--small"> cao nhất </label>
-                                                <div class="filter__form-text-input filter__form-text-input--small">
-                                                    <input
-                                                        type="text"
-                                                        name=""
-                                                        id=""
-                                                        class="filter__form-input"
-                                                        value="$100.00"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="filter__separate"></div>
-
-                                    <!-- Filter column 2 -->
-                                    <div class="filter__col">
-                                         <label for="" class="form__label">Kích thước/Trọng lượng</label>
-                                        <div class="filter__form-group">
-                                            <div class="form__select-wrap">
-                                                <div class="form__select" style="--width: 158px">
-                                                    500g
-                                                    <img
-                                                        src="./assets/icons/select-arrow.svg"
-                                                        alt=""
-                                                        class="form__select-arrow icon"
-                                                    />
-                                                </div>
-                                                <div class="form__select">
-                                                    Gram
-                                                    <img
-                                                        src="./assets/icons/select-arrow.svg"
-                                                        alt=""
-                                                        class="form__select-arrow icon"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="filter__form-group">
-                                            <div class="form__tags">
-                                                <button class="form__tag">nhỏ</button>
-                                                <button class="form__tag">vừa</button>
-                                                <button class="form__tag">lớn</button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="filter__separate"></div>
-
-                                    <!-- Filter column 3 -->
-                                    <div class="filter__col">
-                                        <label for="" class="form__label">thương hiệu</label>
-                                        <div class="filter__form-group">
-                                            <div class="filter__form-text-input">
-                                                <input
-                                                    type="text"
-                                                    name=""
-                                                    id=""
-                                                    placeholder="Search brand name"
-                                                    class="filter__form-input"
-                                                />
-                                                <img
-                                                    src="./assets/icons/search.svg"
-                                                    alt=""
-                                                    class="filter__form-input-icon icon"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div class="filter__form-group">
-                                            <div class="form__tags">
-                                                <button class="form__tag">Lavazza</button>
-                                                <button class="form__tag">Nescafe</button>
-                                                <button class="form__tag">Starbucks</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="filter__row filter__footer">
-                                    <button class="btn btn--text filter__cancel js-toggle" toggle-target="#home-filter">
-                                        Hủy
-                                    </button>
-                                    <button
-                                        class="btn btn--primary filter__submit js-toggle"
-                                        toggle-target="#home-filter"
-                                    >
-                                        Xem kết quả
-                                    </button>
+                        
                                 </div>
                             </form>
                         </div>
@@ -248,7 +139,7 @@
                                 </button>
                             </div>
                             <h3 class="product-card__title">
-                                <a href="./product-detail.html">Hạt Cà Phê - Espresso Arabica và Robusta</a>
+                                <a href="./product-detail-guest.html">Hạt Cà Phê - Espresso Arabica và Robusta</a>
                             </h3>
                             <p class="product-card__brand">Lavazza</p>
                             <div class="product-card__row">
@@ -272,7 +163,7 @@
                                 </button>
                             </div>
                             <h3 class="product-card__title">
-                                <a href="./product-detail.html">Cà phê Lavazza - Thưởng thức Espresso Ý</a>
+                                <a href="./product-detail-guest.html">Cà phê Lavazza - Thưởng thức Espresso Ý</a>
                             </h3>
                             <p class="product-card__brand">Lavazza</p>
                             <div class="product-card__row">
@@ -296,7 +187,7 @@
                                 </button>
                             </div>
                             <h3 class="product-card__title">
-                                <a href="./product-detail.html">Lavazza - Cà phê xay hộp đen Espresso</a>
+                                <a href="./product-detail-guest.html">Lavazza - Cà phê xay hộp đen Espresso</a>
                             </h3>
                             <p class="product-card__brand">Welikecoffee</p>
                             <div class="product-card__row">
@@ -320,7 +211,7 @@
                                 </button>
                             </div>
                             <h3 class="product-card__title">
-                               <a href="./product-detail.html">Qualità Oro Mountain Grown - Hạt cà phê Espresso</a>
+                               <a href="./product-detail-guest.html">Qualità Oro Mountain Grown - Hạt cà phê Espresso</a>
                             </h3>
                             <p class="product-card__brand">Lavazza</p>
                             <div class="product-card__row">
@@ -344,7 +235,7 @@
                                 </button>
                             </div>
                             <h3 class="product-card__title">
-                                <a href="./product-detail.html">Hạt Cà Phê - Espresso Arabica và Robusta</a>
+                                <a href="./product-detail-guest.html">Hạt Cà Phê - Espresso Arabica và Robusta</a>
                             </h3>
                             <p class="product-card__brand">Lavazza</p>
                             <div class="product-card__row">
@@ -368,7 +259,7 @@
                                 </button>
                             </div>
                             <h3 class="product-card__title">
-                                <a href="./product-detail.html">Cà phê Lavazza - Thưởng thức Espresso Ý</a>
+                                <a href="./product-detail-guest.html">Cà phê Lavazza - Thưởng thức Espresso Ý</a>
                             </h3>
                                  <p class="product-card__brand">Lavazza</p>
                                  <div class="product-card__row">
@@ -392,7 +283,7 @@
                                 </button>
                             </div>
                             <h3 class="product-card__title">
-                                <a href="./product-detail.html">Lavazza - Cà phê xay hộp đen Espresso</a>
+                                <a href="./product-detail-guest.html">Lavazza - Cà phê xay hộp đen Espresso</a>
                              </h3>
                                <p class="product-card__brand">Welikecoffee</p>
                                  <div class="product-card__row">
@@ -485,22 +376,22 @@
 </div>
 
 
-            </section>
-        </main>
-        <!-- Footer -->
-        <footer id="footer" class="footer"></footer>
-        <script>
-            load("#footer", "./templates/footer.html");
-        </script>
-        <script>
-  const buttons = document.querySelectorAll(".page-btn");
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      buttons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
+            <!-- 🔹 Header -->
+<div id="header"></div>
+
+<script>
+  // Tải header.html vào phần #header
+  fetch("./templates/header.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("header").innerHTML = data;
+
+      // Sau khi header.html đã được chèn, load script riêng của header
+      const script = document.createElement("script");
+      script.src = "./templates/header-script.js";
+      document.body.appendChild(script);
     });
-  });
-    </script>
+</script>
 </body>
 </html>
 

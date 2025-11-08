@@ -4777,6 +4777,76 @@ html.light .search-box input {
 .hide {
     display: none !important;
 }
+.top-act__auth {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.top-act__login {
+  color: #333;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.top-act__login:hover {
+  color: #ffb703;
+}
+
+.top-act__signup {
+  background: #ffb703;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 8px 18px;
+  transition: background 0.3s;
+}
+
+.top-act__signup:hover {
+  background: #ffa500;
+}
+/* ✅ Tạo khoảng cách giữa các khung */
+.shipping-summary,
+.gift-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0; /* cách đều giữa các phần */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* ✅ Làm cho nút nổi bật hơn và có khoảng cách */
+.btn-continue {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px;
+  background-color: #fbbf24;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-continue:hover {
+  background-color: #f59e0b;
+  transform: translateY(-2px);
+}
+/* ==== SHIPPING PAGE FIX ==== */
+.checkout-page .cart-info {
+  margin-top: 24px; /* tạo khoảng cách giữa các khung */
+  border-radius: 12px;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.checkout-page .cart-info--summary {
+  margin-top: 20px; /* giãn cách khung quà tặng ra khỏi khung trên */
+}
 
 
 /*# sourceMappingURL=main.css.map */

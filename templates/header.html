@@ -14,7 +14,7 @@
         placeholder="Tìm kiếm sản phẩm..."
         class="search-box"
       />
-      <button id="searchBtn" class="search-btn">Tìm kiếm</button>
+      <button id="searchBtn" class="search-btn" type="button">Tìm kiếm</button>
     </div>
 
     <!-- Actions -->
@@ -23,6 +23,35 @@
       <a href="./sign-up.html" class="top-act__sign-up btn btn--primary">Đăng ký</a>
     </div>
   </div>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="navbar hide">
+    <button class="navbar__close-btn js-toggle" toggle-target="#navbar">
+      <img class="icon" src="./assets/icons/arrow-left.svg" alt="" />
+    </button>
+
+    <a href="./checkout.html" class="nav-btn d-none d-md-flex">
+      <img src="./assets/icons/buy.svg" alt="" class="nav-btn__icon icon" />
+      <span class="nav-btn__title">Cart</span>
+      <span class="nav-btn__qnt">3</span>
+    </a>
+
+    <a href="./favourite.html" class="nav-btn d-none d-md-flex">
+      <img src="./assets/icons/heart.svg" alt="" class="nav-btn__icon icon" /><div class="container">
+  <div class="top-bar" style="justify-content: space-between; align-items: center;">
+    <!-- Logo -->
+    <a href="./index.html" class="logo top-bar__logo">
+      <img src="./assets/icons/logo.svg" alt="grocerymart" class="logo__img top-bar__logo-img" />
+      <h1 class="logo__title top-bar__logo-title">Cửa hàng cà phê</h1>
+    </a>
+
+    
+    <!-- Actions -->
+    <div class="top-act__auth">
+  <a href="./sign-in.html" class="top-act__login">Đăng nhập</a>
+  <a href="./sign-up.html" class="btn btn--primary top-act__signup">Đăng ký</a>
+</div>
+
 
   <!-- Navbar -->
   <nav id="navbar" class="navbar hide">
@@ -51,6 +80,15 @@
   </nav>
   <div class="navbar__overlay js-toggle" toggle-target="#navbar"></div>
 </div>
+
+<!-- CSS (giữ nguyên như bạn có) -->
+<style>
+  .header-search { /* ... giữ nguyên CSS của bạn ... */ }
+  .search-box { /* ... */ }
+  .search-btn { /* ... */ }
+  /* ... phần CSS khác ... */
+</style>
+
 
 <!-- 🎨 CSS cho thanh tìm kiếm -->
 <style>
@@ -116,51 +154,17 @@
 </style>
 
 <!-- ⚙️ Script xử lý đăng nhập & tìm kiếm -->
+<div id="header"></div>
+
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const userActions = document.getElementById("userActions");
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    const username = localStorage.getItem("userEmail") || "Người dùng";
+  fetch("./templates/header.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("header").innerHTML = data;
 
-    if (isLoggedIn === "true") {
-      userActions.innerHTML = `
-        <div class="top-act__user">
-          <span class="user-name">${username}</span>
-          <button id="logoutBtn" class="btn btn--text">Đăng xuất</button>
-        </div>
-      `;
-    }
-
-    const logoutBtn = document.getElementById("logoutBtn");
-    if (logoutBtn) {
-      logoutBtn.addEventListener("click", function () {
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("userEmail");
-        alert("Bạn đã đăng xuất!");
-        window.location.href = "./sign-in.html";
-      });
-    }
-
-    // ✅ Xử lý tìm kiếm
-    const searchInput = document.querySelector("#searchInput");
-    const searchBtn = document.querySelector("#searchBtn");
-
-    if (searchInput && searchBtn) {
-      const goToSearch = () => {
-        const keyword = searchInput.value.trim();
-        if (!keyword) {
-          alert("Vui lòng nhập tên sản phẩm cần tìm!");
-          return;
-        }
-        // Chuyển qua trang search-result.html và gửi từ khóa
-       window.location.href = `./search-result.html?search=${encodeURIComponent(keyword)}`;
-
-      };
-
-      searchBtn.addEventListener("click", goToSearch);
-      searchInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") goToSearch();
-      });
-    }
-  });
+      // ⚙️ Load script của header sau khi HTML đã được chèn vào
+      const script = document.createElement("script");
+      script.src = "./templates/header-script.js";
+      document.body.appendChild(script);
+    });
 </script>
