@@ -12,7 +12,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 40px; 
+            padding: 40px;
             background-color: #f8f9fa;
             color: #333;
         }
@@ -23,10 +23,10 @@
         }
 
         :root {
-            --primary-color: #198754; 
-            --light-bg: #e6f1ec; 
+            --primary-color: #198754;
+            --light-bg: #e6f1ec;
             --border-color: #dee2e6;
-            --save-color: #007bff; 
+            --save-color: #007bff;
         }
 
         /* ====================================================================
@@ -34,13 +34,19 @@
            ==================================================================== */
         .page-header {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px; 
+            margin-bottom: 40px;
             padding-bottom: 10px;
             border-bottom: 2px solid #e9ecef;
         }
-        
+
+        .page-header h1 {
+            margin: 0;
+            font-size: 1.6em;
+        }
+
         .action-buttons button {
             padding: 10px 20px;
             font-weight: 600;
@@ -58,14 +64,13 @@
         .action-buttons .save-btn { background-color: var(--save-color); color: white; }
         .action-buttons .save-btn:hover { background-color: #0056b3; }
 
-
         /* ====================================================================
            III. BỐ CỤC CHÍNH & CARD
            ==================================================================== */
         .detail-grid {
             display: grid;
-            grid-template-columns: 2.5fr 1fr; 
-            gap: 35px; 
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
             margin-bottom: 35px;
         }
 
@@ -73,11 +78,11 @@
             background-color: white;
             border-radius: 12px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-            padding: 30px; 
+            padding: 25px;
         }
 
         .card h2 {
-            font-size: 1.4em;
+            font-size: 1.25em;
             color: var(--primary-color);
             margin-top: 0;
             padding-bottom: 12px;
@@ -87,7 +92,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .edit-icon {
             color: #6c757d;
             cursor: pointer;
@@ -102,12 +107,12 @@
         .order-info-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 25px 50px; 
+            gap: 20px 45px;
         }
 
         .info-item {
-            flex-basis: calc(33.333% - 50px);
-            min-width: 220px;
+            flex-basis: calc(33.333% - 40px);
+            min-width: 200px;
         }
 
         .info-item label {
@@ -117,7 +122,7 @@
             margin-bottom: 6px;
             font-weight: 500;
         }
-        
+
         .editable-field {
             padding: 10px 12px;
             border: 1px solid #ced4da;
@@ -126,9 +131,9 @@
             box-sizing: border-box;
             font-size: 1em;
         }
-        
+
         .total-amount {
-            font-size: 1.4em !important;
+            font-size: 1.3em !important;
             color: #dc3545;
             font-weight: 700 !important;
         }
@@ -137,36 +142,38 @@
            V. THÔNG TIN KHÁCH HÀNG & GIAO HÀNG
            ==================================================================== */
         .customer-info p {
-            margin: 12px 0; 
+            margin: 12px 0;
             line-height: 1.6;
         }
-        
+
         .customer-info label {
             display: inline-block;
-            width: 110px; 
+            width: 110px;
             color: #495057;
             font-weight: 600;
             margin-right: 10px;
         }
 
         /* ====================================================================
-           VI. BẢNG SẢN PHẨM CHI TIẾT 
+           VI. BẢNG SẢN PHẨM CHI TIẾT
            ==================================================================== */
-        .product-table-card {
-            padding: 0;
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
         }
-        
+
         .product-table th, .product-table td {
-            padding: 18px 30px; 
+            padding: 15px 25px;
+            border-bottom: 1px solid #e9ecef;
         }
 
         .product-table th {
-            background-color: var(--light-bg); 
+            background-color: var(--light-bg);
         }
 
-        /* Hình ảnh sản phẩm */
         .product-image {
-            width: 80px; 
+            width: 80px;
             text-align: center;
         }
 
@@ -178,41 +185,25 @@
             border: 1px solid #e9ecef;
         }
 
-        /* CĂN CHỈNH CÁC CỘT SỐ LIỆU */
-        /* STT */
-        .product-table th:nth-child(1), .product-table td:nth-child(1) { width: 50px; text-align: center; } 
-        /* Tên Sản Phẩm */
-        .product-table th:nth-child(3) { width: auto; }
-        /* Đơn Giá */
-        .product-table th:nth-child(4), .product-table td:nth-child(4) { text-align: right; width: 120px; } 
-        /* Số Lượng (Cột này chứa dữ liệu tĩnh) */
-        .product-table th:nth-child(5), .product-table td:nth-child(5) { 
-            text-align: center; 
-            width: 100px; 
-            font-weight: 600; /* Nhấn mạnh số lượng */
-        } 
-        /* Thành Tiền */
-        .product-table th:nth-child(6), .product-table td:nth-child(6) { 
-            text-align: right; 
-            font-weight: 700; 
-            color: #dc3545; 
-            width: 150px;
-        } 
+        /* Căn cột */
+        .product-table th:nth-child(1), .product-table td:nth-child(1) { width: 50px; text-align: center; }
+        .product-table th:nth-child(4), .product-table td:nth-child(4) { text-align: right; width: 120px; }
+        .product-table th:nth-child(5), .product-table td:nth-child(5) { text-align: center; width: 90px; font-weight: 600; }
+        .product-table th:nth-child(6), .product-table td:nth-child(6) { text-align: right; font-weight: 700; color: #dc3545; width: 150px; }
 
-        /* Hàng tổng cộng cuối bảng */
+        /* Tổng kết */
         .summary-row td {
             border-top: 2px solid var(--border-color);
-            padding: 15px 30px;
+            padding: 15px 25px;
         }
-        
-        .summary-row .total-label { 
-            text-align: right; 
-            font-size: 1.1em;
-        }
-        .summary-row .total-value { 
-            font-weight: 700; 
-            color: #dc3545; 
-            font-size: 1.3em !important; 
+        .summary-row .total-label { text-align: right; font-size: 1.05em; }
+        .summary-row .total-value { font-weight: 700; color: #dc3545; font-size: 1.25em !important; }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -317,9 +308,9 @@
                         <tr data-price="4000000" data-quantity="1" data-id="1">
                             <td>1</td>
                             <td class="product-image">
-                                <img src="https://via.placeholder.com/60x60/87CEFA/FFFFFF?text=Áo" alt="Áo Sơ Mi">
+                                <img src="item-1.png" alt="Áo Sơ Mi">
                             </td>
-                            <td class="product-name">Hạt cà phê  (Size L, Trắng)</td>
+                            <td class="product-name">Hạt cà phê Lavazza  (Size L)</td>
                             <td class="unit-price-display">4.000.000₫</td>
                             <td>
                                 <span class="quantity-display">1</span>
@@ -329,9 +320,9 @@
                         <tr data-price="500000" data-quantity="1" data-id="2">
                             <td>2</td>
                             <td class="product-image">
-                                <img src="https://via.placeholder.com/60x60/9370DB/FFFFFF?text=Vòng" alt="Vòng Tay">
+                                <img src="item-2.png" alt="Vòng Tay">
                             </td>
-                            <td class="product-name">Vòng Tay Thạch Anh Tím</td>
+                            <td class="product-name">Hạt cà phê Epresso (size L)</td>
                             <td class="unit-price-display">500.000₫</td>
                             <td>
                                 <span class="quantity-display">1</span>
