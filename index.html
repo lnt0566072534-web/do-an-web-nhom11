@@ -392,6 +392,11 @@
       document.body.appendChild(script);
     });
 </script>
+<script>
+  // Khi mở trang index.html, luôn reset trạng thái đăng nhập
+  localStorage.removeItem("loggedInUser"); // hoặc key bạn dùng để lưu tài khoản
+  localStorage.removeItem("isLoggedIn"); // tùy bạn đặt tên biến
+</script>
 </body>
 </html>
 
