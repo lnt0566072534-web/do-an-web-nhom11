@@ -1,561 +1,668 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Quản trị Admin</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <link rel="stylesheet" href="styleadmin.css" />
-    <title>Bảng điều khiển Quản trị</title>
+    
+    <style>
+        /* CSS TỪ TRANG ĐĂNG NHẬP (ĐÃ CHỈNH SỬA) */
+        .login-body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            color: #3b82f6;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #3b82f6;
+            outline: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .login-btn:hover {
+            background-color: #2563eb;
+        }
+
+        .login-btn:active {
+            transform: scale(0.99);
+        }
+        
+        /* ẨN/HIỆN ELEMENTS */
+        .hidden {
+            display: none !important;
+        }
+        /* Dashboard cần có kiểu dáng phù hợp với styleadmin.css */
+        /* Nếu styleadmin.css đã đủ cho dashboard thì không cần thêm CSS dashboard ở đây */
+        
+    </style>
 </head>
-
 <body>
-    <main class="main-container">
-        <div class="shadow-overlay"></div>
-        <section class="sidebar">
-            <span class="sidebar-header-container">
-                <a href="#" class="logo-container">
-                    <i class="fas fa-code"></i>
-                    <span class="sidebar-text logo-text">DEVCORE</span>
-                </a>
 
-                <button class="close-btn"><i class="fas fa-xmark"></i></button>
-            </span>
-            <ul class="side-menu top">
-                <li class="active">
-                    <a href="#">
-                        <i class="fas fa-tachometer-alt"></i>
-                        <span class="sidebar-text">Bảng điều khiển</span>
+    <div id="login-screen" class="login-body">
+        <div class="login-container">
+            <h2>Đăng nhập Hệ thống Admin</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập bất kỳ" >
+                </div>
+                <div class="input-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" placeholder="Nhập mật khẩu bất kỳ" >
+                </div>
+                <button type="submit" class="login-btn">Đăng nhập</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="dashboard-screen" class="hidden">
+        <main class="main-container">
+            <div class="shadow-overlay"></div>
+            <section class="sidebar">
+                <span class="sidebar-header-container">
+                    <a href="adminnew.html" class="logo-container">
+                        <i class="fas fa-user"></i>
+                        <span class="sidebar-text logo-text">ADMIN</span>
                     </a>
-                </li>
-
-                <li>
-                    <a href="quanlikhachhang.html">
-                        <i class="fas fa-users"></i>
-                        <span class="sidebar-text">Quản lý khách hàng </span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="quanlidonhang.html">
-                        <i class="fas fa-chart-pie"></i>
-                        <span class="sidebar-text">Quản lý đơn hàng</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="quanlisanpham.html">
-                        <i class="fas fa-store"></i>
-                        <span class="sidebar-text">Quản lí sản phẩm</span>
-                    </a>
-                </li>
-
-         
-
-
-                <li>
-                    <a href="quanlinhaphang.html">
-                        <i class="fas fa-comments"></i>
-                        <span class="sidebar-text">Quản lý nhập hàng </span>
-                    </a>
-                </li>
-
-
-
-                <li>
-                    <a href="quanligiaban.html">
-                        <i class="far fa-calendar"></i>
-                        <span class="sidebar-text">Quản lý giá bán</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="quanlitonkho.html">
-                        <i class="fas fa-boxes"></i>
-                        <span class="sidebar-text">Quản lí tồn kho </span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="baiviet.htmlhtml">
-                        <i class="fas fa-pager"></i>
-                        <span class="sidebar-text">Bài viết</span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="side-menu bottom">
-                <li>
-                    <a href="#">
-                        <i class="fas fa-cogs"></i>
-                        <span class="sidebar-text">Cài đặt</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="logout">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span class="sidebar-text">Đăng xuất</span>
-                    </a>
-                </li>
-            </ul>
-        </section>
-
-
-        <section class="content">
-            <nav>
-                <form class="form-main" action="#">
-                    <div class="form-input-container">
-                        <main class="input-main">
-                            <input class="nav-input" type="search" placeholder="Tìm kiếm..." />
-                            <button class="modal-close-btn">
-                                <i class="fas fa-xmark"></i>
-                            </button>
-                        </main>
-
-                        <main class="modal-links-section">
-                            <h1 class="modal-header">Liên kết nhanh</h1>
-                            <ul class="modal-links">
-                                <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
-                                <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
-                                <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
-                                <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
-                                <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
-                                <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
-                                <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
-                                <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span></a></li>
-                                <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
-                                <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
-                                <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
-                                <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span></a></li>
-                            </ul>
-                        </main>
-                    </div>
-
-
-                </form>
-                <span class="nav-left">
-                    <button class="toggle-btn"><i class="fas fa-bars"></i></button>
-                    <button type="submit" class="nav-search-btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-
-                    <ul class="nav-links">
-                        <li><a href="">Trang chủ</a></li>
-                        <li><a href="">Email</a></li>
-                        <li><a href="">Lịch</a></li>
-                        <li><a href="">Trò chuyện</a></li>
-                    </ul>
+                    <button class="close-btn"><i class="fas fa-xmark"></i></button>
                 </span>
-                <span class="nav-right">
-                    <input type="checkbox" id="dark-mode" hidden />
-                    <label for="dark-mode" class="dark-mode"></label>
-                    <a href="#" class="notification">
-                        <i class="fas fa-bell"></i>
-                        <span class="num">4</span>
-                    </a>
-                    <a href="#" class="profile">
-                    </a>
-                </span>
-            </nav>
-
-
-
-
-
-
-
-
-
-            <div class="container">
-                <main class="center-container">
-                    <div class="info-cards-container">
-                        <main class="card">
-                            <i class="fas fa-calendar-check"></i>
-                            <span class="text">
-                                <h3 class="info-number">1,930</h3>
-                                <p class="info-type">Khách hàng</p>
-                            </span>
-                        </main>
-                        <main class="card">
+                <ul class="side-menu top">
+                    <li class="active">
+                        <a href="#">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span class="sidebar-text">Bảng điều khiển</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="quanlikhachhang.html">
                             <i class="fas fa-users"></i>
-                            <span class="text">
-                                <h3 class="info-number">934</h3>
-                                <p class="info-type">Khách truy cập</p>
-                            </span>
-                        </main>
-                        <main class="card">
-                            <i class="fas fa-dollar-sign"></i>
-                            <span class="text">
-                                <h3 class="info-number">3,243 VNĐ</h3> <p class="info-type">Tổng doanh số</p>
-                            </span>
-                        </main>
-                    </div>
-
-                    <div class="content-container">
-                        <div class="order-half">
-                            <div class="chart-container">
-                                <span>
-                                    <h3 class="card-head-text">Tăng trưởng người dùng</h3>
-                                    <p class="card-description">So sánh hàng năm</p>
-                                </span>
-                                <section id="bar-chart"></section>
-                            </div>
-                        </div>
-
-                        <div class="order">
-                            <span class="card-header">
-                                <span>
-                                    <h3 class="card-head-text">Đơn hàng mới</h3>
-                                    <p class="card-description">Đơn hàng chưa thanh toán</p>
-                                </span>
-                                <span class="card-icon-container">
-                                    <i class="fas fa-search"></i>
-                                    <i class="fas fa-filter"></i>
-                                </span>
-                            </span>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Khách hàng</th>
-                                        <th>Ngày đặt hàng</th>
-                                        <th>Trạng thái</th>
-                                        <th>Giá</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <p>Quang minh</p>
-                                        </td>
-                                        <td>01-10-2021</td>
-                                        <td><span class="status pending">Đang chờ</span></td>
-                                        <td><span>390.000 VNĐ</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p>Thanh thuận </p>
-                                        </td>
-                                        <td>01-10-2021</td>
-                                        <td><span class="status completed">Hoàn thành</span></td>
-                                        <td><span>150.000 VNĐ</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p>Quốc việt</p>
-                                        </td>
-                                        <td>01-10-2021</td>
-                                        <td><span class="status process">Đang xử lý</span></td>
-                                        <td><span>200. VNĐ</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            <span class="sidebar-text">Quản lý khách hàng </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="quanlidonhang.html">
+                            <i class="fas fa-chart-pie"></i>
+                            <span class="sidebar-text">Quản lý đơn hàng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="quanlisanpham.html">
+                            <i class="fas fa-store"></i>
+                            <span class="sidebar-text">Quản lí sản phẩm</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="quanlinhaphang.html">
+                            <i class="fas fa-comments"></i>
+                            <span class="sidebar-text">Quản lý nhập hàng </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="quanligiaban.html">
+                            <i class="far fa-calendar"></i>
+                            <span class="sidebar-text">Quản lý giá bán</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="quanlitonkho.html">
+                            <i class="fas fa-boxes"></i>
+                            <span class="sidebar-text">Quản lí tồn kho </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="baiviet.html">
+                            <i class="fas fa-pager"></i>
+                            <span class="sidebar-text">Bài viết</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="side-menu bottom">
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-cogs"></i>
+                            <span class="sidebar-text">Cài đặt</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="logout" id="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span class="sidebar-text">Đăng xuất</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
 
 
-                        <div class="order-half">
-                            <span>
-                                <h3 class="card-head-text">Giao dịch gần đây</h3>
-                                <p class="card-description"></p>
-                            </span>
-                            <div class="transaction">
-                                <div class="transaction-details">
+            <section class="content">
+                <nav>
+                    <form class="form-main" action="#">
+                        <div class="form-input-container">
+                            <main class="input-main">
+                                <input class="nav-input" type="search" placeholder="Tìm kiếm..." />
+                                <button class="modal-close-btn">
+                                    <i class="fas fa-xmark"></i>
+                                </button>
+                            </main>
 
-                                    <span>
-                                        <h3 class="transaction-name">Bui Thanh </h3>
-                                        <p class="transaction-type" </p>
-                                    </span>
-
-
-                                    <div class="progress-container">
-                                        <span class="rating-amount">
-                                            <h3 class="transaction-amount">45.234 VNĐ</h3> <i class="icon-green fas fa-arrow-up"></i>
-                                        </span>
-                                        <p class="transaction-date">12 Thg 1 2020</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="transaction">
-                                <div class="transaction-details">
-
-                                    <span>
-                                        <h3 class="transaction-name">Tran Quang M </h3>
-                                        <p class="transaction-type"></p>
-                                    </span>
-
-
-                                    <div class="progress-container">
-                                        <span class="rating-amount">
-                                            <h3 class="transaction-amount">35.234 VNĐ</h3> <i class="icon-red fas fa-arrow-down"></i>
-                                        </span>
-                                        <p class="transaction-date">12 Thg 1 2020</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="transaction">
-                                <div class="transaction-details">
-
-                                    <span>
-                                        <h3 class="transaction-name">Nguyen Van D</h3>
-                                        <p class="transaction-type"> </p>
-                                    </span>
-
-
-                                    <div class="progress-container">
-                                        <span class="rating-amount">
-                                            <h3 class="transaction-amount">245.234 VNĐ</h3> <i class="icon-green fas fa-arrow-up"></i>
-                                        </span>
-                                        <p class="transaction-date">12 Thg 1 2020</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="transaction">
-                                <div class="transaction-details">
-
-                                    <span>
-                                        <h3 class="transaction-name">Tran van B </h3>
-                                        <p class="transaction-type">
-
-                                        </p>
-                                    </span>
-
-
-                                    <div class="progress-container">
-                                        <span class="rating-amount">
-                                            <h3 class="transaction-amount">15.234 VNĐ</h3> <i class="icon-red fas fa-arrow-down"></i>
-                                        </span>
-                                        <p class="transaction-date">12 Thg 1 2020</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="transaction">
-                                <div class="transaction-details">
-
-                                    <span>
-                                        <h3 class="transaction-name">Nguyen Van A </h3>
-                                        <p class="transaction-type"></p>
-                                    </span>
-
-
-                                    <div class="progress-container">
-                                        <span class="rating-amount">
-                                            <h3 class="transaction-amount">105.234 VNĐ</h3> <i class="icon-red fas fa-arrow-down"></i>
-                                        </span>
-                                        <p class="transaction-date">12 Thg 1 2020</p>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                        <div class="order">
-                            <div class="card-header">
-                                <span>
-                                    <h3 class="card-head-text">Đánh giá</h3>
-                                    <p class="card-description">Doanh thu của quán</p>
-                                </span>
-                                <span class="card-icon-container">
-                                    <i class="fas fa-search"></i>
-                                    <i class="fas fa-filter"></i>
-                                </span>
-                            </div>
-                            <main class="records-container">
-
-                                <div class="record">
-                                    <h4 class="record-type">Tổng doanh thu</h4>
-                                    <p class="record-description">Tháng trước so với tháng này</p>
-                                    <h3 class="record-amount">5,900.00 VNĐ</h3> <div class="record-icon-container">
-                                        <span class="record-details">
-                                            <p class="icon-green">55%</p>
-                                            <p class="p-estimate-rating">Cao hơn</p>
-                                        </span>
-                                        <i class='record-icon fas fa-chart-line'></i>
-                                    </div>
-
-                                </div>
-
-                                <div class="record">
-                                    <h4 class="record-type">Nhân viên mới</h4>
-                                    <p class="record-description">Nhân viên tham gia tháng này </p>
-                                    <h3 class="record-amount">15</h3>
-
-                                    <div class="record-icon-container">
-                                        <span class="record-details">
-                                            <p class="icon-green">5%</p>
-                                            <p class="p-estimate-rating">Tăng</p>
-                                        </span>
-                                        <i class='record-icon fas fa-user'></i>
-                                    </div>
-
-                                </div>
-
-                                <div class="record">
-                                    <h4 class="record-type">Tổng chi phí</h4>
-                                    <p class="record-description">Tháng trước so với tháng này</p>
-                                    <h3 class="record-amount">15,900.00 VNĐ</h3> <div class="record-icon-container">
-                                        <span class="record-details">
-                                            <p class="icon-red">25%</p>
-                                            <p class="p-estimate-rating">Giảm</p>
-                                        </span>
-                                        <i class='record-icon fas fa-dollar-sign'></i>
-                                    </div>
-
-                                </div>
-
-                                <div class="record">
-                                    <h4 class="record-type">Lợi nhuận </h4>
-                                    <p class="record-description">Tháng trước so với tháng này</p>
-                                    <h3 class="record-amount">5,900.00 VNĐ</h3> <div class="record-icon-container">
-                                        <span class="record-details">
-                                            <p class="icon-green">85%</p>
-                                            <p class="p-estimate-rating">Tăng</p>
-                                        </span>
-                                        <i class='record-icon fas fa-dollar-sign'></i>
-                                    </div>
-
-                                </div>
+                            <main class="modal-links-section">
+                                <h1 class="modal-header">Liên kết nhanh</h1>
+                                <ul class="modal-links">
+                                    <li><a href="#">Hạt cà phê Lavazza <br> <span class="full-link">/apps/store</span> </a></li>
+                                    <li><a href="#">Hạt cà phê Abrica <br> <span class="full-link">/apps/store</span> </a></li>
+                                    <li><a href="#">Hạt cà phê Epresso <br> <span class="full-link">/apps/store</span> </a></li>
+                                    <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
+                                    <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
+                                    <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
+                                    <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
+                                    <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span></a></li>
+                                    <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
+                                    <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
+                                    <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span> </a></li>
+                                    <li><a href="#">Cửa hàng của tôi <br> <span class="full-link">/apps/store</span></a></li>
+                                </ul>
                             </main>
                         </div>
 
-                        <div class="order">
-                            <div class="card-header">
+
+                    </form>
+                    <span class="nav-left">
+                        <button class="toggle-btn"><i class="fas fa-bars"></i></button>
+                        <button type="submit" class="nav-search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+
+                        <ul class="nav-links">
+                            <li><a href="">Trang chủ</a></li>
+                            <li><a href="">Email</a></li>
+                            <li><a href="">Lịch</a></li>
+                            <li><a href="">Trò chuyện</a></li>
+                        </ul>
+                    </span>
+                    <span class="nav-right">
+                        <input type="checkbox" id="dark-mode" hidden />
+                        <label for="dark-mode" class="dark-mode"></label>
+                        <a href="#" class="notification">
+                            <i class="fas fa-bell"></i>
+                            <span class="num">4</span>
+                        </a>
+                        <a href="#" class="profile">
+                        </a>
+                    </span>
+                </nav>
+
+
+
+
+
+
+
+
+
+                <div class="container">
+                    <main class="center-container">
+                        <div class="info-cards-container">
+                            <main class="card">
+                                <i class="fas fa-calendar-check"></i>
+                                <span class="text">
+                                    <h3 class="info-number">1,930</h3>
+                                    <p class="info-type">Khách hàng</p>
+                                </span>
+                            </main>
+                            <main class="card">
+                                <i class="fas fa-users"></i>
+                                <span class="text">
+                                    <h3 class="info-number">934</h3>
+                                    <p class="info-type">Khách truy cập</p>
+                                </span>
+                            </main>
+                            <main class="card">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span class="text">
+                                    <h3 class="info-number">3,243 VNĐ</h3> <p class="info-type">Tổng doanh số</p>
+                                </span>
+                            </main>
+                        </div>
+
+                        <div class="content-container">
+                            <div class="order-half">
+                                <div class="chart-container">
+                                    <span>
+                                        <h3 class="card-head-text">Doanh thu hàng tháng</h3>
+                                        <p class="card-description">So sánh hàng tháng</p>
+                                    </span>
+                                    <section id="bar-chart"></section>
+                                </div>
+                            </div>
+
+                            <div class="order">
+                                <span class="card-header">
+                                    <span>
+                                        <h3 class="card-head-text">Đơn hàng mới</h3>
+                                        <p class="card-description">Đơn hàng chưa thanh toán</p>
+                                    </span>
+                                    <span class="card-icon-container">
+                                        <i class="fas fa-search"></i>
+                                        <i class="fas fa-filter"></i>
+                                    </span>
+                                </span>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Khách hàng</th>
+                                            <th>Ngày đặt hàng</th>
+                                            <th>Trạng thái</th>
+                                            <th>Giá</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <p>Quang minh</p>
+                                            </td>
+                                            <td>01-10-2021</td>
+                                            <td><span class="status pending">Đang chờ</span></td>
+                                            <td><span>390.000 VNĐ</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>Thanh thuận </p>
+                                            </td>
+                                            <td>01-10-2021</td>
+                                            <td><span class="status completed">Hoàn thành</span></td>
+                                            <td><span>150.000 VNĐ</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>Quốc việt</p>
+                                            </td>
+                                            <td>01-10-2021</td>
+                                            <td><span class="status process">Đang xử lý</span></td>
+                                            <td><span>200. VNĐ</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <div class="order-half">
                                 <span>
-                                    <h3 class="card-head-text">Thống kê 5 khách hàng có lượt mua nhiều nhất</h3>
+                                    <h3 class="card-head-text">Giao dịch gần đây</h3>
                                     <p class="card-description"></p>
                                 </span>
-                                <span class="card-icon-container">
-                                    <i class="fas fa-search"></i>
-                                    <i class="fas fa-filter"></i>
-                                </span>
+                                <div class="transaction">
+                                    <div class="transaction-details">
+
+                                        <span>
+                                            <h3 class="transaction-name">Bui Thanh </h3>
+                                            <p class="transaction-type" </p>
+                                        </span>
+
+
+                                        <div class="progress-container">
+                                            <span class="rating-amount">
+                                                <h3 class="transaction-amount">45.234 VNĐ</h3> <i class="icon-green fas fa-arrow-up"></i>
+                                            </span>
+                                            <p class="transaction-date">12 Thg 1 2020</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="transaction">
+                                    <div class="transaction-details">
+
+                                        <span>
+                                            <h3 class="transaction-name">Tran Quang M </h3>
+                                            <p class="transaction-type"></p>
+                                        </span>
+
+
+                                        <div class="progress-container">
+                                            <span class="rating-amount">
+                                                <h3 class="transaction-amount">35.234 VNĐ</h3> <i class="icon-red fas fa-arrow-down"></i>
+                                            </span>
+                                            <p class="transaction-date">12 Thg 1 2020</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="transaction">
+                                    <div class="transaction-details">
+
+                                        <span>
+                                            <h3 class="transaction-name">Nguyen Van D</h3>
+                                            <p class="transaction-type"> </p>
+                                        </span>
+
+
+                                        <div class="progress-container">
+                                            <span class="rating-amount">
+                                                <h3 class="transaction-amount">245.234 VNĐ</h3> <i class="icon-green fas fa-arrow-up"></i>
+                                            </span>
+                                            <p class="transaction-date">12 Thg 1 2020</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="transaction">
+                                    <div class="transaction-details">
+
+                                        <span>
+                                            <h3 class="transaction-name">Tran van B </h3>
+                                            <p class="transaction-type">
+
+                                            </p>
+                                        </span>
+
+
+                                        <div class="progress-container">
+                                            <span class="rating-amount">
+                                                <h3 class="transaction-amount">15.234 VNĐ</h3> <i class="icon-red fas fa-arrow-down"></i>
+                                            </span>
+                                            <p class="transaction-date">12 Thg 1 2020</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="transaction">
+                                    <div class="transaction-details">
+
+                                        <span>
+                                            <h3 class="transaction-name">Nguyen Van A </h3>
+                                            <p class="transaction-type"></p>
+                                        </span>
+
+
+                                        <div class="progress-container">
+                                            <span class="rating-amount">
+                                                <h3 class="transaction-amount">105.234 VNĐ</h3> <i class="icon-red fas fa-arrow-down"></i>
+                                            </span>
+                                            <p class="transaction-date">12 Thg 1 2020</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
-                            <table>
-                                <thead>
-                                    ...
-                                    <table>
-                                <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Tên khách hàng</th>
-                                        <th>Email</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Vai trò</th>
-                                        <th>Số đơn hàng</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Chi tiết</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <span class="employee-details">
-                                                <p class="employee-name">1</p>
-                                                <p class="employee-job"></p>
-                                            </span>
-                                        </td>
-                                        <td class="project-name">Nguyễn Văn A</td>
-                                        <td><span class="status completed">abc@gmail.com</span></td>
-                                        <td><span class="table-number">123456789</span></td>
-                                        <td><span class="status completed">Khách hàng</span></td>
-                                        <td><span class="table-number">10</span></td>
-                                        <td><span class="table-number">500.000 VNĐ</span></td>
 
-                                        <td>
-                                            <a href="chitiet_nguyenvana.html" class="detail-link completed">
-                                                xem chi tiết
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span class="employee-details">
-                                                <p class="employee-name">2</p>
-                                                <p class="employee-job"></p>
-                                            </span>
-                                        </td>
-                                        <td class="project-name">Nguyễn Văn B</td>
-                                        <td><span class="status pending">111@mail.com</span></td>
-                                        <td><span class="table-number">363636369</span></td> <td><span class="status pending">Khách hàng</span></td> <td><span class="table-number">3</span></td>
-                                        <td><span class="table-number">100.000 VNĐ</span></td>
+                            <div class="order">
+                                <div class="card-header">
+                                    <span>
+                                        <h3 class="card-head-text">Đánh giá</h3>
+                                        <p class="card-description">Doanh thu của quán</p>
+                                    </span>
+                                    <span class="card-icon-container">
+                                        <i class="fas fa-search"></i>
+                                        <i class="fas fa-filter"></i>
+                                    </span>
+                                </div>
+                                <main class="records-container">
 
-                                        <td>
-                                            <a href="chitiet_steve1.html" class="detail-link pending">
-                                                xem chi tiết
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span class="employee-details">
-                                                <p class="employee-name">3</p>
-                                                <p class="employee-job"></p>
+                                    <div class="record">
+                                        <h4 class="record-type">Tổng doanh thu</h4>
+                                        <p class="record-description">Tháng trước so với tháng này</p>
+                                        <h3 class="record-amount">5,900.00 VNĐ</h3> <div class="record-icon-container">
+                                            <span class="record-details">
+                                                <p class="icon-green">55%</p>
+                                                <p class="p-estimate-rating">Cao hơn</p>
                                             </span>
-                                        </td>
-                                        <td class="project-name">Nguyễn Văn C</td>
-                                        <td><span class="status process">222@mail.com</span></td>
-                                        <td><span class="table-number">181818189181818189</span></td> <td><span class="status process">Khách hàng</span></td> <td><span class="table-number">4</span></td>
-                                        <td><span class="table-number">390.000 VNĐ</span></td>
+                                            <i class='record-icon fas fa-chart-line'></i>
+                                        </div>
 
-                                        <td>
-                                            <a href="chitiet_steve2.html" class="detail-link process">
-                                                xem chi tiết
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span class="employee-details">
-                                                <p class="employee-name">4</p>
-                                                <p class="employee-job"></p>
+                                    </div>
+
+                                    <div class="record">
+                                        <h4 class="record-type">Nhân viên mới</h4>
+                                        <p class="record-description">Nhân viên tham gia tháng này </p>
+                                        <h3 class="record-amount">15</h3>
+
+                                        <div class="record-icon-container">
+                                            <span class="record-details">
+                                                <p class="icon-green">5%</p>
+                                                <p class="p-estimate-rating">Tăng</p>
                                             </span>
-                                        </td>
-                                        <td class="project-name">Nguyễn Văn D</td>
-                                        <td><span class="status process">333@mail.com</span></td>
-                                        <td><span class="table-number">083657628083657628</span></td> <td><span class="status process">Khách hàng</span></td> <td><span class="table-number">6</span></td>
-                                        <td><span class="table-number">750.000 VNĐ</span></td>
+                                            <i class='record-icon fas fa-user'></i>
+                                        </div>
 
-                                        <td>
-                                            <a href="chitiet_steve3.html" class="detail-link process">
-                                                xem chi tiết
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span class="employee-details">
-                                                <p class="employee-name">5</p>
-                                                <p class="employee-job"></p>
+                                    </div>
+
+                                    <div class="record">
+                                        <h4 class="record-type">Tổng chi phí</h4>
+                                        <p class="record-description">Tháng trước so với tháng này</p>
+                                        <h3 class="record-amount">15,900.00 VNĐ</h3> <div class="record-icon-container">
+                                            <span class="record-details">
+                                                <p class="icon-red">25%</p>
+                                                <p class="p-estimate-rating">Giảm</p>
                                             </span>
-                                        </td>
-                                        <td class="project-name">Nguyễn Văn E</td>
-                                        <td><span class="status pending">444@mail.com</span></td>
-                                        <td><span class="table-number">648848748</span></td> <td><span class="status pending">Khách hàng</span></td> <td><span class="table-number">8 </span></td>
-                                        <td><span class="table-number">950.000 VNĐ</span></td>
+                                            <i class='record-icon fas fa-dollar-sign'></i>
+                                        </div>
 
-                                        <td>
-                                            <a href="chitiet_steve4.html" class="detail-link pending">
-                                                xem chi tiết
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-...
+                                    </div>
+
+                                    <div class="record">
+                                        <h4 class="record-type">Lợi nhuận </h4>
+                                        <p class="record-description">Tháng trước so với tháng này</p>
+                                        <h3 class="record-amount">5,900.00 VNĐ</h3> <div class="record-icon-container">
+                                            <span class="record-details">
+                                                <p class="icon-green">85%</p>
+                                                <p class="p-estimate-rating">Tăng</p>
+                                            </span>
+                                            <i class='record-icon fas fa-dollar-sign'></i>
+                                        </div>
+
+                                    </div>
+                                </main>
+                            </div>
+
+                            <div class="order">
+                                <div class="card-header">
+                                    <span>
+                                        <h3 class="card-head-text">Thống kê 5 khách hàng có lượt mua nhiều nhất</h3>
+                                        <p class="card-description"></p>
+                                    </span>
+                                    <span class="card-icon-container">
+                                        <i class="fas fa-search"></i>
+                                        <i class="fas fa-filter"></i>
+                                    </span>
+                                </div>
+                                <table>
+                                    <thead>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>STT</th>
+                                                    <th>Tên khách hàng</th>
+                                                    <th>Email</th>
+                                                    <th>Số điện thoại</th>
+                                                    <th>Vai trò</th>
+                                                    <th>Số đơn hàng</th>
+                                                    <th>Tổng tiền</th>
+                                                    <th>Chi tiết</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <span class="employee-details">
+                                                            <p class="employee-name">1</p>
+                                                            <p class="employee-job"></p>
+                                                        </span>
+                                                    </td>
+                                                    <td class="project-name">Nguyễn Văn A</td>
+                                                    <td><span class="status completed">abc@gmail.com</span></td>
+                                                    <td><span class="table-number">123456789</span></td>
+                                                    <td><span class="status completed">Khách hàng</span></td>
+                                                    <td><span class="table-number">10</span></td>
+                                                    <td><span class="table-number">500.000 VNĐ</span></td>
+
+                                                    <td>
+                                                        <a href="xemchitiet.html" class="detail-link completed">
+                                                            xem chi tiết
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="employee-details">
+                                                            <p class="employee-name">2</p>
+                                                            <p class="employee-job"></p>
+                                                        </span>
+                                                    </td>
+                                                    <td class="project-name">Nguyễn Văn B</td>
+                                                    <td><span class="status pending">111@mail.com</span></td>
+                                                    <td><span class="table-number">350.000 VNĐ</span></td> <td><span class="status pending">Khách hàng</span></td> <td><span class="table-number">3</span></td>
+                                                    <td><span class="table-number">100.000 VNĐ</span></td>
+
+                                                    <td>
+                                                        <a href="xemchitiet.html" class="detail-link pending">
+                                                            xem chi tiết
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="employee-details">
+                                                            <p class="employee-name">3</p>
+                                                            <p class="employee-job"></p>
+                                                        </span>
+                                                    </td>
+                                                    <td class="project-name">Nguyễn Văn C</td>
+                                                    <td><span class="status process">222@mail.com</span></td>
+                                                    <td><span class="table-number">390.000K VNĐ</span></td> <td><span class="status process">Khách hàng</span></td> <td><span class="table-number">4</span></td>
+                                                    <td><span class="table-number">390.000 VNĐ</span></td>
+
+                                                    <td>
+                                                        <a href="xemchitiet.html" class="detail-link process">
+                                                            xem chi tiết
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="employee-details">
+                                                            <p class="employee-name">4</p>
+                                                            <p class="employee-job"></p>
+                                                        </span>
+                                                    </td>
+                                                    <td class="project-name">Nguyễn Văn D</td>
+                                                    <td><span class="status process">333@mail.com</span></td>
+                                                    <td><span class="table-number">750.000 VNĐ</span></td> <td><span class="status process">Khách hàng</span></td> <td><span class="table-number">6</span></td>
+                                                    <td><span class="table-number">750.000 VNĐ</span></td>
+
+                                                    <td>
+                                                        <a href="xemchitiet.html" class="detail-link process">
+                                                            xem chi tiết
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span class="employee-details">
+                                                            <p class="employee-name">5</p>
+                                                            <p class="employee-job"></p>
+                                                        </span>
+                                                    </td>
+                                                    <td class="project-name">Nguyễn Văn E</td>
+                                                    <td><span class="status pending">444@mail.com</span></td>
+                                                    <td><span class="table-number">950.000 VNĐ</span></td> <td><span class="status pending">Khách hàng</span></td> <td><span class="table-number">8 </span></td>
+                                                    <td><span class="table-number">950.000 VNĐ</span></td>
+
+                                                    <td>
+                                                        <a href="xemchitiet.html" class="detail-link pending">
+                                                            xem chi tiết
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </main>
-            </div>
-        </section>
-    </main>
+                    </main>
+                </div>
+            </section>
+        </main>
+    </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const loginForm = document.getElementById('login-form');
+        const loginScreen = document.getElementById('login-screen');
+        const dashboardScreen = document.getElementById('dashboard-screen');
 
+        // Khi nhấn Đăng nhập thì vào thẳng dashboard
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn load lại trang
+
+            // Ẩn trang đăng nhập và hiện dashboard
+            loginScreen.classList.add('hidden');
+            dashboardScreen.classList.remove('hidden');
+        });
+    });
+    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="scriptnew.js"></script>
 </body>
-
 </html>
