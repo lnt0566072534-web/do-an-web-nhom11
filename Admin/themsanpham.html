@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Sản Phẩm Mới - Quản Lý Cafe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* CSS STYLING (STYLE.CSS) */
+        /* VARIABLES & BASE STYLES */
+        :root {
+            --primary-color: #5d5dff; /* Xanh-tím chủ đạo từ dashboard */
+            --primary-light-color: #8c8cff; /* Nhạt hơn một chút cho hover */
+            --secondary-color: #6a6a6a; /* Màu xám cho chữ phụ */
+            --background-color: #f0f2f5; /* Nền của dashboard */
+            --card-background: #ffffff;
+            --border-color: #e8e8e8; /* Viền nhẹ nhàng */
+            --font-color: #333333; /* Màu chữ chính */
+            --header-background: #ffffff; /* Màu nền header */
+            --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif; /* Font mềm mại hơn */
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            color: var(--font-color);
+            line-height: 1.6;
+        }
+
+        /* HEADER & FOOTER */
+        .header-bar {
+            background-color: var(--header-background);
+            padding: 15px 30px;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-bar h1 {
+            margin: 0;
+            font-size: 1.8em;
+            color: var(--primary-color);
+        }
+
+        .footer-actions {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: var(--card-background);
+            border-top: 1px solid var(--border-color);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            box-shadow: var(--shadow-medium);
+            z-index: 10;
+        }
+
+        /* CONTAINER & LAYOUT */
+        .container {
+            padding: 30px;
+            padding-bottom: 90px; /* Tạo không gian cho footer cố định */
+        }
+
+        #productForm {
+            display: flex;
+            gap: 20px;
+        }
+
+        .main-content {
+            flex: 2; /* Khoảng 65-70% chiều rộng */
+            min-width: 600px; /* Đảm bảo không quá hẹp trên màn hình lớn */
+        }
+
+        .sidebar {
+            flex: 1; /* Khoảng 30-35% chiều rộng */
+            min-width: 300px;
+        }
+
+        /* CARDS & SECTIONS */
+        .card {
+            background-color: var(--card-background);
+            padding: 25px;
+            border-radius: 12px; /* Bo góc tròn hơn */
+            box-shadow: var(--shadow-light);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            color: var(--primary-color); /* Tiêu đề card màu primary */
+            font-weight: 600;
+        }
+        .card h3 {
+            font-size: 1.2em;
+            color: var(--secondary-color);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        /* FORM ELEMENTS */
+        .form-group {
+            margin-bottom: 20px; /* Khoảng cách lớn hơn giữa các trường */
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            color: var(--secondary-color);
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px; /* Padding lớn hơn */
+            border: 1px solid var(--border-color);
+            border-radius: 8px; /* Bo góc tròn hơn */
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            background-color: #fdfdfd;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(93, 93, 255, 0.2); /* Hiệu ứng focus nhẹ */
+            outline: none;
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        /* BUTTONS */
+        .btn {
+            padding: 12px 25px; /* Padding lớn hơn cho nút */
+            border: none;
+            border-radius: 8px; /* Bo góc tròn hơn */
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light-color);
+            box-shadow: var(--shadow-light);
+        }
+
+        .btn-secondary {
+            background-color: #e0e0f0; /* Tông màu xanh nhạt */
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border: 1px solid #c0c0e0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #d0d0ed;
+        }
+
+        .btn-cancel { /* Được dùng cho nút Quay Về */
+            background-color: #f0f0f0;
+            color: var(--secondary-color);
+            border: 1px solid var(--border-color);
+        }
+        .btn-cancel:hover {
+            background-color: #e0e0e0;
+        }
+        
+        /* UPLOAD AREA */
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            position: relative;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .upload-area:hover {
+            background-color: #f8f8f8;
+            border-color: var(--primary-light-color);
+        }
+
+        .upload-area input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .upload-area i {
+            font-size: 2.5em; /* Icon lớn hơn */
+            color: #c0c0c0;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .upload-area p {
+            margin: 0;
+            color: var(--secondary-color);
+            font-size: 0.95em;
+        }
+
+        .upload-area .btn-secondary {
+            margin-top: 15px;
+            padding: 8px 15px;
+        }
+
+        .image-preview {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .image-preview img {
+            max-width: 100%;
+            max-height: 200px; /* Giới hạn chiều cao cho ảnh preview */
+            object-fit: contain; /* Đảm bảo ảnh không bị méo */
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-light);
+        }
+
+        /* SWITCH TOGGLE */
+        .form-inline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 50px; 
+          height: 28px; 
+        }
+
+        .switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          -webkit-transition: .4s;
+          transition: .4s;
+          border-radius: 28px; 
+        }
+
+        .slider:before {
+          position: absolute;
+          content: "";
+          height: 20px; 
+          width: 20px; 
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          -webkit-transition: .4s;
+          transition: .4s;
+          border-radius: 50%;
+        }
+
+        input:checked + .slider {
+          background-color: var(--primary-color);
+        }
+
+        input:focus + .slider {
+          box-shadow: 0 0 1px var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+          -webkit-transform: translateX(22px); 
+          -ms-transform: translateX(22px);
+          transform: translateX(22px);
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 992px) {
+            #productForm {
+                flex-direction: column;
+            }
+            .main-content, .sidebar {
+                min-width: unset;
+                width: 100%;
+            }
+            .container {
+                padding: 20px;
+            }
+            .header-bar, .footer-actions {
+                padding: 15px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-bar h1 {
+                font-size: 1.5em;
+            }
+            .btn {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+            .footer-actions {
+                flex-wrap: wrap-reverse; 
+                justify-content: center;
+            }
+            .footer-actions .btn-primary {
+                order: 1;
+                width: 100%;
+                margin-top: 10px;
+            }
+            .footer-actions .btn-cancel {
+                order: 2;
+                width: 100%;
+            }
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-bar">
+        <h1>Thêm Sản Phẩm Mới</h1>
+    </header>
+
+    <div class="container">
+        <form id="productForm">
+            <div class="main-content">
+                <section class="card">
+                    <h2>Thông Tin Cơ Bản</h2>
+                    <div class="form-group">
+                        <label for="productName">Tên Sản Phẩm </label>
+                        <input type="text" id="productName" formnovalidate>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Danh Mục Chính </label>
+                        <select id="category" formnovalidate>
+                            <option value="">-- Chọn Danh Mục --</option>
+                            <option value="coffee">Cà Phê</option>
+                            <option value="tea">Trà</option>
+                            <option value="cake">Bánh Ngọt</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="basePrice">Giá Bán Gốc (VNĐ) </label>
+                        <input type="number" id="basePrice" min="1000"formnovalidate>
+                    </div>
+                     <div class="form-group">
+                        <label for="productDescription">Mô Tả Chi Tiết</label>
+                        <textarea id="productDescription"></textarea>
+                    </div>
+                </section>
+                
+                <section class="card">
+                    <h2> Quản Lý Tồn Kho</h2>
+                    <div class="form-group">
+                        <label for="stockQuantity">Số Lượng Tồn Kho Ban Đầu</label>
+                        <input type="number" id="stockQuantity" min="0" value="0">
+                    </div>
+                     <div class="form-group">
+                        <label for="lowStockThreshold">Ngưỡng Cảnh Báo Tồn Kho</label>
+                        <input type="number" id="lowStockThreshold" min="0" value="10">
+                    </div>
+                </section>
+            </div>
+
+            <div class="sidebar">
+                <section class="card">
+                    <h2>Hình Ảnh Sản Phẩm</h2>
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Kéo & Thả ảnh vào đây</p>
+                        <input type="file" id="productImage" accept="image/*" onchange="previewImage(event)">
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('productImage').click()">Chọn ảnh</button>
+                    </div>
+                    <div id="imagePreview" class="image-preview"></div>
+                </section>
+                
+                <section class="card">
+                    <h2> Trạng Thái & Thuế</h2>
+                    <div class="form-group form-inline">
+                        <label for="isActive">Đang Bán</label>
+                        <label class="switch">
+                            <input type="checkbox" id="isActive" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="vatRate">Thuế (VAT)</label>
+                        <select id="vatRate">
+                            <option value="0.1">10%</option>
+                            <option value="0.08">8%</option>
+                            <option value="0">0%</option>
+                        </select>
+                    </div>
+                </section>
+            </div>
+        </form>
+    </div>
+
+    <footer class="footer-actions">
+        <a type="button" class="btn btn-cancel" href="quanlisanpham.html"><i class="fas fa-arrow-left"></i> Quay Về</a>
+        <button type="submit" class="btn btn-primary" form="productForm"><i class="fas fa-save"></i> Thêm Sản Phẩm</button>
+    </footer>
+
+    <script>
+    // --- 1. Xử lý Xem trước Hình ảnh ---
+    function previewImage(event) {
+        const preview = document.getElementById('imagePreview');
+        preview.innerHTML = ''; 
+        
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = "Ảnh xem trước sản phẩm";
+                preview.appendChild(img);
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // --- 2. Submit Form Không Cần Nhập ---
+    document.getElementById('productForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        alert('✅ Thêm sản phẩm thành công!');
+    });
+</script>
+
+</body>
+</html>

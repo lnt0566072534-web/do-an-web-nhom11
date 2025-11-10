@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch Sử Phiếu Nhập Hàng - Cafe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* CSS STYLING */
+        /* VARIABLES & BASE STYLES */
+        :root {
+            --primary-color: #5d5dff; 
+            --primary-light-color: #8c8cff;
+            --secondary-color: #6a6a6a; 
+            --background-color: #f0f2f5; 
+            --card-background: #ffffff;
+            --border-color: #e8e8e8; 
+            --font-color: #333333; 
+            --header-background: #ffffff; 
+            --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.08);
+            --info-color: #2196F3; 
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            color: var(--font-color);
+            line-height: 1.6;
+        }
+
+        /* HEADER & CONTAINER */
+        .header-bar {
+            background-color: var(--header-background);
+            padding: 15px 30px;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-bar h1 {
+            margin: 0;
+            font-size: 1.8em;
+            color: var(--primary-color);
+        }
+        .container {
+            padding: 30px;
+        }
+        
+        /* CARD */
+        .card {
+            background-color: var(--card-background);
+            padding: 25px;
+            border-radius: 12px; 
+            box-shadow: var(--shadow-light);
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            color: var(--primary-color); 
+            font-weight: 600;
+        }
+
+        /* SEARCH BAR STYLING */
+        .search-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap; 
+        }
+        .search-controls label {
+            font-weight: 600;
+            color: var(--secondary-color);
+            white-space: nowrap; 
+        }
+        
+        /* INPUT STYLING */
+        input[type="date"], input[type="text"] {
+            padding: 10px 15px; 
+            border: 1px solid var(--border-color);
+            border-radius: 8px; 
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            background-color: #fdfdfd;
+        }
+        #searchKeyword {
+            flex-grow: 1; 
+        }
+        input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(93, 93, 255, 0.2); 
+            outline: none;
+        }
+        
+        /* BUTTON STYLING */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px; 
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .btn i {
+            margin-right: 5px;
+        }
+        .btn-primary { 
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-light-color);
+        }
+        .btn-secondary { 
+            background-color: #f0f0f0;
+            color: var(--secondary-color);
+            border: 1px solid var(--border-color);
+        }
+        .btn-view { 
+            background-color: var(--info-color);
+            color: white;
+            padding: 6px 12px;
+            font-size: 0.9em;
+            text-decoration: none; 
+            display: inline-block;
+        }
+        .btn-view:hover {
+            background-color: #0d47a1;
+        }
+
+        /* TABLE STYLING */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+            margin-bottom: 20px; /* Thêm khoảng cách trước footer */
+        }
+        .data-table th, .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .data-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        .data-table tbody tr:hover {
+            background-color: #fafafa;
+        }
+
+        /* UTILITIES */
+        .text-center { text-align: center !important; }
+
+        /* ----- CSS MỚI CHO PHÂN TRANG ----- */
+        .pagination-footer {
+            display: flex;
+            justify-content: space-between; /* Đặt thông báo bên trái, số trang bên phải */
+            align-items: center;
+            padding-top: 10px;
+        }
+
+        .pagination-summary {
+            font-size: 0.95em;
+            color: var(--secondary-color);
+        }
+
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pagination li a {
+            padding: 8px 12px;
+            margin: 0 2px;
+            text-decoration: none;
+            color: var(--font-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            transition: all 0.3s;
+            display: block;
+        }
+
+        .pagination li a:hover:not(.active) {
+            background-color: #f0f0f0;
+        }
+
+        .pagination li a.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            font-weight: bold;
+        }
+        /* ------------------------------------- */
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .search-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-controls label, .search-controls input, .search-controls .btn {
+                width: 100%;
+                margin-top: 5px;
+            }
+            .search-controls .btn-primary, .search-controls .btn-secondary {
+                margin-top: 10px;
+            }
+            .pagination-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+        a {
+            text-decoration: none;
+        }
+        /* Nút Quay Về */
+.btn-back {
+    display: flex;
+    align-items: center;
+    background-color: #e4e4e4;
+    color: #444;
+    border: 1px solid var(--border-color);
+}
+.btn-back:hover {
+    background-color: #d4d4d4;
+    color: #222;
+}
+
+    </style>
+</head>
+<body>
+
+    <header class="header-bar">
+    <h1> Lịch Sử Phiếu Nhập Hàng</h1>
+
+    <div style="display: flex; gap: 10px;">
+        <a class="btn btn-secondary btn-back" href="admin.html">
+            <i class="fas fa-arrow-left"></i> Quay Về
+        </a>
+        <a class="btn btn-primary" href="taophieunhap.html">
+            <i class="fas fa-plus"></i> Tạo Phiếu Nhập Mới
+        </a>
+    </div>
+</header>
+
+
+    <div class="container">
+        <div class="card">
+            
+            <div class="search-controls">
+                <label for="dateFrom">Từ Ngày:</label>
+                <input type="date" id="dateFrom">
+                
+                <label for="dateTo">Đến Ngày:</label>
+                <input type="date" id="dateTo">
+                
+                <input type="text" id="searchKeyword" placeholder="Tìm theo Mã Phiếu, NCC...">
+                
+                <button class="btn btn-primary"><i class="fas fa-search"></i> Tìm Kiếm</button>
+                <button class="btn btn-secondary"><i class="fas fa-sync-alt"></i> Đặt Lại</button>
+            </div>
+
+            <h2>5 Phiếu Nhập Gần Nhất</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Mã Phiếu</th>
+                        <th style="width: 25%;">Nhà Cung Cấp</th>
+                        <th style="width: 15%;">Ngày Nhập</th>
+                        <th style="width: 15%;" class="text-center">Số Lượng Sản Phẩm</th>
+                        <th style="width: 15%;">Tổng Tiền</th>
+                        <th style="width: 15%;" class="text-center">Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>PNK005</td>
+                        <td>Công ty Cà phê ABC</td>
+                        <td>05/11/2025</td>
+                        <td class="text-center">12</td>
+                        <td>5.200.000 VNĐ</td>
+                        <td class="text-center">
+                            <a href="xemnhaphang.html" class="btn btn-view">Xem</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PNK004</td>
+                        <td>Bột & Đường XYZ</td>
+                        <td>01/11/2025</td>
+                        <td class="text-center">5</td>
+                        <td>1.850.000 VNĐ</td>
+                        <td class="text-center">
+                            <a href="xemnhaphang.html" class="btn btn-view">Xem</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PNK003</td>
+                        <td>Công ty Cà phê ABC</td>
+                        <td>25/10/2025</td>
+                        <td class="text-center">8</td>
+                        <td>3.100.000 VNĐ</td>
+                        <td class="text-center">
+                            <a href="xemnhaphang.html" class="btn btn-view">Xem</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PNK002</td>
+                        <td>Sữa tươi Vinamilk</td>
+                        <td>20/10/2025</td>
+                        <td class="text-center">20</td>
+                        <td>950.000 VNĐ</td>
+                        <td class="text-center">
+                            <a href="xemnhaphang.html" class="btn btn-view">Xem</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PNK001</td>
+                        <td>Bột & Đường XYZ</td>
+                        <td>15/10/2025</td>
+                        <td class="text-center">4</td>
+                        <td>1.400.000 VNĐ</td>
+                        <td class="text-center">
+                            <a href="xemnhaphang.html" class="btn btn-view">Xem</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="pagination-footer">
+                <div class="pagination-summary">
+                    **Hiển thị 1 đến 5** của **25** phiếu nhập
+                </div>
+
+                <ul class="pagination">
+                    <li><a href="#"><i class="fas fa-chevron-left"></i></a></li>
+                    <li><a href="#" class="active">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i></a></li>
+                </ul>
+            </div>
+            </div>
+    </div>
+</body>
+
+</html>
