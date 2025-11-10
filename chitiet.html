@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chi Tiết Sản Phẩm - Cà Phê</title>
+<style>
+    body {
+        font-family: "Segoe UI", Arial;
+        background: #f5f6fa;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    /* --- Bố Cục Chính (Mới) --- */
+    .main-content {
+        display: flex; /* Bật Flexbox để chia 2 cột */
+        gap: 30px; /* Khoảng cách giữa 2 cột */
+        max-width: 1200px; /* Giới hạn chiều rộng tổng thể */
+        margin: 0 auto; /* Căn giữa nội dung chính */
+    }
+
+    .form-column {
+        flex: 2; /* Cột Form chiếm 2/3 không gian */
+    }
+
+    .image-column {
+        flex: 1; /* Cột Hình Ảnh chiếm 1/3 không gian */
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: fit-content; /* Giữ cột hình ảnh không bị dài ra */
+    }
+
+    .product-image {
+        width: 100%; /* Hình ảnh chiếm toàn bộ chiều rộng cột */
+        max-width: 300px; 
+        height: auto;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        object-fit: cover;
+    }
+    
+    .image-upload-btn {
+        padding: 8px 16px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    
+    .image-upload-btn:hover {
+        background-color: #2980b9;
+    }
+    /* --- Kết Thúc Bố Cục Chính --- */
+
+
+    .form-group {
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+        padding: 6px 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    textarea {
+        resize: vertical;
+        height: 80px;
+    }
+
+    .save-btn {
+        padding: 8px 16px;
+        background-color: #1abc9c;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .save-btn:hover {
+        background-color: #16a085;
+    }
+
+    .success-msg {
+        margin-top: 10px;
+        color: #10b981;
+        display: none;
+        font-weight: 500;
+    }
+
+    .form-container {
+        /* max-width: 600px; - Đã bỏ giới hạn này để dùng flex */
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+</style>
+</head>
+<body>
+
+<h1>Chi Tiết Sản Phẩm Cà Phê</h1>
+
+<div class="main-content">
+    
+    <div class="form-column">
+        <div class="form-container">
+            <div class="form-group"><label for="productCode">Mã Sản Phẩm</label><input type="text" id="productCode" value="CF01"></div>
+            <div class="form-group"><label for="productName">Tên Sản Phẩm</label><input type="text" id="productName" value="Cà phê hạt Arabica"></div>
+            <div class="form-group"><label for="supplier">Nhà Cung Cấp</label><input type="text" id="supplier" value="Công ty ABC"></div>
+            <div class="form-group"><label for="productionDate">Ngày Sản Xuất</label><input type="date" id="productionDate" value="2025-10-01"></div>
+            <div class="form-group"><label for="expiryDate">Hạn Sử Dụng</label><input type="date" id="expiryDate" value="2026-10-01"></div>
+            <div class="form-group"><label for="ageRange">Độ Tuổi Phù Hợp</label><input type="text" id="ageRange" value="18+"></div>
+            <div class="form-group"><label for="country">Quốc Gia</label><input type="text" id="country" value="Việt Nam"></div>
+            <div class="form-group"><label for="importPrice">Giá Nhập (₫)</label><input type="number" id="importPrice" value="220000"></div>
+            <div class="form-group"><label for="sellPrice">Giá Bán (₫)</label><input type="number" id="sellPrice" value="350000"></div>
+            <div class="form-group"><label for="stock">Số Lượng Tồn Kho</label><input type="number" id="stock" value="25"></div>
+            <div class="form-group"><label for="flavor">Hương Vị</label><input type="text" id="flavor" value="Đậm, Ngọt nhẹ, Hương hạt rang"></div>
+            <div class="form-group"><label for="description">Mô Tả</label><textarea id="description">Cà phê Arabica nguyên chất, hạt rang thơm ngon, thích hợp pha phin hoặc máy espresso.</textarea></div>
+
+            <button class="save-btn" id="saveBtn">Lưu</button>
+            <div class="success-msg" id="successMsg">Đã lưu thành công!</div>
+        </div>
+    </div>
+    
+    <div class="image-column">
+        <label>Ảnh Sản Phẩm</label>
+        <img src="item-1.png" alt="Ảnh Sản Phẩm Cà Phê" class="product-image">
+        <button class="image-upload-btn" onclick="document.getElementById('file-upload').click();">
+            Chọn / Thay Đổi Ảnh
+        </button>
+        <input type="file" id="file-upload" style="display: none;"> 
+    </div>
+    
+</div>
+
+<script>
+    const saveBtn = document.getElementById('saveBtn');
+    const successMsg = document.getElementById('successMsg');
+
+    saveBtn.addEventListener('click', () => {
+        // có thể thêm validate dữ liệu nếu cần
+        successMsg.style.display = 'block';
+        setTimeout(() => successMsg.style.display = 'none', 2000);
+    });
+</script>
+
+</body>
+</html>
