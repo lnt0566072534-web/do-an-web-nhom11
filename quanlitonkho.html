@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Lý Tồn Kho & Nguyên Liệu</title>
+    <title>Quản Lý Tồn Kho & Nguyên Liệu (HTML Tĩnh)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght+300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
         /* --- 1. BIẾN & CÀI ĐẶT CHUNG --- */
@@ -19,7 +18,7 @@
             --border-color: #e8e8e8; 
             --font-color: #333333; 
             --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.08);
-            --shadow-btn-hover: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow nhẹ cho nút */
+            --shadow-btn-hover: 0 2px 5px rgba(0, 0, 0, 0.1);
 
             /* Màu sắc cảnh báo/nổi bật */
             --success-color: #4CAF50;
@@ -71,7 +70,7 @@
             display: inline-flex;
             align-items: center;
             padding: 8px 15px;
-            background-color: var(--card-background); /* Nền trắng */
+            background-color: var(--card-background);
             color: var(--primary-color);
             border: 1px solid var(--border-color);
             border-radius: 6px;
@@ -92,8 +91,7 @@
             border-color: var(--primary-color);
             box-shadow: var(--shadow-btn-hover);
         }
-        /* KẾT THÚC Nút Quay lại */
-
+        
         /* --- 3. TAB NAVIGATION (NỘI BỘ) --- */
         .inner-tab-navigation {
             display: flex;
@@ -153,14 +151,12 @@
         /* --- 5. LỌC & TÌM KIẾM --- */
         .filter-grid {
             display: flex;
-            /* Thay đổi: Sử dụng flex-wrap để xuống dòng khi màn hình nhỏ */
             flex-wrap: wrap; 
             gap: 20px;
             align-items: flex-end;
             margin-bottom: 25px;
             padding: 0 25px; 
         }
-        /* Thay đổi: Đặt lại padding cho mục báo cáo để tránh trùng lặp */
         .filter-grid-report {
             padding: 25px 25px 10px 25px;
         }
@@ -217,7 +213,7 @@
         
         <div class="content-card">
             <div class="card-header-main">
-                 Quản lý Tồn kho & Nguyên liệu
+                Quản lý Tồn kho & Nguyên liệu
             </div>
             
             <div class="inner-tab-navigation">
@@ -238,7 +234,7 @@
                             <label for="categoryFilter">Danh mục</label>
                             <select id="categoryFilter">
                                 <option value="all">Tất cả danh mục</option>
-                                <option value="coffee">Cà Phê</option>
+                                <option value="coffee" selected>Cà Phê</option>
                                 <option value="milk">Sữa</option>
                                 <option value="syrup">Syrup</option>
                                 <option value="tea">Trà</option>
@@ -247,7 +243,7 @@
                         </div>
                         <div class="filter-group">
                             <label for="dateFilter">Thời điểm</label>
-                            <input type="date" id="dateFilter">
+                            <input type="date" id="dateFilter" value="2025-11-10"> 
                         </div>
                         <button type="button" class="btn-action-filter btn-search" >
                             <i class="fas fa-search"></i> Tìm kiếm
@@ -266,7 +262,62 @@
                                 </tr>
                             </thead>
                             <tbody id="inventoryTableBody">
-                                </tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td class="product-name-column">
+                                        <img src="item-1.png" alt="Hạt Cà Phê Arabica" class="product-image-small">Hạt Cà Phê Arabica
+                                    </td>
+                                    <td>Cà Phê</td>
+                                    <td style="text-align: right;">15.5 kg</td>
+                                    <td style="text-align: center;">
+                                        <span class="status-badge normal"><i class="fas fa-check-circle"></i> Bình thường</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td class="product-name-column">
+                                        <img src="item-2.png" alt="Hạt cà phê Lavazza" class="product-image-small">Hạt cà phê Lavazza
+                                    </td>
+                                    <td>Sữa</td>
+                                    <td style="text-align: right;">0.0 hộp</td>
+                                    <td style="text-align: center;">
+                                        <span class="status-badge critical"><i class="fas fa-bomb"></i> Hết hàng</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td class="product-name-column">
+                                        <img src="item-3.png" alt="Hạt cà phê Epresso" class="product-image-small">Hạt cà phê Epresso
+                                    </td>
+                                    <td>Syrup</td>
+                                    <td style="text-align: right;">8.0 chai</td>
+                                    <td style="text-align: center;">
+                                        <span class="status-badge low"><i class="fas fa-exclamation-triangle"></i> Sắp hết hàng</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td class="product-name-column">
+                                        <img src="item-4.png" alt="Hạt Cà Phê Arabica" class="product-image-small">Hạt Cà Phê Arabica
+                                    </td>
+                                    <td>Khác</td>
+                                    <td style="text-align: right;">45.0 kg</td>
+                                    <td style="text-align: center;">
+                                        <span class="status-badge normal"><i class="fas fa-check-circle"></i> Bình thường</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td class="product-name-column">
+                                        <img src="item-5.png" alt="Hạt cà phê Lavazza" class="product-image-small">Hạt cà phê Lavazza
+                                    </td>
+                                    <td>Trà</td>
+                                    <td style="text-align: right;">4.0 hộp</td>
+                                    <td style="text-align: center;">
+                                        <span class="status-badge low"><i class="fas fa-exclamation-triangle"></i> Sắp hết hàng</span>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -275,24 +326,24 @@
                     
                     <div class="alert-message">
                         <i class="fas fa-exclamation-triangle"></i>
-                        <span id="fullAlertMessage">CẢNH BÁO: Đang tải thông tin cảnh báo...</span>
+                        <span id="fullAlertMessage">CÓ 3 sản phẩm sắp hết hàng và 1 sản phẩm đã hết hàng. Vui lòng kiểm tra và nhập thêm hàng cho các sản phẩm dưới đây để đảm bảo không gián đoạn kinh doanh.</span>
                     </div>
 
                     <div class="alert-summary-grid">
                         <div class="alert-summary-item">
-                            <div class="alert-summary-value" id="totalProductCount">0</div>
+                            <div class="alert-summary-value" id="totalProductCount">5</div>
                             <div class="alert-summary-label">Tổng số sản phẩm</div>
                         </div>
                         <div class="alert-summary-item">
-                            <div class="alert-summary-value" id="inStockCount">0</div>
+                            <div class="alert-summary-value" id="inStockCount">4</div>
                             <div class="alert-summary-label">Sản phẩm tồn kho</div>
                         </div>
                         <div class="alert-summary-item">
-                            <div class="alert-summary-value" id="lowStockSummary">0</div>
+                            <div class="alert-summary-value" id="lowStockSummary">3</div> 
                             <div class="alert-summary-label">Sắp hết hàng</div>
                         </div>
                         <div class="alert-summary-item">
-                            <div class="alert-summary-value" id="criticalStockSummary">0</div>
+                            <div class="alert-summary-value" id="criticalStockSummary">1</div>
                             <div class="alert-summary-label">Đã hết hàng</div>
                         </div>
                     </div>
@@ -311,7 +362,40 @@
                                 </tr>
                             </thead>
                             <tbody id="alertsTableBody">
-                                </tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td class="product-name-column">
+                                        <img src="item-2.png" alt="Hạt cà phê Lavazza" class="product-image-small">Hạt cà phê Lavazza
+                                    </td>
+                                    <td>Sữa</td>
+                                    <td style="text-align: right;">0.0 hộp</td>
+                                    <td style="text-align: right;">50.0 hộp</td>
+                                    <td style="text-align: center;"><span class="status-badge critical">Đã hết hàng</span></td>
+                                    <td style="text-align: center;"><a class="btn-action-table" href="taophieunhap.html" style="background-color: var(--warning-color); color: var(--font-color); border: 1px solid var(--warning-color)">Nhập hàng</a></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td class="product-name-column">
+                                        <img src="item-3.png" alt="Hạt cà phê Epresso" class="product-image-small">Hạt cà phê Epresso
+                                    </td>
+                                    <td>Syrup</td>
+                                    <td style="text-align: right;">8.0 chai</td>
+                                    <td style="text-align: right;">15.0 chai</td>
+                                    <td style="text-align: center;"><span class="status-badge low">Sắp hết hàng</span></td>
+                                    <td style="text-align: center;"><a class="btn-action-table" href="taophieunhap.html" style="background-color: var(--warning-color); color: var(--font-color); border: 1px solid var(--warning-color)">Nhập hàng</a></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td class="product-name-column">
+                                        <img src="item-5.png" alt="Hạt cà phê Lavazza" class="product-image-small">Hạt cà phê Lavazza
+                                    </td>
+                                    <td>Trà</td>
+                                    <td style="text-align: right;">4.0 hộp</td>
+                                    <td style="text-align: right;">5.0 hộp</td>
+                                    <td style="text-align: center;"><span class="status-badge low">Sắp hết hàng</span></td>
+                                    <td style="text-align: center;"><a class="btn-action-table" href="taophieunhap.html" style="background-color: var(--warning-color); color: var(--font-color); border: 1px solid var(--warning-color)">Nhập hàng</a></td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -320,11 +404,11 @@
                     <div class="filter-grid filter-grid-report">
                         <div class="filter-group">
                             <label for="reportStartDate">Từ ngày</label>
-                            <input type="date" id="reportStartDate">
+                            <input type="date" id="reportStartDate" value="2025-11-03"> 
                         </div>
                         <div class="filter-group">
                             <label for="reportEndDate">Đến ngày</label>
-                            <input type="date" id="reportEndDate">
+                            <input type="date" id="reportEndDate" value="2025-11-10"> 
                         </div>
                         <div class="filter-group">
                             <label for="reportSearchInput">Tìm kiếm nguyên liệu</label>
@@ -341,7 +425,7 @@
                                 <option value="other">Khác</option>
                             </select>
                         </div>
-                        <button type="button" class="btn-action-filter btn-search" onclick="searchAndRenderReport()">
+                        <button type="button" class="btn-action-filter btn-search">
                             <i class="fas fa-chart-bar"></i> Xem báo cáo
                         </button>
                     </div>
@@ -360,7 +444,47 @@
                                 </tr>
                             </thead>
                             <tbody id="reportTableBody">
-                                </tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Hạt Cà Phê Arabica (kg)</td>
+                                    <td style="text-align: right;">10.0</td>
+                                    <td style="text-align: right;">20.0</td>
+                                    <td style="text-align: right;">14.5</td>
+                                    <td style="text-align: right;">15.5</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Hạt cà phê Lavazza (hộp)</td>
+                                    <td style="text-align: right;">15.0</td>
+                                    <td style="text-align: right;">50.0</td>
+                                    <td style="text-align: right;">53.0</td>
+                                    <td style="text-align: right;">12.0</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Hạt cà phê Epresso (chai)</td>
+                                    <td style="text-align: right;">5.0</td>
+                                    <td style="text-align: right;">5.0</td>
+                                    <td style="text-align: right;">2.0</td>
+                                    <td style="text-align: right;">8.0</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Hạt cà phê Arabica (hộp)</td>
+                                    <td style="text-align: right;">6.0</td>
+                                    <td style="text-align: right;">0.0</td>
+                                    <td style="text-align: right;">2.0</td>
+                                    <td style="text-align: right;">4.0</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Hạt cà phê Lavazza (kg)</td>
+                                    <td style="text-align: right;">50.0</td>
+                                    <td style="text-align: right;">10.0</td>
+                                    <td style="text-align: right;">15.0</td>
+                                    <td style="text-align: right;">45.0</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -370,256 +494,31 @@
     </div>
 
     <script>
-        // --- Dữ liệu Mẫu (Mock Data) ---
-        let inventoryData = [
-            // id, sku, name, category, stock, unit, imageUrl, minStock, criticalStock
-            { id: 1, name: "Hạt Cà Phê Arabica", category: "Cà Phê", stock: 15.5, unit: "kg", imageUrl: "item-1.png", minStock: 10, criticalStock: 5 }, 
-            { id: 2, name: "Hạt cà phê Lavazza", category: "Sữa", stock: 0, unit: "hộp", imageUrl: "item-2.png", minStock: 50, criticalStock: 10 }, 
-            { id: 3, name: "Hạt cà phê Epresso", category: "Syrup", stock: 8, unit: "chai", imageUrl: "item-3.png", minStock: 15, criticalStock: 5 }, 
-            { id: 4, name: "Hạt Cà Phê Arabica", category: "Khác", stock: 45, unit: "kg", imageUrl: "item-4.png", minStock: 30, criticalStock: 15 }, 
-            { id: 5, name: "Hạt cà phê Lavazza", category: "Trà", stock: 4, unit: "hộp", imageUrl: "item-5.png", minStock: 5, criticalStock: 2 }, 
-    ];
-
-        // ⭐ ĐÃ THÊM: Thêm trường category cho dữ liệu báo cáo để có thể lọc ⭐
-        let reportData = [
-            // name, unit, initial (Tồn đầu), import, export, final (Tồn cuối)
-            { id: 1, name: "Hạt Cà Phê Arabica", category: "Coffee", unit: "kg", initial: 10, import: 20, export: 14.5, final: 15.5 },
-            { id: 2, name: "Hạt cà phê Lavazza", category: "Milk", unit: "hộp", initial: 15, import: 50, export: 53, final: 12 },
-            { id: 3, name: "Hạt cà phê Epresso", category: "Syrup", unit: "chai", initial: 5, import: 5, export: 2, final: 8 },
-            { id: 4, name: "Hạt cà phê Arabica", category: "Tea", unit: "hộp", initial: 6, import: 0, export: 2, final: 4 },
-            { id: 5, name: "Hạt cà phê Lavazza", category: "Other", unit: "kg", initial: 50, import: 10, export: 15, final: 45 },
-        ];
-
-
-        // --- HÀM CHUYỂN TAB NỘI BỘ (Chuyển trang chính) ---
+        // Hàm này chỉ thực hiện logic ẩn/hiện cơ bản khi click vào tab
         function switchTab(tabId) {
             // 1. Cập nhật nút tab
             document.querySelectorAll('.inner-tab-button').forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`.inner-tab-button[data-tab="${tabId}"]`).classList.add('active');
+            const activeBtn = document.querySelector(`.inner-tab-button[data-tab="${tabId}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
             
             // 2. Ẩn/Hiện nội dung
             document.querySelectorAll('.tab-pane').forEach(pane => {
                 pane.style.display = 'none';
             });
-            document.getElementById(tabId).style.display = 'block';
-
-            // 3. Load dữ liệu tương ứng
-            if (tabId === 'lookup-inventory') {
-                renderTable(inventoryData);
-            } else if (tabId === 'stock-alerts') {
-                renderAlertsTable(inventoryData);
-            } else if (tabId === 'import-export-report') {
-                // Tự động tìm kiếm báo cáo khi chuyển tab
-                searchAndRenderReport(); 
-            }
+            const activePane = document.getElementById(tabId);
+            if (activePane) activePane.style.display = 'block';
         }
         
-        // --- HÀM VẼ BẢNG TRA CỨU TỒN KHO ---
-        function renderTable(data) {
-            const tableBody = document.getElementById('inventoryTableBody');
-            tableBody.innerHTML = ''; 
-
-            data.forEach((item, index) => {
-                let statusText = "Bình thường";
-                let statusClass = "normal";
-                let statusIcon = "fa-check-circle";
-
-                if (item.stock <= 0) {
-                    statusText = "Hết hàng";
-                    statusClass = "critical";
-                    statusIcon = "fa-bomb";
-                } else if (item.stock < item.criticalStock) {
-                    statusText = "Nguy cấp";
-                    statusClass = "critical";
-                    statusIcon = "fa-bomb";
-                } else if (item.stock < item.minStock) {
-                    statusText = "Sắp hết hàng";
-                    statusClass = "low";
-                    statusIcon = "fa-exclamation-triangle";
-                }
-                
-                const row = tableBody.insertRow();
-                row.insertCell(0).textContent = index + 1;
-                
-                const productCell = row.insertCell(1);
-                productCell.classList.add('product-name-column');
-                productCell.innerHTML = `<img src="${item.imageUrl}" alt="${item.name}" class="product-image-small">${item.name}`;
-
-                row.insertCell(2).textContent = item.category;
-                
-                const stockCell = row.insertCell(3);
-                stockCell.textContent = item.stock.toFixed(1) + ' ' + item.unit;
-                stockCell.style.textAlign = 'right';
-
-                const statusCell = row.insertCell(4);
-                statusCell.innerHTML = `<span class="status-badge ${statusClass}"><i class="fas ${statusIcon}"></i> ${statusText}</span>`;
-                statusCell.style.textAlign = 'center';
+        // Gắn sự kiện cho các nút tab nội dung
+        document.querySelectorAll('.inner-tab-button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                switchTab(tabId);
             });
-        }
-        
-        // --- HÀM VẼ BẢNG CẢNH BÁO TỒN KHO ---
-        function renderAlertsTable(data) {
-            const alertsBody = document.getElementById('alertsTableBody');
-            alertsBody.innerHTML = '';
-            
-            // 1. Lọc và phân loại
-            let lowAlerts = data.filter(item => item.stock < item.minStock && item.stock > 0);
-            let criticalAlerts = data.filter(item => item.stock < item.criticalStock && item.stock > 0);
-            let outOfStockAlerts = data.filter(item => item.stock <= 0);
-            
-            const finalAlerts = [...outOfStockAlerts, ...criticalAlerts, ...lowAlerts];
-            
-            const totalProducts = data.length;
-            const inStock = data.filter(item => item.stock > 0).length;
-            const totalLowAndCritical = lowAlerts.length + criticalAlerts.length;
-            const totalCriticalOnly = outOfStockAlerts.length;
-
-            // 2. Cập nhật thẻ tổng quan
-            document.getElementById('totalProductCount').textContent = totalProducts;
-            document.getElementById('inStockCount').textContent = inStock;
-            document.getElementById('lowStockSummary').textContent = totalLowAndCritical; 
-            document.getElementById('criticalStockSummary').textContent = totalCriticalOnly; 
-
-            // 3. Cập nhật TOÀN BỘ CHUỖI thông báo 
-            const message = `CÓ ${totalLowAndCritical} sản phẩm sắp hết hàng và ${totalCriticalOnly} sản phẩm đã hết hàng. Vui lòng kiểm tra và nhập thêm hàng cho các sản phẩm dưới đây để đảm bảo không gián đoạn kinh doanh.`;
-            document.getElementById('fullAlertMessage').textContent = message;
-
-            // 4. Vẽ bảng chi tiết
-            finalAlerts.forEach((item, index) => {
-                let statusText;
-                let statusClass;
-                
-                if (item.stock <= 0) {
-                    statusText = "Đã hết hàng";
-                    statusClass = "critical";
-                } else if (item.stock < item.criticalStock) {
-                    statusText = "Nguy cấp";
-                    statusClass = "critical";
-                } else { 
-                    statusText = "Sắp hết hàng";
-                    statusClass = "low";
-                }
-                
-                const row = alertsBody.insertRow();
-                row.insertCell(0).textContent = index + 1;
-                
-                const productCell = row.insertCell(1);
-                productCell.classList.add('product-name-column');
-                productCell.innerHTML = `<img src="item-1.png" alt="${item.name}" class="product-image-small">${item.name}`;
-
-                row.insertCell(2).textContent = item.category;
-                
-                const stockCell = row.insertCell(3);
-                stockCell.textContent = item.stock.toFixed(1) + ' ' + item.unit;
-                stockCell.style.textAlign = 'right';
-
-                const minStockCell = row.insertCell(4);
-                minStockCell.textContent = item.minStock.toFixed(1) + ' ' + item.unit;
-                minStockCell.style.textAlign = 'right';
-
-                const statusCell = row.insertCell(5);
-                statusCell.innerHTML = `<span class="status-badge ${statusClass}">${statusText}</span>`;
-                statusCell.style.textAlign = 'center';
-
-                const actionCell = row.insertCell(6);
-                actionCell.innerHTML = `<a class="btn-action-table" href="taophieunhap.html" style="background-color: var(--warning-color); color: var(--font-color); border: 1px solid var(--warning-color)">Nhập hàng</a>`;
-                actionCell.style.textAlign = 'center';
-            });
-        }
-        
-        // --- HÀM VẼ BÁO CÁO NHẬP - XUẤT - TỒN (Cập nhật để nhận dữ liệu đã lọc) ---
-        function renderReportTable(data) {
-            const reportBody = document.getElementById('reportTableBody');
-            reportBody.innerHTML = '';
-            
-            data.forEach((item, index) => {
-                const row = reportBody.insertRow();
-                row.insertCell(0).textContent = index + 1;
-                row.insertCell(1).textContent = item.name + ' (' + item.unit + ')';
-                
-                const initialCell = row.insertCell(2);
-                initialCell.textContent = item.initial.toFixed(1);
-                initialCell.style.textAlign = 'right';
-
-                const importCell = row.insertCell(3);
-                importCell.textContent = item.import.toFixed(1);
-                importCell.style.textAlign = 'right';
-
-                const exportCell = row.insertCell(4);
-                exportCell.textContent = item.export.toFixed(1);
-                exportCell.style.textAlign = 'right';
-
-                const finalCell = row.insertCell(5);
-                finalCell.textContent = item.final.toFixed(1);
-                finalCell.style.textAlign = 'right';
-            });
-        }
-
-        // ⭐ HÀM TÌM KIẾM VÀ LỌC CHO BÁO CÁO (Hàm mới) ⭐
-        function searchAndRenderReport() {
-            const searchTerm = document.getElementById('reportSearchInput').value.toLowerCase().trim();
-            const categoryFilter = document.getElementById('reportCategoryFilter').value.toLowerCase();
-            // reportStartDate và reportEndDate có thể được dùng ở đây để lọc dữ liệu trong môi trường thực
-
-            let filteredData = reportData;
-
-            // Lọc theo tên nguyên liệu
-            if (searchTerm !== '') {
-                filteredData = filteredData.filter(item => item.name.toLowerCase().includes(searchTerm));
-            }
-
-            // Lọc theo danh mục
-            if (categoryFilter !== 'all') {
-                // Lưu ý: category trong reportData là 'Coffee', 'Milk', ... cần chuyển về chữ thường để so sánh
-                filteredData = filteredData.filter(item => item.category.toLowerCase() === categoryFilter);
-            }
-
-            renderReportTable(filteredData);
-        }
-
-        // --- HÀM TÌM KIẾM VÀ LỌC CHO TRA CỨU TỒN KHO ---
-        function searchInventory() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-            const categoryFilter = document.getElementById('categoryFilter').value.toLowerCase();
-            
-            let filteredData = inventoryData;
-
-            if (searchTerm !== '') {
-                filteredData = filteredData.filter(item => item.name.toLowerCase().includes(searchTerm));
-            }
-
-            if (categoryFilter !== 'all') {
-                filteredData = filteredData.filter(item => item.category.toLowerCase() === categoryFilter);
-            }
-
-            renderTable(filteredData);
-        }
-
-        // --- KHỞI TẠO ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const today = new Date();
-            
-            // Đặt ngày mặc định cho bộ lọc Tra cứu tồn kho
-            document.getElementById('dateFilter').valueAsDate = today;
-
-            // Đặt ngày mặc định cho bộ lọc Báo cáo
-            document.getElementById('reportEndDate').valueAsDate = today;
-            const lastWeek = new Date(today);
-            lastWeek.setDate(today.getDate() - 7);
-            document.getElementById('reportStartDate').valueAsDate = lastWeek;
-
-            // Gắn sự kiện cho các nút tab nội dung
-            document.querySelectorAll('.inner-tab-button').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const tabId = btn.getAttribute('data-tab');
-                    switchTab(tabId);
-                });
-            });
-            
-            // Mặc định load tab Tra cứu tồn kho
-            switchTab('lookup-inventory');
         });
+        
+        // Mặc định hiển thị tab đầu tiên
+        switchTab('lookup-inventory'); 
     </script>
 </body>
-
 </html>
