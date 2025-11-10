@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="styleadmin.css" />
     
     <style>
-        /* CSS TỪ TRANG ĐĂNG NHẬP (ĐÃ CHỈNH SỬA) */
+        
         .login-body {
             font-family: Arial, sans-serif;
             background-color: #f0f2f5;
@@ -87,34 +87,111 @@
         .login-btn:active {
             transform: scale(0.99);
         }
+        .nav-right a.profile {
+    font-size: 22px;
+    margin-left: 15px;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.nav-right a.profile:hover {
+    color: #3b82f6;
+}
+
+.user-menu-container {
+    position: relative;
+    display: inline-block;
+}
+
+.user-icon {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.user-icon:hover {
+    background: #f2f2f2;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 230px;
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0px 4px 16px rgba(0,0,0,0.15);
+    display: none;
+    animation: fadeDown 0.25s ease;
+    z-index: 999;
+}
+
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.user-dropdown h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.user-dropdown .role {
+    color: #7a7a7a;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.user-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+.user-dropdown ul li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.user-dropdown ul li:hover {
+    background: #f7f7f7;
+}
+
+.logout-btn {
+    width: 100%;
+    padding: 8px 0;
+    background: white;
+    border: 1px solid black;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: black;
+    color: white;
+}
+
+
         
-        /* ẨN/HIỆN ELEMENTS */
-        .hidden {
-            display: none !important;
-        }
-        /* Dashboard cần có kiểu dáng phù hợp với styleadmin.css */
-        /* Nếu styleadmin.css đã đủ cho dashboard thì không cần thêm CSS dashboard ở đây */
+        
+        
         
     </style>
 </head>
 <body>
 
-    <div id="login-screen" class="login-body">
-        <div class="login-container">
-            <h2>Đăng nhập Hệ thống Admin</h2>
-            <form id="login-form">
-                <div class="input-group">
-                    <label for="username">Tên đăng nhập</label>
-                    <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập bất kỳ" >
-                </div>
-                <div class="input-group">
-                    <label for="password">Mật khẩu</label>
-                    <input type="password" id="password" name="password" placeholder="Nhập mật khẩu bất kỳ" >
-                </div>
-                <button type="submit" class="login-btn">Đăng nhập</button>
-            </form>
-        </div>
-    </div>
+    
 
     <div id="dashboard-screen" class="hidden">
         <main class="main-container">
@@ -185,7 +262,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="logout" id="logout-btn">
+                        <a href="login-admin.html" class="logout" id="logout-btn">
                             <i class="fas fa-sign-out-alt"></i>
                             <span class="sidebar-text">Đăng xuất</span>
                         </a>
@@ -247,6 +324,12 @@
                             <span class="num">4</span>
                         </a>
                         <a href="#" class="profile">
+                            
+                            <div class="user-menu-container">
+    
+
+    
+
                         </a>
                     </span>
                 </nav>
@@ -644,23 +727,6 @@
             </section>
         </main>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-        const loginForm = document.getElementById('login-form');
-        const loginScreen = document.getElementById('login-screen');
-        const dashboardScreen = document.getElementById('dashboard-screen');
-
-        // Khi nhấn Đăng nhập thì vào thẳng dashboard
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Ngăn load lại trang
-
-            // Ẩn trang đăng nhập và hiện dashboard
-            loginScreen.classList.add('hidden');
-            dashboardScreen.classList.remove('hidden');
-        });
-    });
-    </script>
     
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="scriptnew.js"></script>
