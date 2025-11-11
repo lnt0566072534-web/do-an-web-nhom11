@@ -72,6 +72,7 @@
 
         /* ====================================================================
             III. CONTROL BAR (Search, Filter, Sort)
+            ĐÃ CHỈNH SỬA CHO FORM
             ==================================================================== */
         .control-bar {
             background-color: white;
@@ -91,21 +92,20 @@
             flex-shrink: 0; 
         }
         
-        /* HIỂN THỊ LẠI icon tìm kiếm bên trong input */
         .search-box i {
             position: absolute;
             left: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: #999;
-            display: block; /* Hiển thị lại icon */
+            display: block; 
         }
 
         #search-input {
             width: 100%;
-            padding: 12px 15px 12px 45px; /* Thêm padding trái để chừa chỗ cho icon */
+            padding: 12px 15px 12px 45px; 
             border: 1px solid var(--border-color);
-            border-radius: 8px; /* Bo góc tròn lại */
+            border-radius: 8px; 
             font-size: 1em;
             transition: border-color 0.2s;
         }
@@ -133,7 +133,7 @@
 
         .control-bar .filter-group {
             flex-shrink: 0;
-            margin-left: auto; /* Đẩy bộ lọc sang phải */
+            margin-left: auto; 
             display: flex;
             align-items: center;
         }
@@ -144,7 +144,7 @@
             background-color: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 8px; /* Bo góc tròn */
+            border-radius: 8px; 
             cursor: pointer;
             font-weight: 600;
             transition: background-color 0.2s;
@@ -153,7 +153,7 @@
             align-items: center;
             gap: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-left: 20px; /* Thêm khoảng cách với bộ lọc tồn kho */
+            margin-left: 20px; 
         }
         
         #search-button-end:hover {
@@ -161,7 +161,7 @@
         }
 
         /* ====================================================================
-            IV. BẢNG SẢN PHẨM
+            IV. BẢNG SẢN PHẨM (Giữ nguyên)
             ==================================================================== */
         .product-table-container {
             background-color: white;
@@ -276,7 +276,7 @@
         .col-stock.low { color: var(--danger-color); font-weight: 700; }
 
         /* ====================================================================
-            V. PAGINATION (Phân trang)
+            V. PAGINATION (Phân trang - Giữ nguyên)
             ==================================================================== */
         .pagination-footer {
             display: flex;
@@ -315,22 +315,18 @@
         a{
             text-decoration-line: none;
         }
-        a {
-            text-decoration-line: none;
-        }
-
     </style>
 </head>
 <body>
 <div class="container">
 
-    <!-- Nút Quay Về -->
     <div style="margin-bottom: 15px;">
-        <a href="admin.html" 
-                style="padding: 10px 20px; background-color: #6c757d; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+        <a href="adminnew.html" 
+            style="padding: 10px 20px; background-color: #6c757d; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
             <i class="fas fa-arrow-left"></i> Quay Về
-    </a>
+        </a>
     </div>
+
     <div class="container">
         
         <div class="page-header">
@@ -342,15 +338,15 @@
             </div>
         </div>
 
-        <div class="control-bar">
+        <form action="timkiemsanpham.html" method="GET" class="control-bar">
             <div class="search-box">
                 <i class="fas fa-search"></i> 
-                <input type="text" id="search-input" placeholder="Tìm kiếm theo Tên Sản Phẩm...">
+                <input type="text" id="search-input" name="search_name" placeholder="Tìm kiếm theo Tên Sản Phẩm...">
             </div>
             
             <div class="filter-group">
                 <label for="stock-filter">Trạng Thái Tồn Kho:</label>
-                <select id="stock-filter">
+                <select id="stock-filter" name="stock_status">
                     <option value="all">Tất cả</option>
                     <option value="instock">Còn Hàng</option>
                     <option value="lowstock">Sắp Hết</option>
@@ -358,16 +354,16 @@
                 </select>
             </div>
             
-            <button id="search-button-end" onclick="filterProducts()">
+            <button id="search-button-end" type="submit">
                 <i class="fas fa-search"></i> Tìm Kiếm
             </button>
-        </div>
+        </form>
 
         <div class="product-table-container">
             <table class="product-table">
                 <thead>
                     <tr>
-                        <th class="col-id"></th>
+                        <th class="col-id">STT</th>
                         <th class="col-image">Ảnh</th>
                         <th>Tên Sản Phẩm</th>
                         <th class="col-price">Giá Bán</th>
@@ -379,9 +375,7 @@
                 <tbody id="product-list">
                     <tr data-id="101">
                         <td class="col-id">1</td>
-                        <td class="col-image">
-                        <img src="./assets/img/product/item-1.png" alt="Product A" class="product-img" />
-                        </td>
+                        <td class="col-image"><img src="item-1.png" alt="Product A" class="product-img"></td>
                         <td>Hạt cà phê Lavazza</td>
                         <td class="col-price">350.000₫</td>
                         <td class="col-stock">150</td>
@@ -397,9 +391,7 @@
                     </tr>
                     <tr data-id="102">
                         <td class="col-id">2</td>
-                        <td class="col-image">
-                        <img src="./assets/img/product/item-2.png" alt="Product B" class="product-img">
-                        </td>
+                        <td class="col-image"><img src="item-2.png" alt="Product B" class="product-img"></td>
                         <td>Hạt cà phê Epresso</td>
                         <td class="col-price">1.200.000₫</td>
                         <td class="col-stock low">15</td>
@@ -415,9 +407,7 @@
                     </tr>
                     <tr data-id="103">
                         <td class="col-id">3</td>
-                        <td class="col-image">
-                        <img src="./assets/img/product/item-3.png" alt="Product C" class="product-img">
-                        </td>
+                        <td class="col-image"><img src="item-3.png" alt="Product C" class="product-img"></td>
                         <td>Hạt cà phê Abrica</td>
                         <td class="col-price">4.500.000₫</td>
                         <td class="col-stock">0</td>
@@ -433,9 +423,7 @@
                     </tr>
                     <tr data-id="104">
                         <td class="col-id">4</td>
-                        <td class="col-image">
-                        <img src="./assets/img/product/item-4.png" alt="Product D" class="product-img">
-                        </td>
+                        <td class="col-image"><img src="item-4.png" alt="Product D" class="product-img"></td>
                         <td>Cà phê nguyên chất</td>
                         <td class="col-price">250.000₫</td>
                         <td class="col-stock">75</td>
@@ -451,9 +439,7 @@
                     </tr>
                     <tr data-id="105">
                         <td class="col-id">5</td>
-                        <td class="col-image">
-                        <img src="./assets/img/product/item-5.png" alt="Product E" class="product-img">
-                        </td>
+                        <td class="col-image"><img src="item-5.png" alt="Product E" class="product-img"></td>
                         <td>Cà phê truyền thống </td>
                         <td class="col-price">480.000₫</td>
                         <td class="col-stock low">5</td>
@@ -483,61 +469,19 @@
     </div>
     
     <script>
-        // Lắng nghe sự kiện Enter trên ô input
-        document.getElementById('search-input').addEventListener('keyup', (event) => {
-             if (event.key === 'Enter') {
-                 filterProducts();
-             }
-        });
-        
-        // Lắng nghe sự kiện thay đổi trên select box
-        
+        // CÁC HÀM LỌC BỊ XÓA HOẶC VÔ HIỆU HÓA ĐỂ CHO PHÉP CHUYỂN TRANG BẰNG FORM SUBMIT.
+        // Chỉ giữ lại hàm deleteProduct()
 
-        // Nút tìm kiếm mới và Enter đều gọi hàm này
-        function filterProducts() {
-            const searchText = document.getElementById('search-input').value.toLowerCase();
-            
-            const rows = document.getElementById('product-list').getElementsByTagName('tr');
-            let visibleRowCount = 0;
-
-            for (let i = 0; i < rows.length; i++) {
-                const row = rows[i];
-                const cells = row.getElementsByTagName('td');
-                
-                const name = cells[2].textContent.toLowerCase(); 
-                const stockTag = cells[5].querySelector('.status-tag').classList[1]; 
-
-                let showRow = true;
-
-                if (searchText && !name.includes(searchText)) {
-                    showRow = false;
-                }
-                
-                if (stockStatus !== 'all') {
-                    if (stockStatus === 'instock' && stockTag !== 'status-in-stock') showRow = false;
-                    if (stockStatus === 'lowstock' && stockTag !== 'status-low-stock') showRow = false;
-                    if (stockStatus === 'outofstock' && stockTag !== 'status-out-stock') showRow = false;
-                }
-                
-                row.style.display = showRow ? '' : 'none';
-                if (showRow) {
-                    visibleRowCount++;
-                }
-            }
-            updateProductCount(visibleRowCount);
-        }
-        
         function updateProductCount(visibleCount) {
-            const totalProducts = document.getElementById('product-list').getElementsByTagName('tr').length;
-            const displayElement = document.getElementById('product-count-display');
+             const totalProducts = document.getElementById('product-list').getElementsByTagName('tr').length;
+             const displayElement = document.getElementById('product-count-display');
             
-            if (visibleCount === 0) {
-                 displayElement.textContent = `Không tìm thấy sản phẩm nào.`;
-            } else {
-                 displayElement.textContent = `Hiển thị 1 đến ${visibleCount} trên tổng số ${totalProducts} sản phẩm`;
-            }
-        }
-
+             if (visibleCount === 0) {
+                  displayElement.textContent = `Không tìm thấy sản phẩm nào.`;
+             } else {
+                  displayElement.textContent = `Hiển thị 1 đến ${visibleCount} trên tổng số ${totalProducts} sản phẩm`;
+             }
+         }
 
 
         function deleteProduct(buttonElement, id) {
@@ -548,18 +492,20 @@
                     row.remove();
                     alert(`Đã xóa Sản phẩm ID: ${id} khỏi bảng.`);
                     
+                    // Cần cập nhật lại số lượng sau khi xóa
                     const productList = document.getElementById('product-list');
-                    const currentVisibleRows = Array.from(productList.children).filter(row => row.style.display !== 'none').length;
+                    const currentVisibleRows = Array.from(productList.children).length; // Dùng length vì không còn lọc ẩn/hiện
                     updateProductCount(currentVisibleRows);
                 }
             }
         }
         
+        // Khởi tạo số lượng sản phẩm khi load trang
         document.addEventListener('DOMContentLoaded', () => {
-             filterProducts(); 
+             const totalProducts = document.getElementById('product-list').getElementsByTagName('tr').length;
+             updateProductCount(totalProducts);
         });
 
     </script>
 </body>
-
 </html>
