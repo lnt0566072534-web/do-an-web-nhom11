@@ -190,6 +190,15 @@
     </style>
 </head>
 <body>
+    <script>
+    // Kiểm tra trạng thái đăng nhập
+    const isLoggedIn = localStorage.getItem("adminLoggedIn");
+
+    if (!isLoggedIn) {
+        alert("Bạn chưa đăng nhập!");
+        window.location.href = "login-admin.html"; // Chuyển tới trang đăng nhập
+    }
+</script>
 
     
 
