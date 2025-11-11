@@ -7,7 +7,7 @@ const $$ = document.querySelectorAll.bind(document);
  * Cách dùng:
  * <div id="parent"></div>
  * <script>
- *  load("#parent", "./path-to-template.html");
+ * load("#parent", "./path-to-template.html");
  * </script>
  */
 function load(selector, path) {
@@ -95,7 +95,7 @@ window.addEventListener("template-loaded", calArrowPos);
  * Cách dùng:
  * 1. Thêm class "js-menu-list" vào thẻ ul menu chính
  * 2. Thêm class "js-dropdown" vào class "dropdown" hiện tại
- *  nếu muốn reset lại item active khi ẩn menu
+ * nếu muốn reset lại item active khi ẩn menu
  */
 window.addEventListener("template-loaded", handleActiveMenu);
 
@@ -228,6 +228,7 @@ window.addEventListener("template-loaded", () => {
 
 const isDark = localStorage.dark === "true";
 document.querySelector("html").classList.toggle("dark", isDark);
+
 // =============================
 // XỬ LÝ ĐĂNG NHẬP, LƯU TRẠNG THÁI
 // =============================
@@ -239,21 +240,25 @@ document.addEventListener("DOMContentLoaded", () => {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
 
+            // Đoạn code này đã được sửa đổi:
+            // Lấy giá trị từ input (giữ nguyên)
             const email = document.querySelector('input[type="email"]').value;
             const password = document.querySelector('input[type="password"]').value;
 
-            // Chỉ cần nhập không trống là cho đăng nhập
-            if (email.trim() !== "" && password.trim() !== "") {
-                localStorage.setItem("isLoggedIn", "true");
-                window.location.href = "index-logined.html"; // chuyển đến trang chủ sau đăng nhập
-            } else {
-                alert("Vui lòng nhập email và mật khẩu!");
-            }
+            // BỎ QUA KIỂM TRA ĐẦY ĐỦ THÔNG TIN.
+            // Luôn cho phép đăng nhập khi nhấn nút (dù input trống hay không).
+            localStorage.setItem("isLoggedIn", "true");
+            window.location.href = "index-logined.html"; // chuyển đến trang chủ sau đăng nhập
         });
     }
 
     // Nếu chưa đăng nhập mà truy cập các trang khác -> chuyển về trang đăng nhập
-    
+    const publicPages = ["sign-in.html", "sign-up.html", "index.html"];
+    const currentPage = window.location.pathname.split("/").pop();
+
+    if (!localStorage.getItem("isLoggedIn") && !publicPages.includes(currentPage)) {
+        window.location.href = "sign-in.html";
+    }
 
     // Nút đăng xuất
     const logoutBtn = document.querySelector(".logout-btn");
@@ -262,64 +267,5 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.removeItem("isLoggedIn");
             window.location.href = "sign-in.html";
         });
-    }
-});
-// =============================
-// XỬ LÝ TÌM KIẾM SẢN PHẨM
-// =============================
-
-// Khi template (header) load xong thì gắn sự kiện tìm kiếm
-window.addEventListener("template-loaded", () => {
-    const searchInput = document.querySelector("#searchInput");
-    const searchBtn = document.querySelector("#searchBtn");
-
-    if (searchInput && searchBtn) {
-        // Khi click nút tìm kiếm
-        searchBtn.addEventListener("click", () => {
-            const keyword = searchInput.value.trim().toLowerCase();
-            if (!keyword) {
-                alert("Vui lòng nhập tên sản phẩm cần tìm!");
-                return;
-            }
-            // Chuyển hướng đến trang index với tham số tìm kiếm
-            window.location.href = `./index.html?search=${encodeURIComponent(keyword)}`;
-        });
-
-        // Khi nhấn Enter
-        searchInput.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") {
-                e.preventDefault();
-                searchBtn.click();
-            }
-        });
-    }
-});
-
-// Khi trang index load thì lọc kết quả tìm kiếm
-document.addEventListener("DOMContentLoaded", () => {
-    const params = new URLSearchParams(window.location.search);
-    const keyword = params.get("search");
-    if (!keyword) return;
-
-    const searchTerm = keyword.toLowerCase();
-    const products = document.querySelectorAll(".product-card");
-    let found = 0;
-
-    products.forEach((product) => {
-        const title = product.querySelector(".product-card__title").textContent.toLowerCase();
-        const brand = product.querySelector(".product-card__brand").textContent.toLowerCase();
-        if (title.includes(searchTerm) || brand.includes(searchTerm)) {
-            product.style.display = "";
-            found++;
-        } else {
-            product.style.display = "none";
-        }
-    });
-
-    if (found === 0) {
-        const container = document.querySelector(".row.row-cols-5");
-        if (container) {
-            container.innerHTML = `<p style="font-size:18px; color:#888; text-align:center; width:100%; margin-top:40px;">Không tìm thấy sản phẩm nào phù hợp với từ khóa "<b>${keyword}</b>"</p>`;
-        }
     }
 });
