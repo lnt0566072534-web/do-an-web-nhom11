@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết Quả Tìm Kiếm Sản Phẩm</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ====================================================================
+            CSS (Sử dụng lại Style từ trang Quản Lý Sản Phẩm)
+            ==================================================================== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 30px; 
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px; 
+            margin: auto;
+        }
+
+        :root {
+            --primary-color: #007bff; 
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --light-bg: #e9ecef; 
+            --border-color: #dee2e6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Nút Quay Về */
+        .back-btn-container {
+            margin-bottom: 25px;
+        }
+        .back-btn {
+            padding: 10px 20px; 
+            background-color: #6c757d; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
+        .back-btn:hover {
+            background-color: #5a6268;
+        }
+
+        /* Header Kết Quả */
+        .result-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+            margin-bottom: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .result-header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        
+        /* Thông tin Lọc đã áp dụng */
+        .result-info {
+            background-color: var(--light-bg);
+            padding: 15px 20px;
+            border-radius: 0 0 12px 12px;
+            margin-bottom: 25px;
+            border-top: 1px solid #c9d2db;
+        }
+        .result-info p {
+            margin: 5px 0;
+            font-size: 0.95em;
+            color: #495057;
+            font-weight: 500;
+        }
+        .highlight {
+            font-weight: 700;
+            color: #000;
+        }
+
+        /* ====================================================================
+            BẢNG KẾT QUẢ SẢN PHẨM (Sử dụng lại style bảng)
+            ==================================================================== */
+        .product-table-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+        }
+
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .product-table th, .product-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .product-table th {
+            background-color: var(--light-bg);
+            color: #495057;
+            font-weight: 700;
+            font-size: 0.95em;
+            text-transform: uppercase;
+        }
+        
+        .product-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Căn chỉnh cột */
+        .col-id { width: 60px; text-align: center; }
+        .col-image { width: 80px; text-align: center; }
+        .col-price { width: 140px; text-align: right; }
+        .col-stock { width: 100px; text-align: right; }
+        .col-status { width: 100px; text-align: center; }
+        .col-actions { 
+            width: 180px; 
+            text-align: center; 
+            white-space: nowrap; 
+        } 
+
+        /* Hiển thị hình ảnh */
+        .product-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        /* Thẻ trạng thái */
+        .status-tag {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-align: center;
+        }
+        .status-in-stock { background-color: #d4edda; color: var(--success-color); }
+        .status-low-stock { background-color: #fff3cd; color: #ffc107; }
+        .status-out-stock { background-color: #f8d7da; color: var(--danger-color); }
+
+        /* CÁC NÚT HÀNH ĐỘNG */
+        .action-link {
+            display: inline-flex; 
+            align-items: center;
+            justify-content: center;
+            padding: 5px 12px; 
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 600; 
+            border-radius: 4px;
+            transition: opacity 0.2s, background-color 0.2s;
+            border: none; 
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+            cursor: pointer; 
+            gap: 5px; 
+        }
+
+        .action-link.edit {
+            margin-right: 8px; 
+            background-color: #ffc107; 
+            color: #333; 
+        }
+
+        .action-link.delete {
+            background-color: var(--danger-color); 
+            color: white; 
+        }
+        
+        /* PHÂN TRANG (Giữ nguyên) */
+        .pagination-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+
+        .pagination-controls button {
+            padding: 8px 15px;
+            margin: 0 4px;
+            border: 1px solid var(--border-color);
+            background-color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .pagination-controls .active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="back-btn-container">
+        <a href="quanlisanpham.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Quay Lại Trang Tìm Kiếm
+        </a>
+    </div>
+
+    <div class="result-header">
+        <h1><i class="fas fa-filter"></i> Kết Quả Tìm Kiếm Sản Phẩm</h1>
+    </div>
+    
+    <div class="result-info">
+        <p>Kết quả tìm thấy: <span id="product-count" class="highlight">0 sản phẩm</span></p>
+        <p>Tiêu chí tìm kiếm: <span id="search-criteria" class="highlight"></span></p>
+    </div>
+
+    <div class="product-table-container">
+        <table class="product-table">
+            <thead>
+                <tr>
+                    <th class="col-id">STT</th>
+                    <th class="col-image">Ảnh</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th class="col-price">Giá Bán</th>
+                    <th class="col-stock">Tồn Kho</th>
+                    <th class="col-status">Trạng Thái</th>
+                    <th class="col-actions">Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody id="product-list">
+                <tr data-id="101">
+                    <td class="col-id">1</td>
+                    <td class="col-image"><img src="item-1.png" alt="Product A" class="product-img"></td>
+                    <td>Hạt cà phê Lavazza</td>
+                    <td class="col-price">350.000₫</td>
+                    <td class="col-stock">150</td>
+                    <td class="col-status"><span class="status-tag status-in-stock">Còn hàng</span></td>
+                    <td class="col-actions">
+                        <a class="action-link edit" href="chitiet.html"><i class="fas fa-edit"></i> Sửa</a>
+                        <button class="action-link delete" onclick="deleteProduct(101)"><i class="fas fa-trash-alt"></i> Xóa</button>
+                    </td>
+                </tr>
+                <tr data-id="102">
+                    <td class="col-id">2</td>
+                    <td class="col-image"><img src="item-2.png" alt="Product B" class="product-img"></td>
+                    <td>Hạt cà phê Epresso</td>
+                    <td class="col-price">1.200.000₫</td>
+                    <td class="col-stock low">15</td>
+                    <td class="col-status"><span class="status-tag status-low-stock">Sắp hết</span></td>
+                    <td class="col-actions">
+                        <a class="action-link edit" href="chitiet.html"><i class="fas fa-edit"></i> Sửa</a>
+                        <button class="action-link delete" onclick="deleteProduct(102)"><i class="fas fa-trash-alt"></i> Xóa</button>
+                    </td>
+                </tr>
+                <tr data-id="104">
+                    <td class="col-id">3</td>
+                    <td class="col-image"><img src="item-4.png" alt="Product D" class="product-img"></td>
+                    <td>Cà phê nguyên chất</td>
+                    <td class="col-price">250.000₫</td>
+                    <td class="col-stock">75</td>
+                    <td class="col-status"><span class="status-tag status-in-stock">Còn hàng</span></td>
+                    <td class="col-actions">
+                        <a class="action-link edit" href="chitiet.html"><i class="fas fa-edit"></i> Sửa</a>
+                        <button class="action-link delete" onclick="deleteProduct(104)"><i class="fas fa-trash-alt"></i> Xóa</button>
+                    </td>
+                </tr>
+                </tbody>
+        </table>
+    </div>
+
+    <div class="pagination-footer">
+        <span id="product-count-display"></span>
+        <div class="pagination-controls">
+            <button disabled>Trước</button>
+            <button class="active">1</button>
+            <button>Sau</button>
+        </div>
+    </div>
+
+</div>
+    
+<script>
+    // Hàm giả định đọc tham số từ URL và hiển thị trên trang
+    function displaySearchParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchName = urlParams.get('search_name');
+        const stockStatus = urlParams.get('stock_status');
+
+        let criteria = "Không có tiêu chí nào được áp dụng.";
+        let visibleRows = document.getElementById('product-list').children.length;
+
+        if (searchName || stockStatus) {
+            criteria = "";
+            if (searchName) {
+                criteria += `Tên Sản Phẩm: <span class="highlight-value">${decodeURIComponent(searchName)}</span>`;
+            }
+            if (stockStatus && stockStatus !== 'all') {
+                const statusMap = {
+                    'instock': 'Còn Hàng',
+                    'lowstock': 'Sắp Hết',
+                    'outofstock': 'Hết Hàng'
+                };
+                criteria += (searchName ? "; " : "") + `Trạng Thái: <span class="highlight-value">${statusMap[stockStatus] || stockStatus}</span>`;
+            } else if (!searchName) {
+                 criteria = "Lọc theo: Tất Cả Trạng Thái";
+            }
+        }
+        
+        document.getElementById('search-criteria').innerHTML = criteria;
+        document.getElementById('product-count').textContent = `${visibleRows} sản phẩm`;
+        document.getElementById('product-count-display').textContent = `Hiển thị 1 đến ${visibleRows} trên tổng số ${visibleRows} sản phẩm`;
+    }
+
+    // Hàm giả định cho nút Xóa
+    function deleteProduct(id) {
+        if (confirm(`Bạn có chắc chắn muốn XÓA Sản phẩm ID: ${id}?`)) {
+            // Logic xóa thật sự sẽ diễn ra ở đây (gọi API, etc.)
+            alert(`Đã xóa Sản phẩm ID: ${id} (Giả định).`);
+            
+            // Xóa dòng khỏi bảng (chỉ để minh họa)
+            const row = document.querySelector(`tr[data-id="${id}"]`);
+            if (row) {
+                 row.remove();
+                 displaySearchParams(); // Cập nhật lại số lượng sản phẩm hiển thị
+            }
+           
+        }
+    }
+
+    // Chạy khi trang tải xong
+    document.addEventListener('DOMContentLoaded', displaySearchParams);
+
+</script>
+</body>
+</html>

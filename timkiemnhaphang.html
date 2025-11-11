@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết Quả Tìm Kiếm Phiếu Nhập</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* ====================================================================
+            CSS (Sử dụng lại Style từ trang Lịch Sử Phiếu Nhập)
+            ==================================================================== */
+        :root {
+            --primary-color: #5d5dff; 
+            --primary-light-color: #8c8cff;
+            --secondary-color: #6a6a6a; 
+            --background-color: #f0f2f5; 
+            --card-background: #ffffff;
+            --border-color: #e8e8e8; 
+            --font-color: #333333; 
+            --header-background: #ffffff; 
+            --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.08);
+            --info-color: #2196F3; 
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            color: var(--font-color);
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+        }
+
+        .header-bar {
+            background-color: var(--header-background);
+            padding: 15px 30px;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-bar h1 {
+            margin: 0;
+            font-size: 1.8em;
+            color: var(--primary-color);
+        }
+        .container {
+            padding: 30px;
+        }
+        
+        .card {
+            background-color: var(--card-background);
+            padding: 25px;
+            border-radius: 12px; 
+            box-shadow: var(--shadow-light);
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            color: var(--primary-color); 
+            font-weight: 600;
+        }
+
+        /* Nút Quay Lại */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px; 
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-secondary { 
+            background-color: #f0f0f0;
+            color: var(--secondary-color);
+            border: 1px solid var(--border-color);
+        }
+        .btn-secondary:hover {
+             background-color: #e4e4e4;
+        }
+        .btn-view { 
+            background-color: var(--info-color);
+            color: white;
+            padding: 6px 12px;
+            font-size: 0.9em;
+            text-decoration: none; 
+            display: inline-block;
+        }
+        .btn-view:hover {
+            background-color: #0d47a1;
+        }
+
+
+        /* TABLE STYLING */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+        }
+        .data-table th, .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .data-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        .data-table tbody tr:hover {
+            background-color: #fafafa;
+        }
+
+        /* THÔNG TIN KẾT QUẢ TÌM KIẾM */
+        .result-info {
+            background-color: #e3f2fd; /* Màu nền nhẹ nhàng, nổi bật hơn card */
+            border: 1px solid #90caf9;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .result-info p {
+            margin: 5px 0;
+            font-size: 1em;
+            color: #1e88e5; /* Màu chữ xanh đậm */
+        }
+        .highlight {
+            font-weight: 700;
+            color: #000;
+        }
+
+        /* UTILITIES & PAGINATION */
+        .text-center { text-align: center !important; }
+        .pagination-footer {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            padding-top: 10px;
+        }
+        .pagination-summary {
+            font-size: 0.95em;
+            color: var(--secondary-color);
+        }
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .pagination li a {
+            padding: 8px 12px;
+            margin: 0 2px;
+            text-decoration: none;
+            color: var(--font-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            transition: all 0.3s;
+            display: block;
+        }
+        .pagination li a.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-bar">
+        <h1> Kết Quả Tìm Kiếm Phiếu Nhập</h1>
+        <a class="btn btn-secondary" href=".html">
+            <i class="fas fa-arrow-left"></i> Quay Lại Trang Lịch Sử
+        </a>
+    </header>
+
+
+    <div class="container">
+        <div class="card">
+            
+            <div class="result-info">
+                <p>Số lượng Phiếu tìm thấy: <span id="result-count" class="highlight">0 Phiếu</span></p>
+                <p>Tiêu chí tìm kiếm: <span id="search-criteria" class="highlight"></span></p>
+            </div>
+
+            <h2>Kết Quả Lọc</h2>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Mã Phiếu</th>
+                        <th style="width: 25%;">Nhà Cung Cấp</th>
+                        <th style="width: 15%;">Ngày Nhập</th>
+                        <th style="width: 15%;" class="text-center">Số Lượng Sản Phẩm</th>
+                        <th style="width: 15%;">Tổng Tiền</th>
+                        <th style="width: 15%;" class="text-center">Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody id="result-list">
+                    <tr>
+                        <td>PNK004</td>
+                        <td>Bột & Đường XYZ</td>
+                        <td>01/11/2025</td>
+                        <td class="text-center">5</td>
+                        <td>1.850.000 VNĐ</td>
+                        <td class="text-center">
+                            <a href="xemnhaphang.html" class="btn btn-view">Xem</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PNK001</td>
+                        <td>Bột & Đường XYZ</td>
+                        <td>15/10/2025</td>
+                        <td class="text-center">4</td>
+                        <td>1.400.000 VNĐ</td>
+                        <td class="text-center">
+                            <a href="xemnhaphang.html" class="btn btn-view">Xem</a>
+                        </td>
+                    </tr>
+                    </tbody>
+            </table>
+
+            <div class="pagination-footer">
+                <div class="pagination-summary" id="pagination-summary">
+                    </div>
+
+                <ul class="pagination">
+                    <li><a href="#"><i class="fas fa-chevron-left"></i></a></li>
+                    <li><a href="#" class="active">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i></a></li>
+                </ul>
+            </div>
+            </div>
+    </div>
+    
+<script>
+    // Hàm lấy tham số từ URL và hiển thị trên trang
+    function displaySearchParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const dateFrom = urlParams.get('dateFrom');
+        const dateTo = urlParams.get('dateTo');
+        const keyword = urlParams.get('keyword');
+
+        let criteria = "Tất cả phiếu nhập (Không có tiêu chí lọc).";
+        
+        let criteriaParts = [];
+        if (dateFrom) {
+            criteriaParts.push(`Từ Ngày: **${dateFrom}**`);
+        }
+        if (dateTo) {
+            criteriaParts.push(`Đến Ngày: **${dateTo}**`);
+        }
+        if (keyword) {
+            criteriaParts.push(`Từ khóa: **${decodeURIComponent(keyword)}**`);
+        }
+
+        if (criteriaParts.length > 0) {
+            criteria = criteriaParts.join(" | ");
+        }
+
+        // Đếm số lượng dòng trong bảng kết quả giả định
+        const visibleRows = document.getElementById('result-list').children.length;
+
+        // Cập nhật DOM
+        document.getElementById('search-criteria').innerHTML = criteria;
+        document.getElementById('result-count').textContent = `${visibleRows} Phiếu`;
+        
+        // Cập nhật footer phân trang (giả định tổng số phiếu khớp là 10, hiển thị 5 trên mỗi trang)
+        const totalMatching = 10; // Giả định có 10 phiếu khớp với tiêu chí tìm kiếm
+        document.getElementById('pagination-summary').innerHTML = `**Hiển thị 1 đến ${visibleRows}** của **${totalMatching}** phiếu nhập`;
+    }
+
+    // Chạy khi trang tải xong
+    document.addEventListener('DOMContentLoaded', displaySearchParams);
+</script>
+</body>
+</html>
