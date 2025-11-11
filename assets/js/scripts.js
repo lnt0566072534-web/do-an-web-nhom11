@@ -253,12 +253,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Nếu chưa đăng nhập mà truy cập các trang khác -> chuyển về trang đăng nhập
-    const publicPages = ["sign-in.html", "sign-up.html", "index.html"];
-    const currentPage = window.location.pathname.split("/").pop();
+    // scripts.js
+(function () {
+  const currentPage = window.location.pathname.split("/").pop();
 
-    if (!localStorage.getItem("isLoggedIn") && !publicPages.includes(currentPage)) {
-        window.location.href = "sign-in.html";
-    }
+  // ✅ Chặn truy cập admin khi chưa đăng nhập
+  if (currentPage === "admin.html" && !localStorage.getItem("isLoggedIn")) {
+    window.location.href = "sign-in.html";
+  }
+
+  // ... các đoạn code khác của bạn
+})();
+
 
     // Nút đăng xuất
     const logoutBtn = document.querySelector(".logout-btn");
