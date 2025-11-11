@@ -359,15 +359,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Xóa sản phẩm
-    document.querySelectorAll(".cart-item__ctrl-btn:last-child").forEach(btn => {
-        btn.addEventListener("click", () => {
-            if (confirm("Bạn có chắc muốn xóa sản phẩm này?")) {
-                let item = btn.closest(".cart-item");
-                item.remove();
-            }
-        });
-    });
+    // Giả lập xóa sản phẩm (chỉ hiển thị thông báo, không xóa thật)
+document.querySelectorAll(".cart-item__ctrl-btn:last-child").forEach(btn => {
+  btn.addEventListener("click", () => {
+    if (confirm("Bạn có chắc muốn xóa sản phẩm này?")) {
+      alert("Đã xóa sản phẩm thành công!");
+      // ❌ Không remove() nữa để giữ nguyên sản phẩm
+    }
+  });
+});
+
 
 });
 </script>
