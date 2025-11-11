@@ -739,5 +739,10 @@
     
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="scriptnew.js"></script>
+    <script>
+document.getElementById("logout-btn").addEventListener("click", function() {
+    localStorage.removeItem("adminLoggedIn"); // Xóa trạng thái đăng nhập
+});
+</script>
 </body>
 </html>
