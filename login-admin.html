@@ -176,5 +176,14 @@
             <a href="#">Đăng ký tài khoản mới</a>
         </div>
     </div>
+    <script>
+document.querySelector(".login-button").addEventListener("click", function(event) {
+    event.preventDefault(); // Ngăn mở link mặc định
+    // Không cần kiểm tra tài khoản, chỉ cần bấm là đăng nhập
+    localStorage.setItem("adminLoggedIn", "true");
+    window.location.href = "admin.html";
+});
+</script>
 </body>
 </html>
+
