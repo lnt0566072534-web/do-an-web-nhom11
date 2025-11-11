@@ -19,7 +19,7 @@
         <!-- Styles -->
         <link rel="stylesheet" href="./assets/css/main.css" />
 
-        <!-- Scripts -->
+        <!-- Scripts -->fide
         <script src="./assets/js/scripts.js"></script>
     </head>
     <body>
@@ -40,7 +40,7 @@
             </div>
 
             <!-- Auth content -->
-            <div id="auth-content" class="auth__content hide">
+            <div id="auth-content" class="auth__content">
                 <div class="auth__content-inner">
                     <a href="./" class="logo">
                         <img src="./assets/icons/logo.svg" alt="grocerymart" class="logo__img" />
@@ -48,7 +48,7 @@
                     </a>
                     <h1 class="auth__heading">Đăng ký</h1>
                     <p class="auth__desc">Hãy tạo tài khoản để mua sắm tiện lợi và tiết kiệm hơn.</p>
-                    <form action="./index-logined.html" class="form auth__form">
+                    <form action="./sign-in.html" class="form auth__form">
                         <div class="form__group">
                             <div class="form__text-input">
                                 <input
@@ -73,8 +73,6 @@
                                     id=""
                                     placeholder="Password"
                                     class="form__input"
-                                    required
-                                    minlength="6"
                                 />
                                 <img src="./assets/icons/lock.svg" alt="" class="form__input-icon" />
                                 <img src="./assets/icons/form-error.svg" alt="" class="form__input-icon-error" />
@@ -89,8 +87,6 @@
                                     id=""
                                     placeholder="Confirm password"
                                     class="form__input"
-                                    required
-                                    minlength="6"
                                 />
                                 <img src="./assets/icons/lock.svg" alt="" class="form__input-icon" />
                                 <img src="./assets/icons/form-error.svg" alt="" class="form__input-icon-error" />
@@ -122,5 +118,22 @@
         <script>
             window.dispatchEvent(new Event("template-loaded"));
         </script>
+        <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector(".auth__form");
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault(); // Ngăn form tự chuyển trang ngay
+
+        alert("🎉 Đăng ký thành công!");
+
+        // Sau 1 giây thì chuyển sang trang đăng nhập
+        setTimeout(function() {
+            window.location.href = "sign-in.html";
+        }, 500);
+    });
+});
+</script>
+
     </body>
 </html>
