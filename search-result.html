@@ -383,10 +383,63 @@
     });
   </script>
 
-  <!-- Footer -->
-  <footer id="footer" class="footer"></footer>
-  <script>load("#footer", "./templates/footer.html");</script>
-  <script>
+  <!-- ✅ FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__row">
+          <div class="footer__col">
+            <a href="./" class="logo footer__logo">
+              <img src="./assets/icons/logo.svg" alt="logo" class="logo__img" />
+              <h1 class="logo__title">Cửa hàng cà phê</h1>
+            </a>
+            <p class="footer__desc">Chào mừng bạn đến với Cửa Hàng Cà Phê – nơi hương vị đậm đà và chất lượng được đặt lên hàng đầu.</p>
+            <p class="footer__help-text">Nhận tin tức và cập nhật về sản phẩm.</p>
+            <form action="" class="footer__form">
+              <input type="text" class="footer__input" placeholder="Địa chỉ email" />
+              <button class="btn btn--primary">Gửi</button>
+            </form>
+          </div>
+
+          <div class="footer__col">
+            <h3 class="footer__heading">Liên hệ</h3>
+            <ul class="footer__list">
+              <li>
+                <p class="footer__label">Email</p>
+                <a href="mailto:lienhe@cuahangcaphe.com" class="footer__link">lienhe@cuahangcaphe.com</a>
+              </li>
+              <li>
+                <p class="footer__label">Số điện thoại</p>
+                <a href="tel:18008888" class="footer__link">123467895</a>
+              </li>
+              <li>
+                <p class="footer__label">Địa chỉ</p>
+                <p class="footer__text">273 An Dương Vương, Phường Chợ Quán, TP. HCM</p>
+              </li>
+              <li>
+                <p class="footer__label">Giờ làm việc</p>
+                <p class="footer__text">5 giờ sáng - 23 giờ đêm</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <p class="footer__copyright">© 2010 - 2025 Cửa Hàng Cà Phê. Mọi quyền được bảo lưu.</p>
+          <div class="footer__socials">
+            <a href="#!" class="footer__social-link footer__social-link--facebook">
+              <img src="./assets/icons/facebook.svg" alt="" class="footer__social-icon" />
+            </a>
+            <a href="#!" class="footer__social-link footer__social-link--youtube">
+              <img src="./assets/icons/youtube.svg" alt="" class="footer__social-icon" />
+            </a>
+            <a href="#!" class="footer__social-link footer__social-link--tiktok">
+              <img src="./assets/icons/tiktok.svg" alt="" class="footer__social-icon" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
   // Khi trang đã load xong
   document.addEventListener("DOMContentLoaded", function () {
     // Lấy tất cả các sản phẩm trong trang
