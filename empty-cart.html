@@ -77,10 +77,92 @@
 </head>
 <body>
 
-  <header id="header" class="header"></header>
-  <script>
-    load("#header", "./templates/header.html");
-  </script>
+  <!-- ✅ HEADER (đã gộp) -->
+    <header class="header">
+      <div class="container">
+        <div class="top-bar" style="justify-content: space-between; align-items: center;">
+          <a href="./index.html" class="logo top-bar__logo">
+            <img src="./assets/icons/logo.svg" alt="logo" class="logo__img top-bar__logo-img" />
+            <h1 class="logo__title top-bar__logo-title">Cửa hàng cà phê</h1>
+          </a>
+
+          <div class="header-search">
+            <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." class="search-box" />
+            <button id="searchBtn" class="search-btn" type="button">Tìm kiếm</button>
+          </div>
+
+          <div class="top-act" id="userActions">
+            <a href="./sign-in.html" class="btn btn--text d-md-none">Đăng nhập</a>
+            <a href="./sign-up.html" class="btn btn--text d-md-none">Đăng ký</a>
+          </div>
+        </div>
+
+        <nav id="navbar" class="navbar hide">
+          <button class="navbar__close-btn js-toggle" toggle-target="#navbar">
+            <img class="icon" src="./assets/icons/arrow-left.svg" alt="" />
+          </button>
+
+          <a href="./checkout.html" class="nav-btn d-none d-md-flex">
+            <img src="./assets/icons/buy.svg" alt="" class="nav-btn__icon icon" />
+            <span class="nav-btn__title">Giỏ hàng</span>
+          </a>
+
+          <a href="./favourite.html" class="nav-btn d-none d-md-flex">
+            <img src="./assets/icons/heart.svg" alt="" class="nav-btn__icon icon" />
+            <span class="nav-btn__title">Yêu thích</span>
+          </a>
+
+          <ul class="navbar__list js-dropdown-list">
+            <li><a href="./index.html">Trang chủ</a></li>
+            <li><a href="./index.html">Sản phẩm</a></li>
+            <li><a href="./checkout.html">Giỏ hàng</a></li>
+            <li><a href="./purchase-history-guest.html">Lịch sử mua hàng</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 🔹 CSS cho thanh tìm kiếm -->
+    <style>
+      .header-search {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border-radius: 999px;
+        padding: 8px 16px;
+        border: 2px solid #ccc;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .search-box {
+        border: none;
+        outline: none;
+        padding: 0.8rem 1.2rem;
+        border-radius: 999px;
+        flex: 1;
+        font-size: 1.1rem;
+        color: #000;
+        background: transparent;
+      }
+      .search-btn {
+        background: #ffb703;
+        color: #fff;
+        border: none;
+        border-radius: 999px;
+        padding: 0.7rem 1.6rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.25s;
+      }
+      .search-btn:hover {
+        background: #ffa500;
+      }
+    </style>
+
 
   <main>
     <div class="empty-cart-message">
@@ -90,10 +172,61 @@
     </div>
   </main>
 
-  <footer id="footer" class="footer"></footer>
-  <script>
-    load("#footer", "./templates/footer.html");
-  </script>
+ <!-- ✅ FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__row">
+          <div class="footer__col">
+            <a href="./" class="logo footer__logo">
+              <img src="./assets/icons/logo.svg" alt="logo" class="logo__img" />
+              <h1 class="logo__title">Cửa hàng cà phê</h1>
+            </a>
+            <p class="footer__desc">Chào mừng bạn đến với Cửa Hàng Cà Phê – nơi hương vị đậm đà và chất lượng được đặt lên hàng đầu.</p>
+            <p class="footer__help-text">Nhận tin tức và cập nhật về sản phẩm.</p>
+            <form action="" class="footer__form">
+              <input type="text" class="footer__input" placeholder="Địa chỉ email" />
+              <button class="btn btn--primary">Gửi</button>
+            </form>
+          </div>
 
+          <div class="footer__col">
+            <h3 class="footer__heading">Liên hệ</h3>
+            <ul class="footer__list">
+              <li>
+                <p class="footer__label">Email</p>
+                <a href="mailto:lienhe@cuahangcaphe.com" class="footer__link">lienhe@cuahangcaphe.com</a>
+              </li>
+              <li>
+                <p class="footer__label">Số điện thoại</p>
+                <a href="tel:18008888" class="footer__link">123467895</a>
+              </li>
+              <li>
+                <p class="footer__label">Địa chỉ</p>
+                <p class="footer__text">273 An Dương Vương, Phường Chợ Quán, TP. HCM</p>
+              </li>
+              <li>
+                <p class="footer__label">Giờ làm việc</p>
+                <p class="footer__text">5 giờ sáng - 23 giờ đêm</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <p class="footer__copyright">© 2010 - 2025 Cửa Hàng Cà Phê. Mọi quyền được bảo lưu.</p>
+          <div class="footer__socials">
+            <a href="#!" class="footer__social-link footer__social-link--facebook">
+              <img src="./assets/icons/facebook.svg" alt="" class="footer__social-icon" />
+            </a>
+            <a href="#!" class="footer__social-link footer__social-link--youtube">
+              <img src="./assets/icons/youtube.svg" alt="" class="footer__social-icon" />
+            </a>
+            <a href="#!" class="footer__social-link footer__social-link--tiktok">
+              <img src="./assets/icons/tiktok.svg" alt="" class="footer__social-icon" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
 </body>
 </html>

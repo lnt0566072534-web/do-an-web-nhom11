@@ -1,127 +1,344 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Cửa Hàng Cà Phê</title>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cửa Hàng Cà Phê</title>
 
-        <!-- Favicon -->
-        <link rel="apple-touch-icon" sizes="76x76" href="./assets/favicon/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png" />
-        <link rel="manifest" href="./assets/favicon/site.webmanifest" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="76x76" href="./assets/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+    <!-- Fonts -->
+    <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="./assets/css/main.css" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="./assets/css/main.css" />
 
-        <!-- Scripts -->
-        <script src="./assets/js/scripts.js"></script>
-    </head>
-    <body>
-<div id="header"></div>
-<script>
-  fetch("./templates/header.html")
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById("header").innerHTML = html;
-      const s = document.createElement("script");
-      s.src = "./templates/header-script.js";
-      document.body.appendChild(s);
-    })
-    .catch(err => {
-      console.error("Không thể load header:", err);
-    });
-</script>
+    <!-- Scripts -->
+    <script src="./assets/js/scripts.js" defer></script>
+  </head>
 
-        <!-- MAIN -->
-        <main class="container home">
-            <!-- Slideshow -->
-            <div class="home__container">
-                <div class="slideshow">
-                    <div class="slideshow__inner">
-                        <div class="slideshow__item">
-                            <a href="#!" class="slideshow__link">
-                                <picture>
-                                    <source
-                                        media="(max-width: 767.98px)"
-                                        srcset="./assets/img/slideshow/item-1-md.png"
-                                    />
-                                    <img src="assets/img/slideshow/1ff551b6-ff7d-4bd4-a3ab-45fd2d3a29c8.jpg" alt="" class="slideshow__img" />
-                                </picture>
-                            </a>
-                        </div>
-                    </div>
+  <body>
+    <!-- ✅ HEADER (đã gộp) -->
+    <header class="header">
+      <div class="container">
+        <div class="top-bar" style="justify-content: space-between; align-items: center;">
+          <a href="./index.html" class="logo top-bar__logo">
+            <img src="./assets/icons/logo.svg" alt="logo" class="logo__img top-bar__logo-img" />
+            <h1 class="logo__title top-bar__logo-title">Cửa hàng cà phê</h1>
+          </a>
 
-                </div>
+          <div class="header-search">
+            <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." class="search-box" />
+            <button id="searchBtn" class="search-btn" type="button">Tìm kiếm</button>
+          </div>
+
+          <div class="top-act" id="userActions">
+            <a href="./sign-in.html" class="btn btn--text d-md-none">Đăng nhập</a>
+            <a href="./sign-up.html" class="btn btn--text d-md-none">Đăng ký</a>
+          </div>
+        </div>
+
+        <nav id="navbar" class="navbar hide">
+          <button class="navbar__close-btn js-toggle" toggle-target="#navbar">
+            <img class="icon" src="./assets/icons/arrow-left.svg" alt="" />
+          </button>
+
+          <a href="./checkout.html" class="nav-btn d-none d-md-flex">
+            <img src="./assets/icons/buy.svg" alt="" class="nav-btn__icon icon" />
+            <span class="nav-btn__title">Giỏ hàng</span>
+          </a>
+
+          <a href="./favourite.html" class="nav-btn d-none d-md-flex">
+            <img src="./assets/icons/heart.svg" alt="" class="nav-btn__icon icon" />
+            <span class="nav-btn__title">Yêu thích</span>
+          </a>
+
+          <ul class="navbar__list js-dropdown-list">
+            <li><a href="./index.html">Trang chủ</a></li>
+            <li><a href="./index.html">Sản phẩm</a></li>
+            <li><a href="./checkout.html">Giỏ hàng</a></li>
+            <li><a href="./purchase-history-guest.html">Lịch sử mua hàng</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 🔹 CSS cho thanh tìm kiếm -->
+    <style>
+      .header-search {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border-radius: 999px;
+        padding: 8px 16px;
+        border: 2px solid #ccc;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .search-box {
+        border: none;
+        outline: none;
+        padding: 0.8rem 1.2rem;
+        border-radius: 999px;
+        flex: 1;
+        font-size: 1.1rem;
+        color: #000;
+        background: transparent;
+      }
+      .search-btn {
+        background: #ffb703;
+        color: #fff;
+        border: none;
+        border-radius: 999px;
+        padding: 0.7rem 1.6rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.25s;
+      }
+      .search-btn:hover {
+        background: #ffa500;
+      }
+    </style>
+
+    <!-- ✅ MAIN -->
+    <main class="container home">
+      <!-- Slideshow -->
+      <div class="home__container">
+        <div class="slideshow">
+          <div class="slideshow__inner">
+            <div class="slideshow__item">
+              <a href="#!" class="slideshow__link">
+                <img src="./assets/img/slideshow/1ff551b6-ff7d-4bd4-a3ab-45fd2d3a29c8.jpg" alt="" class="slideshow__img" />
+              </a>
             </div>
+          </div>
+        </div>
+      </div>
 
-            <!-- Browse Categories -->
-            <section class="home__container">
-                <div class="home__row">
-                    <h2 class="home__heading">Danh mục Cà Phê</h2>
+      <!-- Danh mục -->
+      <section class="home__container">
+        <div class="home__row">
+          <h2 class="home__heading">Các sản phẩm mới</h2>
+        </div>
+        <div class="home__cate row row-cols-3 row-cols-md-1">
+          <div class="col">
+            <a href="#!">
+              <article class="cate-item">
+                <img src="./assets/img/category-item/item-1.png" alt="" class="cate-item__thumb" />
+                <div class="cate-item__info">
+                  <h3 class="cate-item__title">24.000đ - 150.000đ</h3>
+                  <p class="cate-item__desc">Cà phê Sumatra Mandheling pha trộn mới</p>
                 </div>
-                <div class="home__cate row row-cols-3 row-cols-md-1">
-                    <!-- Category item 1 -->
-                    <div class="col">
-                        <a href="#!">
-                            <article class="cate-item">
-                                <img src="./assets/img/category-item/item-1.png" alt="" class="cate-item__thumb" />
-                                <div class="cate-item__info">
-                                  <h3 class="cate-item__title">24.000đ - 150.000đ</h3>
-                                    <p class="cate-item__desc">Cà phê Sumatra Mandheling pha trộn mới</p>
-                                </div>
-                            </article>
-                        </a>
-                    </div>
-
-                    <!-- Category item 2 -->
-                    <div class="col">
-                        <a href="#!">
-                            <article class="cate-item">
-                                <img src="./assets/img/category-item/item-2.png" alt="" class="cate-item__thumb" />
-                                <div class="cate-item__info">
-                                   <h3 class="cate-item__title">37.000đ - 160.000đ</h3>
-                                    <p class="cate-item__desc">Cà phê Espresso Arabica và Robusta</p>
-                                </div>
-                            </article>
-                        </a>
-                    </div>
-
-                    <!-- Category item 3 -->
-                    <div class="col">
-                        <a href="#!">
-                            <article class="cate-item">
-                                <img src="./assets/img/category-item/item-3.png" alt="" class="cate-item__thumb" />
-                                <div class="cate-item__info">
-                                    <h3 class="cate-item__title">32.000đ - 160.000đ</h3>
-                                    <p class="cate-item__desc">Cà phê Lavazza Top Class nguyên hạt</p>
-                                </div>
-                            </article>
-                        </a>
-                    </div>
+              </article>
+            </a>
+          </div>
+          <div class="col">
+            <a href="#!">
+              <article class="cate-item">
+                <img src="./assets/img/category-item/item-2.png" alt="" class="cate-item__thumb" />
+                <div class="cate-item__info">
+                  <h3 class="cate-item__title">37.000đ - 160.000đ</h3>
+                  <p class="cate-item__desc">Cà phê Espresso Arabica và Robusta</p>
                 </div>
-            </section>
-
-            <!-- Browse Products -->
-            <section class="home__container">
-                <div class="home__row">
-                    <h2 class="home__heading">Tổng số sản phẩm LavAzza 1320</h2>
-                    <div class="filter-wrap">
-                        <button class="filter-btn js-toggle" toggle-target="#home-filter">
-                        
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+              </article>
+            </a>
+          </div>
+          <div class="col">
+            <a href="#!">
+              <article class="cate-item">
+                <img src="./assets/img/category-item/item-3.png" alt="" class="cate-item__thumb" />
+                <div class="cate-item__info">
+                  <h3 class="cate-item__title">32.000đ - 160.000đ</h3>
+                  <p class="cate-item__desc">Cà phê Lavazza Top Class nguyên hạt</p>
                 </div>
+              </article>
+            </a>
+          </div>
+        </div>
+      </section>
+      <!-- ☕ DANH MỤC CÀ PHÊ -->
+<section class="coffee-category-section">
+  <h2 class="coffee-category-title">Danh mục Cà Phê</h2>
 
-                <div class="row row-cols-5 row-cols-lg-2 row-cols-sm-1 g-3">
-                    <!-- Product card 1 -->
+  <div class="coffee-dropdown-container">
+    <button id="coffeeDropdownBtn" class="coffee-dropdown-btn">
+      <span id="selectedCoffee">Chọn loại cà phê</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+
+    <ul id="coffeeDropdownList" class="coffee-dropdown-list hidden">
+      <li data-value="sumatra">
+        <span class="coffee-item-name">Cà phê Sumatra Mandheling</span>
+        <p class="coffee-item-desc">Pha trộn mới, hương vị đậm đà</p>
+      </li>
+      <li data-value="espresso">
+        <span class="coffee-item-name">Espresso Arabica & Robusta</span>
+        <p class="coffee-item-desc">Đậm vị Ý, thơm nồng</p>
+      </li>
+      <li data-value="lavazza">
+        <span class="coffee-item-name">Lavazza Top Class nguyên hạt</span>
+        <p class="coffee-item-desc">Hương thơm cao cấp, vị ngọt hậu</p>
+      </li>
+      <li data-value="classic">
+        <span class="coffee-item-name">Classic Blend</span>
+        <p class="coffee-item-desc">Pha máy hoặc phin đều ngon</p>
+      </li>
+      <li data-value="mocha">
+        <span class="coffee-item-name">Mocha đặc biệt</span>
+        <p class="coffee-item-desc">Vị chocolate nhẹ, thanh tao</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 🌿 CSS -->
+<style>
+  .coffee-category-section {
+    margin-top: 70px;
+    text-align: left;
+  }
+
+  /* 🌟 Tiêu đề danh mục cà phê */
+  .coffee-category-title {
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: #1b1b1b;
+    margin-bottom: 30px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    border-left: 6px solid #CC9933;
+    padding-left: 14px;
+  }
+
+  .coffee-dropdown-container {
+    position: relative;
+    width: 450px;
+  }
+
+  /* 🌟 Nút chọn loại cà phê */
+  .coffee-dropdown-btn {
+    width: 100%;
+    background: #ffffff;
+    border: 2px solid #CC9933;
+    border-radius: 14px;
+    padding: 18px 24px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1b1b1b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(204, 153, 51, 0.2);
+  }
+
+  .coffee-dropdown-btn:hover {
+    background-color: #fff7e6;
+  }
+
+  .coffee-dropdown-btn i {
+    font-size: 1.2rem;
+    color: #CC9933;
+    transition: transform 0.3s ease;
+  }
+
+  .coffee-dropdown-btn.active i {
+    transform: rotate(180deg);
+  }
+
+  /* 🌟 Danh sách cà phê */
+  .coffee-dropdown-list {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 2px solid #CC9933;
+    border-radius: 14px;
+    list-style: none;
+    margin: 0;
+    padding: 12px;
+    z-index: 10;
+    box-shadow: 0 6px 16px rgba(204, 153, 51, 0.15);
+  }
+
+  .coffee-dropdown-list li {
+    padding: 16px 20px;
+    border: 1.8px solid #CC9933;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    color: #1b1b1b;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+
+  .coffee-dropdown-list li:hover {
+    background: #fff3d9;
+    transform: translateX(4px);
+  }
+
+  .coffee-item-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #000;
+  }
+
+  .coffee-item-desc {
+    font-size: 1rem;
+    color: #444;
+    margin: 4px 0 0;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+
+<!-- ☕ JS -->
+<script>
+  const coffeeDropdownBtn = document.getElementById("coffeeDropdownBtn");
+  const coffeeDropdownList = document.getElementById("coffeeDropdownList");
+  const selectedCoffee = document.getElementById("selectedCoffee");
+
+  coffeeDropdownBtn.addEventListener("click", () => {
+    coffeeDropdownList.classList.toggle("hidden");
+    coffeeDropdownBtn.classList.toggle("active");
+  });
+
+  coffeeDropdownList.querySelectorAll("li").forEach((item) => {
+    item.addEventListener("click", () => {
+      selectedCoffee.textContent = item.querySelector(".coffee-item-name").textContent;
+      coffeeDropdownList.classList.add("hidden");
+      coffeeDropdownBtn.classList.remove("active");
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!coffeeDropdownBtn.contains(e.target)) {
+      coffeeDropdownList.classList.add("hidden");
+      coffeeDropdownBtn.classList.remove("active");
+    }
+  });
+</script>
+      <!-- Sản phẩm -->
+      <section class="home__container">
+        <div class="home__row">
+          <h2 class="home__heading">Tổng số sản phẩm LavAzza 1320</h2>
+        </div>
+        <div class="row row-cols-5 row-cols-lg-2 row-cols-sm-1 g-3">
+           <!-- Product card 1 -->
                     <div class="col">
                         <article class="product-card">
                             <div class="product-card__img-wrap">
@@ -361,33 +578,132 @@
                         </article>
                     </div>
                 </div>
-                <!-- Pagination -->
-              <!-- Pagination -->
-<div class="pagination">
-  <a href="./index.html" class="page-btn active">1</a>
-  <a href="./index.html" class="page-btn">2</a>
-  <a href="./index.html" class="page-btn">3</a>
-  <a href="./index.html" class="page-btn next">&raquo;</a>
-</div>
+        </div>
+        <div class="pagination">
+          <a href="./index.html" class="page-btn active">1</a>
+          <a href="./index.html" class="page-btn">2</a>
+          <a href="./index.html" class="page-btn">3</a>
+          <a href="./index.html" class="page-btn next">&raquo;</a>
+        </div>
+      </section>
+    </main>
 
+    <!-- ✅ FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__row">
+          <div class="footer__col">
+            <a href="./" class="logo footer__logo">
+              <img src="./assets/icons/logo.svg" alt="logo" class="logo__img" />
+              <h1 class="logo__title">Cửa hàng cà phê</h1>
+            </a>
+            <p class="footer__desc">Chào mừng bạn đến với Cửa Hàng Cà Phê – nơi hương vị đậm đà và chất lượng được đặt lên hàng đầu.</p>
+            <p class="footer__help-text">Nhận tin tức và cập nhật về sản phẩm.</p>
+            <form action="" class="footer__form">
+              <input type="text" class="footer__input" placeholder="Địa chỉ email" />
+              <button class="btn btn--primary">Gửi</button>
+            </form>
+          </div>
 
-            <!-- 🔹 Header -->
-<div id="header"></div>
+          <div class="footer__col">
+            <h3 class="footer__heading">Liên hệ</h3>
+            <ul class="footer__list">
+              <li>
+                <p class="footer__label">Email</p>
+                <a href="mailto:lienhe@cuahangcaphe.com" class="footer__link">lienhe@cuahangcaphe.com</a>
+              </li>
+              <li>
+                <p class="footer__label">Số điện thoại</p>
+                <a href="tel:18008888" class="footer__link">123467895</a>
+              </li>
+              <li>
+                <p class="footer__label">Địa chỉ</p>
+                <p class="footer__text">273 An Dương Vương, Phường Chợ Quán, TP. HCM</p>
+              </li>
+              <li>
+                <p class="footer__label">Giờ làm việc</p>
+                <p class="footer__text">5 giờ sáng - 23 giờ đêm</p>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-<script>
-  fetch("./templates/header.html")
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById("header").innerHTML = data;
-      const script = document.createElement("script");
-      script.src = "./templates/header-script.js";
-      document.body.appendChild(script);
-    });
+        <div class="footer__bottom">
+          <p class="footer__copyright">© 2010 - 2025 Cửa Hàng Cà Phê. Mọi quyền được bảo lưu.</p>
+          <div class="footer__socials">
+            <a href="#!" class="footer__social-link footer__social-link--facebook">
+              <img src="./assets/icons/facebook.svg" alt="" class="footer__social-icon" />
+            </a>
+            <a href="#!" class="footer__social-link footer__social-link--youtube">
+              <img src="./assets/icons/youtube.svg" alt="" class="footer__social-icon" />
+            </a>
+            <a href="#!" class="footer__social-link footer__social-link--tiktok">
+              <img src="./assets/icons/tiktok.svg" alt="" class="footer__social-icon" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ✅ Script của header -->
+    <script>
+  (function () {
+    function initHeaderScripts() {
+      // ✅ Nếu đang ở trang index thì luôn coi là chưa đăng nhập
+      if (window.location.pathname.includes("index.html")) {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userEmail");
+      }
+
+      const userActions = document.getElementById("userActions");
+      const isLoggedIn = localStorage.getItem("isLoggedIn");
+      const username = localStorage.getItem("userEmail") || "Người dùng";
+
+      // ✅ Nếu đang đăng nhập -> hiện tên + nút đăng xuất
+      if (userActions && isLoggedIn === "true") {
+        userActions.innerHTML = `
+          <div class="top-act__user">
+            <span class="user-name">${username}</span>
+            <button id="logoutBtn" class="btn btn--text">Đăng xuất</button>
+          </div>`;
+      }
+
+      // ✅ Xử lý nút đăng xuất
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+          localStorage.removeItem("isLoggedIn");
+          localStorage.removeItem("userEmail");
+          alert("Bạn đã đăng xuất!");
+          window.location.href = "./sign-in.html";
+        });
+      }
+
+      // ✅ Xử lý tìm kiếm
+      const searchInput = document.querySelector("#searchInput");
+      const searchBtn = document.querySelector("#searchBtn");
+      if (searchInput && searchBtn) {
+        const goToSearch = () => {
+          const keyword = (searchInput.value || "").trim();
+          if (!keyword) return;
+          window.location.href = `./search-result.html?search=${encodeURIComponent(keyword)}`;
+        };
+        searchBtn.addEventListener("click", goToSearch);
+        searchInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            goToSearch();
+          }
+        });
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initHeaderScripts);
+    } else {
+      initHeaderScripts();
+    }
+  })();
 </script>
-<script>
-  localStorage.removeItem("loggedInUser");
-  localStorage.removeItem("isLoggedIn");
-</script>
-</body>
+  </body>
 </html>
-
