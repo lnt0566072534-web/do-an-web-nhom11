@@ -381,9 +381,21 @@
       const qs = `?product=${productName}&brand=${brand}&weight=${weight}&unit=${unit}&rating=${rating}&min=${min}&max=${max}`;
       window.location.href = 'search-result.html' + qs;
     });
-  </script>
+  // Khi trang đã load xong
+  document.addEventListener("DOMContentLoaded", function () {
+    // Lấy tất cả các sản phẩm trong trang
+    const productCards = document.querySelectorAll(".product-card");
 
-  <!-- ✅ FOOTER -->
+    // Gắn sự kiện click cho từng sản phẩm
+    productCards.forEach(card => {
+      card.addEventListener("click", function () {
+        // Chuyển qua trang chi tiết sản phẩm cho khách
+        window.location.href = "product-detail-guest.html";
+      });
+    });
+  });
+</script>
+<!-- ✅ FOOTER -->
     <footer class="footer">
       <div class="container">
         <div class="footer__row">
@@ -440,20 +452,6 @@
       </div>
     </footer>
 
-  // Khi trang đã load xong
-  document.addEventListener("DOMContentLoaded", function () {
-    // Lấy tất cả các sản phẩm trong trang
-    const productCards = document.querySelectorAll(".product-card");
-
-    // Gắn sự kiện click cho từng sản phẩm
-    productCards.forEach(card => {
-      card.addEventListener("click", function () {
-        // Chuyển qua trang chi tiết sản phẩm cho khách
-        window.location.href = "product-detail-guest.html";
-      });
-    });
-  });
-</script>
 
 </body>
 </html>
