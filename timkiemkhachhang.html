@@ -6,9 +6,7 @@
     <title>Kết Quả Tìm Kiếm Khách Hàng</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ====================================================================
-            CSS (Giữ nguyên các phần cần thiết)
-            ==================================================================== */
+        
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
@@ -47,6 +45,7 @@
         }
 
         th {
+            vertical-align: middle;
             background-color: #007bff;
             color: white;
             white-space: nowrap;
@@ -65,6 +64,7 @@
         .actions {
             display: flex; 
             gap: 5px; 
+            align-items: center;
         }
         
         .actions a, 
@@ -81,6 +81,7 @@
             align-items: center;
             justify-content: center;
             gap: 3px;
+            min-width: 90px;
         }
 
         .actions .edit-btn {
@@ -180,16 +181,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td>1</td><td>Nguyễn Văn A</td><td>vana</td><td>123 Nguyễn Văn Cừ, HN</td><td>15</td><td>20/10/2023</td><td class="status-active">Hoạt Động</td><td class="actions"><a href="suathongtin.html" class="edit-btn">Sửa</a><button class="lock-btn" onclick="lockCustomer('lock')"><i class="fas fa-lock"></i> Khóa</button></td></tr>
-                <tr><td>4</td><td>Nguyễn Văn B</td><td>vanb</td><td>500 Trần Phú, HN</td><td>2</td><td>01/01/2024</td><td class="status-active">Hoạt Động</td><td class="actions"><a href="suathongtin.html" class="edit-btn">Sửa</a><button class="lock-btn" onclick="lockCustomer('lock')"><i class="fas fa-lock"></i> Khóa</button></td></tr>
+                <tr><td>1</td><td>Nguyễn Văn A</td><td>vana</td><td>123 Nguyễn Văn Cừ, HN</td><td>15</td><td>20/10/2023</td><td class="status-active">Hoạt Động</td><td class="actions"><a href="suathongtin.html" class="edit-btn"><i class="fas fa-edit"></i> Sửa</a><button class="lock-btn" onclick="lockCustomer('lock')"><i class="fas fa-lock"></i> Khóa</button></td></tr>
+ <tr><td>2</td><td>Trần Thị C</td><td>tranthic</td><td>45 Lê Lợi, TP.HCM</td><td>5</td><td>15/09/2023</td><td class="status-active">Hoạt Động</td><td class="actions"><a href="suathongtin.html" class="edit-btn"><i class="fas fa-edit"></i> Sửa</a><button class="lock-btn" onclick="lockCustomer('lock')"><i class="fas fa-lock"></i> Khóa</button></td></tr>
+<tr><td>3</td><td>Lê Văn D</td><td>levand</td><td>10 Hai Bà Trưng, Đà Nẵng</td><td>25</td><td>05/11/2023</td><td class="status-locked">Đã Khóa</td><td class="actions"><a href="suathongtin.html" class="edit-btn"><i class="fas fa-edit"></i> Sửa</a><button class="unlock-btn" onclick="lockCustomer('unlock')"><i class="fas fa-unlock"></i> Mở Khóa</button></td></tr>
+ <tr><td>4</td><td>Nguyễn Văn B</td><td>vanb</td><td>500 Trần Phú, HN</td><td>2</td><td>01/01/2024</td><td class="status-active">Hoạt Động</td><td class="actions"><a href="suathongtin.html" class="edit-btn"><i class="fas fa-edit"></i> Sửa</a><button class="lock-btn" onclick="lockCustomer('lock')"><i class="fas fa-lock"></i> Khóa</button></td></tr>
+ <tr><td>5</td><td>Phạm Thu E</td><td>thue</td><td>Khu Phố 6, Bình Dương</td><td>8</td><td>12/02/2024</td><td class="status-locked">Đã Khóa</td><td class="actions"><a href="suathongtin.html" class="edit-btn"><i class="fas fa-edit"></i> Sửa</a><button class="unlock-btn" onclick="lockCustomer('unlock')"><i class="fas fa-unlock"></i> Mở Khóa</button></td></tr>
+ </tbody>
             </tbody>
         </table>
 
-        <div class="pagination">
-            <a href="#" class="active">1</a>
-            <a href="#">2</a>
-            <a href="#" class="prev-next">Sau &raquo;</a>
-        </div>
+        
     </div>
     
     <script>
