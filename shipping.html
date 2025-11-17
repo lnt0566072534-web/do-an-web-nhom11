@@ -791,15 +791,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Xóa sản phẩm
-    document.querySelectorAll(".cart-item__ctrl-btn:last-child").forEach(btn => {
-        btn.addEventListener("click", () => {
-            if (confirm("Bạn có chắc muốn xóa sản phẩm này?")) {
-                let item = btn.closest(".cart-item");
-                item.remove();
-            }
-        });
+    
+document.querySelectorAll(".cart-item__ctrl-btn:last-child").forEach(btn => {
+    btn.addEventListener("click", () => {
+        if (confirm("Bạn có chắc muốn xóa sản phẩm này?")) {
+            console.log("Đã xóa sản phẩm.");
+        }
     });
+});
+
 
 });
 // --- Chọn tỉnh/TP trong popup ---
