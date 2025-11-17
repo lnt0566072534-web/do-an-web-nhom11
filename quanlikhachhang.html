@@ -117,47 +117,59 @@
         }
 
         /* Nút Thao Tác */
-        .actions {
-            display: flex; 
-            gap: 5px; 
-        }
-        
-        .actions a, 
-        .actions button { 
-            padding: 5px 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9em;
-            text-decoration: none; 
-            text-align: center;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 3px;
-        }
+        /* Nút Thao Tác */
+.actions {
+    display: flex;
+    gap: 8px;
+}
 
-        .actions .edit-btn {
-            background-color: #ffc107; 
-            color: #333;
-        }
+.actions a,
+.actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 
-        .actions .lock-btn {
-            background-color: #dc3545; 
-            color: white;
-        }
-        
-        .actions .unlock-btn {
-            background-color: #17a2b8; 
-            color: white;
-        }
-        
-        /* Đảm bảo icon Khóa/Mở khóa cũng màu trắng */
-        .actions button .fas.fa-lock,
-        .actions button .fas.fa-unlock {
-            color: white;
-        }
+    height: 36px;           /* CHIỀU CAO CỐ ĐỊNH */
+    width: 95px;            /* CHIỀU RỘNG BẰNG NHAU */
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* Đặt chiều rộng tương đối cho các nút để chúng đồng bộ hơn */
+.actions .edit-btn,
+.actions .lock-btn,
+.actions .unlock-btn {
+    min-width: 60px; /* Đảm bảo chiều rộng tối thiểu */
+    flex-grow: 1; /* Cho phép nút co giãn đồng đều trong phạm vi .actions */
+    height: 30px; /* Đặt chiều cao cố định để chúng bằng nhau */
+}
+
+.actions .edit-btn {
+    background-color: #ffc107; 
+    color: #333;
+}
+
+.actions .lock-btn {
+    background-color: #dc3545; 
+    color: white;
+}
+
+.actions .unlock-btn {
+    background-color: #17a2b8; 
+    color: white;
+}
+
+/* Đảm bảo icon Khóa/Mở khóa cũng màu trắng */
+.actions button .fas.fa-lock,
+.actions button .fas.fa-unlock {
+    color: white;
+}
 
         /* PHÂN TRANG */
         .pagination {
@@ -216,7 +228,7 @@
     </style>
 </head>
 <body>
-<a href="admin.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay Về</a>
+<a href="adminnew.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay Về</a>
 
     <div class="header">
         <h1>Quản Lý Khách Hàng </h1>
