@@ -139,7 +139,7 @@
         .filter-grid {
             display: flex;
             gap: 20px;
-            align-items: flex-end;
+            align-items: flex-end; /* Quan trọng để căn chỉnh các items flex về phía dưới */
             margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 1px dashed var(--border-color);
@@ -163,7 +163,7 @@
             border: 1px solid var(--border-color);
             border-radius: 8px;
             font-size: 1em;
-            min-width: 200px;
+            min-width: 150px; 
         }
         
         /* BUTTONS */
@@ -173,6 +173,8 @@
             cursor: pointer;
             font-weight: 600;
             transition: background-color 0.3s;
+            /* Đảm bảo chiều cao nút khớp với input/select */
+            height: 40px; 
         }
         
         .btn-search {
@@ -230,19 +232,52 @@
             margin-right: 5px;
         }
         
-        /* LOOKUP SPECIFIC STYLES - Chỉ dùng để hiển thị thông báo thay thế */
+        /* LOOKUP SPECIFIC STYLES - Đã điều chỉnh để giống table */
         .lookup-message {
             margin-top: 20px;
             padding: 20px;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            background-color: #fff8f8; /* Màu nhẹ để làm nổi bật thông báo */
+            background-color: #fff8f8; 
             color: #cc0000;
             font-weight: 600;
             text-align: center;
             font-size: 1.1em;
         }
-        /* Đã xóa .lookup-result và .lookup-item */
+        
+        /* CSS mới cho phần tra cứu để giống table */
+        .lookup-table-container {
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+        
+        .lookup-table-container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .lookup-table-container thead th {
+            padding: 15px 10px;
+            text-align: left;
+            background-color: var(--primary-light-color);
+            color: white;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        .lookup-table-container tbody td {
+            padding: 15px 10px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+        
+        .lookup-table-container tbody tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
+        
+        .lookup-table-container tbody tr:hover {
+            background-color: #f0f0ff;
+        }
     </style>
 </head>
 <body>
@@ -293,7 +328,7 @@
                                 <option value="high">Trên 40%</option>
                             </select>
                         </div>
-                        <button type="button" class="btn-search" onclick="filterData('category')">
+                        <button type="button" class="btn-search"> 
                             <i class="fas fa-search"></i> Tìm kiếm
                         </button>
                         <button type="button" class="btn-reset" onclick="resetFilter('category')">
@@ -348,6 +383,30 @@
                                         </button>
                                     </td>
                                 </tr>
+                                <tr data-id="3">
+                                    <td>4</td>
+                                    <td>Hạt cà phê Abrica</td>
+                                    <td style="text-align: center;">
+                                        <input type="number" value="42" min="0" class="percentage-input"> %
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <button class="btn-save" onclick="saveProfit('category', 3)">
+                                            <i class="fas fa-save"></i> LƯU
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr data-id="3">
+                                    <td>5</td>
+                                    <td>Abrica và Robusta</td>
+                                    <td style="text-align: center;">
+                                        <input type="number" value="48" min="0" class="percentage-input"> %
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <button class="btn-save" onclick="saveProfit('category', 3)">
+                                            <i class="fas fa-save"></i> LƯU
+                                        </button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -355,7 +414,7 @@
                 
                 <div id="product-profit" class="tab-pane">
                     
-                    <div class="filter-grid" style="align-items: center;">
+                    <div class="filter-grid" style="align-items: flex-end;">
                         <div class="filter-group" style="flex-grow: 2;">
                             <label for="searchProduct">Tìm kiếm mặt hàng...</label>
                             <input type="text" id="searchProduct" placeholder="Ví dụ: Cà phê,hạt cà phê...">
@@ -369,12 +428,14 @@
                                 <option value="high">Trên 40%</option>
                             </select>
                         </div>
-                        <button type="button" class="btn-search" onclick="filterData('product')">
-                            <i class="fas fa-search"></i> Tìm kiếm
-                        </button>
-                        <button type="button" class="btn-reset" onclick="resetFilter('product')">
-                            <i class="fas fa-redo"></i> Đặt lại
-                        </button>
+                        <div style="display: flex; gap: 10px;">
+                            <button type="button" class="btn-search">
+                                <i class="fas fa-search"></i> Tìm kiếm
+                            </button>
+                            <button type="button" class="btn-reset" onclick="resetFilter('product')">
+                                <i class="fas fa-redo"></i> Đặt lại
+                            </button>
+                        </div>
                     </div>
 
                     <div style="overflow-x: auto;">
@@ -418,6 +479,48 @@
                                         </button>
                                     </td>
                                 </tr>
+                                <tr data-id="102">
+                                    <td>3</td>
+                                    <td>Hạt cà phê Abrica</td>
+                                    <td style="text-align: right;">17.000 VNĐ</td>
+                                    <td style="text-align: center;">
+                                        <input type="number" value="180" min="0" class="percentage-input"> %
+                                    </td>
+                                    <td style="text-align: right; color: var(--primary-color); font-weight: 600;">42.000 VNĐ</td>
+                                    <td style="text-align: center;">
+                                        <button class="btn-save" onclick="saveProfit('product', 102)">
+                                            <i class="fas fa-save"></i> LƯU
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr data-id="102">
+                                    <td>4</td>
+                                    <td>Hạt cà phê nguyên chất</td>
+                                    <td style="text-align: right;">20.000 VNĐ</td>
+                                    <td style="text-align: center;">
+                                        <input type="number" value="180" min="0" class="percentage-input"> %
+                                    </td>
+                                    <td style="text-align: right; color: var(--primary-color); font-weight: 600;">42.000 VNĐ</td>
+                                    <td style="text-align: center;">
+                                        <button class="btn-save" onclick="saveProfit('product', 102)">
+                                            <i class="fas fa-save"></i> LƯU
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr data-id="102">
+                                    <td>5</td>
+                                    <td>Abrica và Epresso</td>
+                                    <td style="text-align: right;">23.000 VNĐ</td>
+                                    <td style="text-align: center;">
+                                        <input type="number" value="180" min="0" class="percentage-input"> %
+                                    </td>
+                                    <td style="text-align: right; color: var(--primary-color); font-weight: 600;">42.000 VNĐ</td>
+                                    <td style="text-align: center;">
+                                        <button class="btn-save" onclick="saveProfit('product', 102)">
+                                            <i class="fas fa-save"></i> LƯU
+                                        </button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -425,43 +528,85 @@
                 
                 <div id="price-lookup" class="tab-pane">
                     
-                    <div class="filter-grid">
-                        <div class="filter-group">
-                            <label for="lookupProduct">Tra cứu Giá bán hiện tại</label>
-                            <select id="lookupProduct" onchange="showLookupData()">
-                                <option value="">--- Chọn mặt hàng cà phê để xem giá ---</option>
-                                <option value="Hạt cà phê Lavazza|88.000 VNĐ|28.000 VNĐ">Hạt cà phê Lavazza</option>
-                                <option value="Hạt cà phê Epresso|15.000 VNĐ|42.000 VNĐ">Hạt cà phê Epresso</option>
-                                <option value="Cà phê nguyên chất|12.000 VNĐ|35.000 VNĐ">Cà phê nguyên chất</option>
+                    <div class="filter-grid" style="align-items: flex-end;">
+                        <div class="filter-group" style="flex-grow: 2;">
+                            <label for="searchLookup">Tìm kiếm Sản phẩm</label>
+                            <input type="text" id="searchLookup" placeholder="Nhập tên sản phẩm cần tra cứu...">
+                        </div>
+                        <div class="filter-group" style="flex-grow: 1;">
+                            <label for="lookupCategory">Danh mục</label>
+                            <select id="lookupCategory">
+                                <option value="all">Tất cả</option>
+                                <option value="coffee">Cà Phê</option>
+                                <option value="bean">Hạt Cà Phê</option>
+                                <option value="tea">Trà</option>
                             </select>
                         </div>
-                        
-                        </div>
-                    
-                    <div id="lookupDisplay" class="lookup-result" style="display: none; border-color: var(--primary-color);">
-                        <p style="font-weight: 600; font-size: 1.1em; color: var(--primary-color);">
-                            <i class="fas fa-info-circle"></i> THÔNG TIN TRA CỨU
-                        </p>
-                        <div class="lookup-item">
-                            <span>Sản phẩm:</span>
-                            <strong id="display_Name">---</strong>
-                        </div>
-                        <div class="lookup-item">
-                            <span>Giá Vốn Nguyên Liệu:</span>
-                            <strong id="display_Cost" style="color: var(--secondary-color);">---</strong>
-                        </div>
-                        <div class="lookup-item" style="font-size: 1.2em; padding-top: 10px; border-top: 2px solid var(--success-color);">
-                            <span>**GIÁ BÁN HIỆN TẠI:**</span>
-                            <strong id="display_Price" style="color: var(--success-color);">---</strong>
+                        <div style="display: flex; gap: 10px;"> 
+                            <button type="submit" class="btn-search"> 
+                                <i class="fas fa-search"></i> Tra cứu
+                            </button>
+                            <button type="button" class="btn-reset" onclick="resetLookupFilter()">
+                                <i class="fas fa-redo"></i> Đặt lại
+                            </button>
                         </div>
                     </div>
                     
-                    <div id="lookupMessage" class="lookup-message" style="display: block;">
-                        Vui lòng chọn một sản phẩm trong danh sách trên để xem thông tin giá bán.
+                    <div class="lookup-table-container">
+                        <table class="data-table" id="lookupTable">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%;">STT</th>
+                                    <th style="width: 35%;">TÊN SẢN PHẨM</th>
+                                    <th style="width: 15%; text-align: right;">GIÁ VỐN NL</th>
+                                    <th style="width: 15%; text-align: center;">LỢI NHUẬN (%)</th>
+                                    <th style="width: 20%; text-align: right;">GIÁ BÁN</th>
+                                    <th style="width: 10%; text-align: center;">DANH MỤC</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lookupRows">
+                                <tr data-category="coffee">
+                                    <td>1</td>
+                                    <td>Cà phê Lavazza</td>
+                                    <td style="text-align: right;">10.000 VNĐ</td>
+                                    <td style="text-align: center;">200%</td>
+                                    <td style="text-align: right; color: var(--primary-color); font-weight: 600;">30.000 VNĐ</td>
+                                    <td style="text-align: center;">Cà Phê</td>
+                                </tr>
+                                <tr data-category="bean">
+                                    <td>2</td>
+                                    <td>Hạt Cà Phê Robusta (Kg)</td>
+                                    <td style="text-align: right;">85.000 VNĐ</td>
+                                    <td style="text-align: center;">25%</td>
+                                    <td style="text-align: right; color: var(--primary-color); font-weight: 600;">106.250 VNĐ</td>
+                                    <td style="text-align: center;">Hạt Cà Phê</td>
+                                </tr>
+                                <tr data-category="tea">
+                                    <td>3</td>
+                                    <td>Hạt cà phê Epresso</td>
+                                    <td style="text-align: right;">5.000 VNĐ</td>
+                                    <td style="text-align: center;">300%</td>
+                                    <td style="text-align: right; color: var(--primary-color); font-weight: 600;">20.000 VNĐ</td>
+                                    <td style="text-align: center;">Trà</td>
+                                </tr>
+                                <tr data-category="coffee">
+                                    <td>4</td>
+                                    <td>Cà phê Abrica</td>
+                                    <td style="text-align: right;">8.000 VNĐ</td>
+                                    <td style="text-align: center;">150%</td>
+                                    <td style="text-align: right; color: var(--primary-color); font-weight: 600;">20.000 VNĐ</td>
+                                    <td style="text-align: center;">Cà Phê</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
+                    <div id="lookupMessage" class="lookup-message" style="display: none;">
+                        Không tìm thấy sản phẩm phù hợp.
+                    </div>
                 </div>
-                </div>
+                
+            </div>
             
         </div>
         
@@ -476,9 +621,6 @@
             document.querySelector(`.tab-button[data-tab="${tabId}"]`).classList.add('active');
             document.getElementById(tabId).classList.add('active');
             
-            // Ẩn kết quả tra cứu khi chuyển tab
-            const lookupDisplay = document.getElementById('lookupDisplay');
-            if (lookupDisplay) lookupDisplay.style.display = 'none';
         }
 
         // Gán sự kiện cho các nút tab khi DOM được tải
@@ -489,48 +631,21 @@
                     switchTab(tabId);
                 });
             });
+            
+            // Hiển thị tab đầu tiên khi tải trang
+            switchTab('category-profit'); 
         });
         
-        // --- HÀM HIỂN THỊ THÔNG TIN TRA CỨU (Thay thế cho hàm tính toán) ---
-        function showLookupData() {
-            const lookupSelect = document.getElementById('lookupProduct');
-            const displayDiv = document.getElementById('lookupDisplay');
-            const messageDiv = document.getElementById('lookupMessage');
-            
-            if (!lookupSelect.value) {
-                displayDiv.style.display = 'none';
-                messageDiv.style.display = 'block';
-                return;
-            }
-
-            // Phân tích cú pháp dữ liệu: Tên Sản phẩm|Giá Vốn|Giá Bán Hiện Tại
-            const [productName, costString, priceString] = lookupSelect.value.split('|');
-
-            // Cập nhật kết quả hiển thị
-            document.getElementById('display_Name').textContent = productName;
-            document.getElementById('display_Cost').textContent = costString;
-            document.getElementById('display_Price').textContent = priceString;
-            
-            displayDiv.style.display = 'block';
-            messageDiv.style.display = 'none';
+        // --- CÁC HÀM THAY THẾ CHO PHẦN TRA CỨU GIÁ BÁN ---
+        
+        function resetLookupFilter() {
+             document.getElementById('searchLookup').value = '';
+             document.getElementById('lookupCategory').value = 'all';
+             alert('Đặt lại bộ lọc tra cứu.');
+             // Để hiển thị lại toàn bộ dữ liệu (như trước khi tra cứu), bạn sẽ cần thêm logic hiển thị tất cả các hàng ở đây.
         }
-        
-        // **Đã XÓA HÀM calculatePrice() VÀ formatCurrency()**
-        
+
         // --- CÁC HÀM THAO TÁC MẪU (Lọc và Lưu) ---
-        
-        function filterData(type) {
-            // Trong môi trường thực tế, logic tìm kiếm (lọc dữ liệu trong bảng) sẽ được đặt ở đây.
-            if (type === 'category') {
-                const name = document.getElementById('searchCategory').value;
-                const range = document.getElementById('profitRange').value;
-                console.log(`Đang tìm kiếm Danh mục: ${name}, Lãi: ${range}`);
-            } else if (type === 'product') {
-                const name = document.getElementById('searchProduct').value;
-                const range = document.getElementById('productRange').value;
-                console.log(`Đang tìm kiếm Món: ${name}, Lãi: ${range}`);
-            }
-        }
         
         function resetFilter(type) {
             if (type === 'category') {
@@ -554,7 +669,7 @@
                  return;
             }
             
-            alert(`Đã lưu thành công tỷ lệ lợi nhuận`);
+            alert(`Đã lưu thành công tỷ lệ lợi nhuận mới cho ID ${id}: ${newProfit}%`);
         }
     </script>
 </body>
