@@ -190,15 +190,8 @@
     </style>
 </head>
 <body>
-    <script>
-    // Kiểm tra trạng thái đăng nhập
-    const isLoggedIn = localStorage.getItem("adminLoggedIn");
+    
 
-    if (!isLoggedIn) {
-        alert("Bạn chưa đăng nhập!");
-        window.location.href = "login-admin.html"; // Chuyển tới trang đăng nhập
-    }
-</script>
 
     
 
@@ -207,7 +200,7 @@
             <div class="shadow-overlay"></div>
             <section class="sidebar">
                 <span class="sidebar-header-container">
-                    <a href="admin.html" class="logo-container">
+                    <a href="adminnew.html" class="logo-container">
                         <i class="fas fa-user"></i>
                         <span class="sidebar-text logo-text">ADMIN</span>
                     </a>
@@ -321,6 +314,7 @@
                         <ul class="nav-links">
                             <li><a href="">Trang chủ</a></li>
                             <li><a href="">Email</a></li>
+                            <li><a href="">Lịch</a></li>
                             <li><a href="">Trò chuyện</a></li>
                         </ul>
                     </span>
@@ -334,9 +328,22 @@
                         <a href="#" class="profile">
                             
                             <div class="user-menu-container">
+    
+
+    
+
                         </a>
                     </span>
                 </nav>
+
+
+
+
+
+
+
+
+
                 <div class="container">
                     <main class="center-container">
                         <div class="info-cards-container">
@@ -725,10 +732,5 @@
     
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="scriptnew.js"></script>
-    <script>
-document.getElementById("logout-btn").addEventListener("click", function() {
-    localStorage.removeItem("adminLoggedIn"); // Xóa trạng thái đăng nhập
-});
-</script>
 </body>
 </html>
