@@ -1,14 +1,7 @@
 // Dark Mode Toggle
 // to enable or disable dark mode based on the checkbox state.
     // Nếu chưa đăng nhập thì quay về login
-    if (localStorage.getItem("isLoggedIn") !== "true") {
-        window.location.href = "login-admin.html";
-    }
-
-    function logout() {
-        localStorage.removeItem("isLoggedIn");
-        window.location.href = "login-admin.html";
-    }
+    
 
 const darkMode = document.getElementById("dark-mode");
 darkMode.addEventListener("change", function (event) {
@@ -342,5 +335,6 @@ document.addEventListener("click", (e) => {
 function loadPage(page) {
     document.getElementById("content-frame").src = page;
 }
+
 
 
