@@ -174,7 +174,22 @@
         .data-table { width: 100%; border-collapse: collapse; }
         .data-table thead th { padding: 15px 10px; text-align: left; background-color: #f8f9fa; border-bottom: 2px solid var(--border-color); color: var(--secondary-color); font-weight: 600; font-size: 0.95em; }
         .data-table tbody td { padding: 15px 10px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
-        .status-badge { display: inline-flex; align-items: center; padding: 5px 10px; border-radius: 15px; font-size: 0.85em; font-weight: 600; }
+        .status-badge { 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; /* Mới: Căn giữa nội dung */
+            
+            /* MỚI: Đồng bộ kích thước */
+            padding: 5px 10px; 
+            min-width: 110px; /* Đặt chiều rộng tối thiểu */
+            height: 30px; /* Đặt chiều cao cố định */
+            box-sizing: border-box; 
+            
+            border-radius: 15px; 
+            font-size: 0.85em; 
+            font-weight: 600; 
+            white-space: nowrap; /* Ngăn chữ bị xuống dòng */
+        }
         .status-badge.normal { background-color: #e6f7ed; color: var(--success-color); }
         .status-badge.low { background-color: #fff9e6; color: var(--warning-color); }
         .status-badge.critical { background-color: #ffe6e6; color: var(--danger-color); }
@@ -235,6 +250,10 @@
                             <select id="categoryFilter">
                                 <option value="all">Tất cả danh mục</option>
                                 <option value="coffee" selected>Cà Phê</option>
+                                <option value="milk">Sữa</option>
+                                <option value="syrup">Syrup</option>
+                                <option value="tea">Trà</option>
+                                <option value="other">Khác</option>
                             </select>
                         </div>
                         <div class="filter-group">
@@ -261,7 +280,7 @@
                                 <tr>
                                     <td>1</td>
                                     <td class="product-name-column">
-                                        <img src="./assets/img/product/item-1.png" alt="Hạt Cà Phê Arabica" class="product-image-small">Hạt Cà Phê Arabica
+                                        <img src="item-1.png" alt="Hạt Cà Phê Arabica" class="product-image-small">Hạt Cà Phê Arabica
                                     </td>
                                     <td>Cà Phê</td>
                                     <td style="text-align: right;">15.5 kg</td>
@@ -272,10 +291,10 @@
                                 <tr>
                                     <td>2</td>
                                     <td class="product-name-column">
-                                        <img src="./assets/img/product/item-2.png" alt="Hạt cà phê Lavazza" class="product-image-small">Hạt cà phê Lavazza
+                                        <img src="item-2.png" alt="Hạt cà phê Lavazza" class="product-image-small">Hạt cà phê Lavazza
                                     </td>
-                                    <td>cà phê</td>
-                                    <td style="text-align: right;">0.0 kg</td>
+                                    <td>Sữa</td>
+                                    <td style="text-align: right;">0.0 hộp</td>
                                     <td style="text-align: center;">
                                         <span class="status-badge critical"><i class="fas fa-bomb"></i> Hết hàng</span>
                                     </td>
@@ -283,10 +302,10 @@
                                 <tr>
                                     <td>3</td>
                                     <td class="product-name-column">
-                                        <img src="./assets/img/product/item-3.png" alt="Hạt cà phê Epresso" class="product-image-small">Hạt cà phê Epresso
+                                        <img src="item-3.png" alt="Hạt cà phê Epresso" class="product-image-small">Hạt cà phê Epresso
                                     </td>
-                                    <td>cà phê</td>
-                                    <td style="text-align: right;">8.0 kg</td>
+                                    <td>Syrup</td>
+                                    <td style="text-align: right;">8.0 chai</td>
                                     <td style="text-align: center;">
                                         <span class="status-badge low"><i class="fas fa-exclamation-triangle"></i> Sắp hết hàng</span>
                                     </td>
@@ -294,9 +313,9 @@
                                 <tr>
                                     <td>4</td>
                                     <td class="product-name-column">
-                                        <img src="./assets/img/product/item-4.png" alt="Hạt Cà Phê Arabica" class="product-image-small">Hạt Cà Phê Arabica
+                                        <img src="item-4.png" alt="Hạt Cà Phê Arabica" class="product-image-small">Hạt Cà Phê Arabica
                                     </td>
-                                    <td>cà phê</td>
+                                    <td>Khác</td>
                                     <td style="text-align: right;">45.0 kg</td>
                                     <td style="text-align: center;">
                                         <span class="status-badge normal"><i class="fas fa-check-circle"></i> Bình thường</span>
@@ -305,10 +324,10 @@
                                 <tr>
                                     <td>5</td>
                                     <td class="product-name-column">
-                                        <img src="./assets/img/product/item-5.png" alt="Hạt cà phê Lavazza" class="product-image-small">Hạt cà phê Lavazza
+                                        <img src="item-5.png" alt="Hạt cà phê Lavazza" class="product-image-small">Hạt cà phê Lavazza
                                     </td>
-                                    <td>cà phê</td>
-                                    <td style="text-align: right;">4.0 kg</td>
+                                    <td>Trà</td>
+                                    <td style="text-align: right;">4.0 hộp</td>
                                     <td style="text-align: center;">
                                         <span class="status-badge low"><i class="fas fa-exclamation-triangle"></i> Sắp hết hàng</span>
                                     </td>
@@ -361,33 +380,33 @@
                                 <tr>
                                     <td>1</td>
                                     <td class="product-name-column">
-                                        <img src="./assets/img/category-item/item-1.png" alt="Hạt cà phê Lavazza" class="product-image-small">Hạt cà phê Lavazza
+                                        <img src="item-2.png" alt="Hạt cà phê Lavazza" class="product-image-small">Hạt cà phê Lavazza
                                     </td>
-                                    <td>Cà phê</td>
-                                    <td style="text-align: right;">0.0 kg</td>
-                                    <td style="text-align: right;">50.0 kg</td>
+                                    <td>Sữa</td>
+                                    <td style="text-align: right;">0.0 hộp</td>
+                                    <td style="text-align: right;">50.0 hộp</td>
                                     <td style="text-align: center;"><span class="status-badge critical">Đã hết hàng</span></td>
                                     <td style="text-align: center;"><a class="btn-action-table" href="taophieunhap.html" style="background-color: var(--warning-color); color: var(--font-color); border: 1px solid var(--warning-color)">Nhập hàng</a></td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
                                     <td class="product-name-column">
-                                        <img src="./assets/img/category-item/item-2.png" alt="Hạt cà phê Epresso" class="product-image-small">Hạt cà phê Epresso
+                                        <img src="item-3.png" alt="Hạt cà phê Epresso" class="product-image-small">Hạt cà phê Epresso
                                     </td>
-                                    <td>Cà phê</td>
-                                    <td style="text-align: right;">8.0 kg</td>
-                                    <td style="text-align: right;">15.0 kg</td>
+                                    <td>Syrup</td>
+                                    <td style="text-align: right;">8.0 chai</td>
+                                    <td style="text-align: right;">15.0 chai</td>
                                     <td style="text-align: center;"><span class="status-badge low">Sắp hết hàng</span></td>
                                     <td style="text-align: center;"><a class="btn-action-table" href="taophieunhap.html" style="background-color: var(--warning-color); color: var(--font-color); border: 1px solid var(--warning-color)">Nhập hàng</a></td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
                                     <td class="product-name-column">
-                                        <img src="./assets/img/category-item/item-3.png" alt="Hạt cà phê Lavazza" class="product-image-small">Hạt cà phê Lavazza
+                                        <img src="item-5.png" alt="Hạt cà phê Lavazza" class="product-image-small">Hạt cà phê Lavazza
                                     </td>
-                                    <td>Cà phê</td>
-                                    <td style="text-align: right;">4.0 kg</td>
-                                    <td style="text-align: right;">5.0 kg</td>
+                                    <td>Trà</td>
+                                    <td style="text-align: right;">4.0 hộp</td>
+                                    <td style="text-align: right;">5.0 hộp</td>
                                     <td style="text-align: center;"><span class="status-badge low">Sắp hết hàng</span></td>
                                     <td style="text-align: center;"><a class="btn-action-table" href="taophieunhap.html" style="background-color: var(--warning-color); color: var(--font-color); border: 1px solid var(--warning-color)">Nhập hàng</a></td>
                                 </tr>
@@ -415,6 +434,10 @@
                             <select id="reportCategoryFilter">
                                 <option value="all">Tất cả danh mục</option>
                                 <option value="coffee">Cà Phê</option>
+                                <option value="milk">Sữa</option>
+                                <option value="syrup">Syrup</option>
+                                <option value="tea">Trà</option>
+                                <option value="other">Khác</option>
                             </select>
                         </div>
                         <button type="button" class="btn-action-filter btn-search">
@@ -446,7 +469,7 @@
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td>Hạt cà phê Lavazza (kg)</td>
+                                    <td>Hạt cà phê Lavazza (hộp)</td>
                                     <td style="text-align: right;">15.0</td>
                                     <td style="text-align: right;">50.0</td>
                                     <td style="text-align: right;">53.0</td>
@@ -454,7 +477,7 @@
                                 </tr>
                                 <tr>
                                     <td>3</td>
-                                    <td>Hạt cà phê Epresso (kg)</td>
+                                    <td>Hạt cà phê Epresso (chai)</td>
                                     <td style="text-align: right;">5.0</td>
                                     <td style="text-align: right;">5.0</td>
                                     <td style="text-align: right;">2.0</td>
@@ -462,7 +485,7 @@
                                 </tr>
                                 <tr>
                                     <td>4</td>
-                                    <td>Hạt cà phê Arabica (kg)</td>
+                                    <td>Hạt cà phê Arabica (hộp)</td>
                                     <td style="text-align: right;">6.0</td>
                                     <td style="text-align: right;">0.0</td>
                                     <td style="text-align: right;">2.0</td>
