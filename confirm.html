@@ -27,7 +27,7 @@
       width: 90%;
       margin: 30px auto;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      border: 1px solid #ccc; /* ✅ viền bao ngoài */
+      border: 1px solid #ccc; /* viền bao ngoài */
     }
 
     .order-container h1 {
@@ -61,14 +61,14 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
-      border: 1px solid #ccc; /* ✅ Viền ngoài bảng */
+      border: 1px solid #ccc;
     }
 
     .order-details th,
     .order-details td {
       padding: 12px 10px;
       text-align: left;
-      border: 1px solid #ccc; /* ✅ Viền từng ô kiểu Excel */
+      border: 1px solid #ccc;
       font-size: 16px;
     }
 
@@ -77,16 +77,6 @@
       text-transform: uppercase;
       background: #fafafa;
       font-weight: 600;
-    }
-
-    .order-details th:nth-child(2),
-    .order-details td:nth-child(2) {
-        text-align: center;
-    }
-
-    .order-details th:nth-child(3),
-    .order-details td:nth-child(3) {
-        text-align: right;
     }
 
     .order-details tfoot .total td {
@@ -103,23 +93,28 @@
       color: #555;
     }
 
-    .btn-home {
-      display: block;
-      width: fit-content;
-      margin: 24px auto 0 auto;
+    /* =================== NÚT QUAY LẠI + LỊCH SỬ =================== */
+    .button-row {
+      margin-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-page {
       background: #16a34a;
       color: #ffffff;
       padding: 12px 24px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
-      text-align: center;
       transition: background-color 0.2s;
     }
 
-    .btn-home:hover {
+    .btn-page:hover {
       background: #148a40;
     }
+
 body {
   font-family: 'Inter', sans-serif;
 }
@@ -287,6 +282,7 @@ body {
 </style>
 
 </header>
+
   <main>
     <div class="order-container">
       <h1>Chi Tiết Đơn Hàng</h1>
@@ -338,11 +334,16 @@ body {
       </div>
 
       <p class="thank-you">Cảm ơn bạn đã mua hàng!</p>
-      <a href="./index-logined.html" class="btn-home">Về trang chủ</a>
+
+      <!-- ====================== 2 NÚT ĐÃ THÊM & CHỈNH SỬA ====================== -->
+      <div class="button-row">
+        <a href="./index-logined.html" class="btn-page">← Về trang chủ</a>
+        <a href="./purchase-history.html" class="btn-page">Lịch sử mua hàng →</a>
+      </div>
+
     </div>
   </main>
 
-  <!-- ===================== FOOTER ===================== -->
   <footer class="footer">
     <div class="container">
       <div class="footer__row">

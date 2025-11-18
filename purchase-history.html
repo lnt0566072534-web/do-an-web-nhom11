@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cửa hàng cà phê</title>
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="76x76" href="./assets/favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png" />
+  <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+  <meta name="msapplication-TileColor" content="#da532c" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="./assets/fonts/stylesheet.css" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="./assets/css/main.css" />
+
+  <!-- ===== STYLE RIÊNG CHO TRANG NÀY ===== -->
+  <style>
+    /* KHUNG NỘI DUNG CHÍNH */
+    .main-content {
+      width: 90%;
+      max-width: 1400px;
+      margin: 140px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      min-height: 60vh;
+    }
+
+    .main-content h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 36px;
+      font-weight: 700;
+    }
+
+    /* BẢNG */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 20px;
+    }
+
+    th, td {
+      padding: 18px 22px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background: #f7f7f7;
+      font-size: 22px;
+      text-align: left;
+    }
+
+    tr:hover {
+      background: #f9f9f9;
+    }
+
+    .detail-btn {
+      background: #16a34a;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 18px;
+      transition: 0.25s;
+    }
+    .detail-btn:hover {
+      background: #0f8a3b;
+    }
+
+
+    /* ===================== HEADER ===================== */
+    .header-search {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-radius: 999px;
+      padding: 8px 16px;
+      border: 2px solid #ccc;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+      margin-left: 80px;
+    }
+
+    .search-box {
+      border: none;
+      outline: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 999px;
+      flex: 1;
+      font-size: 1.1rem;
+      color: #000;
+      background: transparent;
+    }
+
+    .search-btn {
+      background: #ffb703;
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 0.7rem 1.6rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.25s;
+    }
+
+    .search-btn:hover {
+      background: #ffa500;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .logo__title {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .header-actions,
+    .top-act__user {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-actions {
+      gap: 28px;
+      margin-right: 10px;
+    }
+
+    .top-act__user {
+      margin-right: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .header-search {
+        max-width: 100%;
+        padding: 6px 12px;
+        margin-left: 0;
+      }
+
+      .top-bar {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="header">
+  <div class="container">
+    <div class="top-bar d-flex align-items-center justify-content-between">
+
+      <a href="./" class="logo d-flex align-items-center text-decoration-none">
+        <img src="./assets/icons/logo.svg" alt="Logo" class="logo__img" />
+        <h1 class="logo__title ms-2 mb-0">Cửa hàng cà phê</h1>
+      </a>
+
+      <div class="header-search">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." class="search-box" />
+        <button id="searchBtn" class="search-btn" type="button">Tìm kiếm</button>
+      </div>
+
+      <div class="header-actions d-flex align-items-center gap-4">
+        <a href="./checkout.html" class="action-btn text-decoration-none position-relative">
+          <img src="./assets/icons/buy.svg" alt="Giỏ hàng" class="action-icon" />
+          <span class="action-badge">65.000đ</span>
+        </a>
+
+        <a href="./favourite.html" class="action-btn text-decoration-none position-relative">
+          <img src="./assets/icons/heart.svg" alt="Yêu thích" class="action-icon" />
+          <span class="action-badge">03</span>
+        </a>
+
+        <div class="top-act__user">
+          <img src="assets/img/avatar/IMG_2422.PNG" alt="Avatar" class="top-act__avatar" />
+          <div class="act-dropdown top-act__dropdown">
+            <div class="act-dropdown__inner user-menu">
+              <img src="./assets/icons/arrow-up.png" alt="" class="act-dropdown__arrow top-act__dropdown-arrow" />
+
+              <div class="user-menu__top">
+                <img src="assets/img/avatar/IMG_2422.PNG" alt="" class="user-menu__avatar" />
+                <div>
+                  <p class="user-menu__name">Nguyễn Văn Meo</p>
+                  <p>@yheffeiie</p>
+                </div>
+              </div>
+
+              <ul class="user-menu__list">
+                <li><a href="./index.html" class="user-menu__link">Trang chủ</a></li>
+                <li><a href="./profile.html" class="user-menu__link">Thông tin cá nhân</a></li>
+                <li><a href="./favourite.html" class="user-menu__link">Danh sách yêu thích</a></li>
+                <li><a href="./customer-list.html" class="user-menu__link">Quản lý khách hàng</a></li>
+                <li class="user-menu__separate">
+                  <a href="#!" class="user-menu__link" id="switch-theme-btn">
+                    <span>Giao diện tối</span>
+                    <img src="./assets/icons/sun.svg" alt="" class="icon user-menu__icon" />
+                  </a>
+                </li>
+                <li><a href="#!" class="user-menu__link">Cài đặt</a></li>
+                <li class="user-menu__separate">
+                  <a href="./sign-in.html" class="user-menu__link">Đăng xuất</a>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= LỊCH SỬ MUA HÀNG ================= -->
+<div class="main-content">
+  <h1>Lịch sử mua hàng</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tên sản phẩm</th>
+        <th>Ngày mua</th>
+        <th>Giá</th>
+        <th>Chi tiết</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>Hạt cà phê Lavazza</td>
+        <td>02/10/2025</td>
+        <td>47.000đ</td>
+        <td><a href="./product-detail.html?id=1" class="detail-btn">Chi tiết</a></td>
+      </tr>
+
+      <tr>
+        <td>Espresso Qualità Oro</td>
+        <td>25/09/2025</td>
+        <td>39.000đ</td>
+        <td><a href="./product-detail.html?id=2" class="detail-btn">Chi tiết</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+    <div class="container">
+      <div class="footer__row">
+        <div class="footer__col">
+          <a href="./" class="logo footer__logo">
+            <img src="./assets/icons/logo.svg" alt="grocerymart" class="logo__img" />
+            <h1 class="logo__title">Cửa hàng cà phê</h1>
+          </a>
+          <p class="footer__desc">
+            Chào mừng bạn đến với Cửa Hàng Cà Phê – nơi hương vị đậm đà và chất lượng được đặt lên hàng đầu.
+          </p>
+          <form action="" class="footer__form">
+            <input type="text" class="footer__input" placeholder="Địa chỉ email" />
+            <button class="btn btn--primary">Gửi</button>
+          </form>
+        </div>
+
+        <div class="footer__col">
+          <h3 class="footer__heading">Liên hệ</h3>
+          <ul class="footer__list">
+            <li><p class="footer__label">Email</p><a href="mailto:lienhe@cuahangcaphe.com" class="footer__link">lienhe@cuahangcaphe.com</a></li>
+            <li><p class="footer__label">Số điện thoại</p><a href="tel:18008888" class="footer__link">123467895</a></li>
+            <li><p class="footer__label">Địa chỉ</p><p class="footer__text">273 An Dương Vương, Phường Chợ Quán, TP. HCM</p></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2010 - 2025 Cửa Hàng Cà Phê. Mọi quyền được bảo lưu.</p>
+      </div>
+    </div>
+</footer>
+
+</body>
+</html>
