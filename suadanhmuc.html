@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa danh mục</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* CSS Tùy Chỉnh - Chủ đạo màu Xanh Nước Biển */
+        :root {
+            --primary-color: #007bff; /* Xanh nước biển chính */
+            --primary-hover: #0056b3;
+            --secondary-text: #6c757d; /* Màu chữ phụ */
+        }
+
+        body {
+            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
+        }
+
+        .main-content {
+            padding: 30px 20px;
+            max-width: 900px; /* Giới hạn chiều rộng nội dung như trong ảnh */
+            margin: 0 auto;
+        }
+
+        /* Thẻ bao quanh nội dung trang chính */
+        .page-wrapper {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tiêu đề trang */
+        .page-title {
+            color: #343a40;
+            font-weight: 600;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        /* Phần thông tin */
+        .info-header h5 {
+            font-weight: 600;
+            color: #343a40;
+        }
+        .info-header p {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        /* Label và chú thích form */
+        .form-label {
+            font-weight: 600;
+            color: #343a40;
+        }
+        .form-text-hint {
+            color: var(--secondary-text);
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
+        /* Nút Lưu thay đổi (Primary/Xanh nước biển) */
+        .btn-save {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .btn-save:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+        }
+
+        /* Nút Quay về (Secondary/Màu xám) */
+        .btn-back {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            color: white;
+            font-weight: 600;
+        }
+        .btn-back:hover {
+            background-color: #5a6268;
+            border-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-content">
+    
+    <div class="page-wrapper">
+
+        <h3 class="page-title">Chỉnh sửa danh mục</h3>
+        
+        <!-- THAY ĐỔI: Thêm onsubmit để gọi hàm handleSave() -->
+        <form onsubmit="return handleSave(event)">
+            <!-- Header Thông tin danh mục -->
+            <div class="info-header">
+                <h5>Thông tin danh mục</h5>
+                <p>Cập nhật các thông tin của danh mục</p>
+            </div>
+            
+            <hr>
+
+            <!-- 1. Tên Danh Mục -->
+            <div class="mb-4">
+                <label for="categoryName" class="form-label">Tên danh mục <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="categoryName" value="Cà phê" required>
+                <div class="form-text-hint">Tên danh mục phải là duy nhất và không trùng với các danh mục khác</div>
+            </div>
+
+            <!-- 2. Mô Tả Danh Mục -->
+            <div class="mb-5">
+                <label for="categoryDescription" class="form-label">Mô tả danh mục</label>
+                <textarea class="form-control" id="categoryDescription" rows="5">Cà phê có hương vị đầm đà,thơm ngon</textarea>
+                <div class="form-text-hint">Mô tả giúp người dùng hiểu rõ hơn về nội dung của danh mục</div>
+            </div>
+
+            <hr>
+
+            <!-- Khu vực Nút Thao Tác -->
+            <div class="d-flex justify-content-end gap-2 mt-4">
+                <!-- Nút Quay về (ĐÃ THAY ĐỔI: chuyển sang trang category-list.html) -->
+                <button type="button" class="btn btn-back text-white" onclick="window.location.href='quanlidanhmuc.html'">
+                    <i class="fas fa-arrow-left me-2"></i> Quay về
+                </button>
+                <!-- Nút Lưu thay đổi -->
+                <button type="submit" class="btn btn-save text-white">
+                    <i class="fas fa-save me-2"></i> Lưu thay đổi
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Hàm xử lý khi form được submit
+    function handleSave(event) {
+        // Ngăn chặn hành vi submit form mặc định (tải lại trang)
+        event.preventDefault(); 
+
+        // Lấy giá trị tên danh mục (để đưa vào alert)
+        const categoryName = document.getElementById('categoryName').value;
+
+        // B1: Thực hiện logic lưu dữ liệu ở đây (ví dụ: gọi API, lưu vào Firestore,...)
+        console.log(`Đang lưu thay đổi cho danh mục: ${categoryName}`);
+        
+        // B2: Hiển thị thông báo thành công bằng alert()
+        alert(`Đã lưu thành công danh mục: ${categoryName}`);
+
+        // Trả về false để đảm bảo form không submit (mặc dù đã dùng preventDefault)
+        return false;
+    }
+</script>
+</body>
+</html>
